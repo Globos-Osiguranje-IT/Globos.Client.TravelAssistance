@@ -6,7 +6,6 @@ import { CodebookClientService } from '../../http/codebook-client.service';
 import { CashedCodebookClientService } from '../../http/cashed-codebook-client.service';
 import { GbsContractorInfoFeatureComponent } from '../contractor-info/gbs-contractor-info-feature.component';
 import { GbsInsurantInfoFeatureComponent } from '../insurant-info/gbs-insurant-info-feature.component';
-import { GbsInsuredLegalInfoFeatureComponent } from "../insured-legal-info/gbs-insured-legal-info-feature/gbs-insured-legal-info-feature.component";
 import { CityAutoComplete, Client, ContractorInfo, foreignCitizenData } from '../contractor-info/model/gbs-contractor-info.model';
 import { InsuredLegalInfo } from '../insured-legal-info/gbs-insured-legal-info-feature/model/Insured-legal-info-feature,model';
 import { ClientType, InsuredAgeGroupMap } from '../../enums';
@@ -17,7 +16,7 @@ import { ClientValidationService } from '../../validations/client-validation/cli
 @Component({
   selector: 'gbs-contractor-type-feature',
   standalone: true,
-  imports: [CommonModule, TranslatePipe, GbsContractorInfoFeatureComponent, GbsInsurantInfoFeatureComponent, GbsInsuredLegalInfoFeatureComponent],
+  imports: [CommonModule, TranslatePipe, GbsContractorInfoFeatureComponent, GbsInsurantInfoFeatureComponent],
   templateUrl: './contractor-type-feature.component.html',
   styleUrl: './contractor-type-feature.component.scss'
 })
