@@ -1,0 +1,12 @@
+<div class="button-container" *ngIf="categories.length">
+  <button *ngFor="let category of categories"
+          class="custom-button" 
+          [ngClass]="{'active-button': insuranceType?.id === category.id}"
+          (click)="setInsuranceType(category)">
+    <i [ngClass]="category.id === 1 ? 'ph ph-user' : 'ph ph-users-three'"></i>
+    <span>{{ category.name | translate }}</span>
+    <div class="check-circle" *ngIf="insuranceType?.id === category.id">
+      <i class="ph ph-check"></i>
+    </div>
+  </button>
+</div>

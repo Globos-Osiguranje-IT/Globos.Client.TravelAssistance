@@ -1,0 +1,12 @@
+
+<label>Destinacija<span class="colorLabel">*</span></label><gbs-autocomplete
+  appDropdownRequired
+  [cid]="'destinationAutocomplete'"
+  [placeholder]="'Destinacija'"
+  [items]="destinationItems"
+  [value]="selectedDestination?.value || ''"
+  [selected]="selectedDestination || { label: '', value: '' }"
+  [selectedValue]="selectedDestination"
+  appLatinOnFocusOut
+  (selectionChange)="onDestinationSelectionChange($event)">
+</gbs-autocomplete>

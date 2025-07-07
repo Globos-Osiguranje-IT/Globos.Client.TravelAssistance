@@ -1,0 +1,93 @@
+<div class="insurance-container">
+  <div class="left-section">
+    <div class="date-section">
+      <gbs-date-picker
+      *ngIf="this.selectedPolicyType?.id === insuranceType"
+        cid="startDate"
+        [placeholder]="'Početak:'"
+        [inputStyle]="{ 'text-align': 'left', 'padding-left': '15px', 'width': '200px' }"
+        [format]="'dd.MM.yyyy'"
+        (dateChange)="updateStartDate($event)"
+        [label]="''"
+        [labelCssClass]="''"
+        [value]="this.startDateInput"
+        readonly="true"
+        [disabled]="true"
+      >
+      </gbs-date-picker>
+      <gbs-date-picker
+      *ngIf="this.selectedPolicyType?.id === insuranceType"
+        cid="endDate"
+        [placeholder]="'Kraj:'"
+        [inputStyle]="{ 'text-align': 'left', 'padding-left': '15px', 'width': '200px' }"
+        [format]="'dd.MM.yyyy'"
+        [minDate]="startDate.value"
+        (dateChange)="updateEndDateManual($event)"
+        [label]="''"
+        [labelCssClass]="''"
+        [value]="this.endDateInput"
+        readonly="true"
+        [disabled]="true"
+      >
+      </gbs-date-picker>
+      <gbs-date-picker
+      *ngIf="this.selectedPolicyType?.id !== insuranceType"
+        cid="startDate"
+        [placeholder]="'Početak:'"
+        [inputStyle]="{ 'text-align': 'left', 'padding-left': '15px'}"
+        [format]="'dd.MM.yyyy'"
+        (dateChange)="updateStartDate($event)"
+        [label]="''"
+        [labelCssClass]="''"
+        [value]="this.startDateAnnual"
+        readonly="true"
+        [disabled]="true"
+      >
+      </gbs-date-picker>
+    </div>
+  </div>
+  <!-- <div class="insurance-options" *ngIf="shouldShowToggles">
+    <div *ngFor="let option of visibleOptionsFooter" class="option-row">
+      <div class="option-info">
+        <span class="insurance-name">{{ option.name }}</span>
+        <span class="insurance-price"
+          >{{ option.price | number : "1.2-2" }}</span
+        >
+      </div>
+      <mat-slide-toggle
+        #matslidetoggle
+        color="primary"
+        [(ngModel)]="option.checked"
+        (ngModelChange)="onToggleChanged(option)">
+      </mat-slide-toggle> -->
+        <!-- (ngModelChange)="updateNextButtonState()"
+        (ngModelChange)="getAdditionalInsuranceAmount(option, option.checked); updateNextButtonState()" -->
+    <!-- </div>
+  </div> -->
+  <div class="total-action-section">
+    <div class="total-info text-end" style="text-align: right !important">
+      <span class="total-label">Ukupno:</span>
+      <div class="total-amount-container">
+        <span class="total-value">{{
+          getSelectedCoverageTotal() | number : "1.2-2"
+        }}</span>
+        <span class="total-currency"> RSD</span>
+      </div>
+    </div>
+  </div>
+  <div class="button">
+    <gbs-button
+      cid="next-button"
+      [inputCssClass]="'next-btn'"
+      [inputStyle]="nextButtonStyles"
+      (click)="goToNextStep()"
+      [text]="'Dalje'"
+    >
+      <span class="button-content">
+        <mat-icon class="icon"
+          ><i class="ph ph-airplane-in-flight"></i
+        ></mat-icon>
+      </span>
+    </gbs-button>
+  </div>
+</div>

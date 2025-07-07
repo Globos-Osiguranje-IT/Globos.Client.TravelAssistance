@@ -1,0 +1,128 @@
+<div *ngIf="contractorType?.id === 1 || contractorType?.id === 2" class="container-fluid d-flex justify-content-center">
+    <div class="shadow-sm rounded bg-white border p-4" style="max-width: 900px; width: 100%;">
+        <div class="naslov d-flex align-items-center mb-3">
+            <h4 class="mb-2">Ugovarač</h4>
+            <label *ngIf="contractorType?.id === 1" class="toggle-checkbox">
+                <input type="checkbox" [(ngModel)]="isInsuredContractor"
+                    (ngModelChange)="onToggleIsInsuredContractor($event)">
+                <span class="toggle-switch"></span>
+                Ugovarač je osiguranik
+            </label>
+
+
+            <div *ngIf="contractorType?.id === 1" class="ms-auto d-flex align-items-center strani-container">
+                <gbs-checkbox [cid]="'straniDrz'" [value]="foreignCitizen" class="orange-checkbox"
+                    (valueChange)="foreignCitizenChange($event)"></gbs-checkbox>
+                <label class="mb-0 ms-2 small-label">Strani državljanin</label>
+            </div>
+        </div>
+        <div class="row">
+
+            <div *ngIf="this.foreignCitizen && contractorType?.id === 1"
+                class=" mb-4 mt-1 ms-auto d-flex align-items-center">
+                <gbs-checkbox [cid]="'Imabroj'" [value]="YesNoJMBG" class="orange-checkbox"
+                    (valueChange)="YesNoJMBGChange($event)"></gbs-checkbox>
+                <label class="mb-0 ms-2 small-label">Ugovarač nema matični broj</label>
+            </div>
+
+            <div class="col-md-4" *ngIf="!this.YesNoJMBG && contractorType?.id === 1">
+                <label>JMBG<span class="colorLabel">*</span></label>
+                <gbs-input type="number" [cid]="YesNoJMBG?  'contractorYesNoForeign' : (foreignCitizen? 'contractorforeignCitizen' :  'contractorJMBG')"
+
+                    [value]="contractor?.registrationNumber || ''"
+                    (valueChange)="onValueChangeRegistrationNumber($event)" maxlength="13" appLatinOnFocusOut
+                    [allJmbgs]="allJmbgs" [contractorJmbg]="contractorJmbg">
+                </gbs-input>
+            </div>
+
+            <div *ngIf="this.YesNoJMBG && this.foreignCitizen && contractorType?.id === 1" class="col-md-4">
+                <label style="margin-bottom: 15px;">Datum rođenja<span class="colorLabel">*</span></label>
+                <gbs-date-picker [cid]="'contractorDatumRodjenja'" (dateChange)="onValueChangeDateForeignBirth($event)" 
+                [maxDate]="maxSelectableDate" [placeholder]="'Izaberite datum rođenja'" [value]="dateForeignBirth" [contractorJmbg]="contractorJmbg"  [allJmbgs]="allJmbgs" appLatinOnFocusOut ></gbs-date-picker>
+            </div>
+
+
+            <div class="col-md-4" *ngIf="contractorType?.id === 2">
+                <label>Matični broj<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'number'" [cid]="'Matični broj'" [value]="contractor?.registrationNumber || ''"
+                    (valueChange)="onValueChangeRegistrationNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4" *ngIf="contractorType?.id === 2">
+                <label>PIB<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'number'" [cid]="'inputPIB'" [value]="contractor?.taxIdentificationNumber || ''"
+                    (valueChange)="onValueChangeTaxIdentificationNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4" *ngIf="contractorType?.id === 1">
+                <label>Ime<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputIme'" [value]="contractor?.firstName || ''"
+                    (valueChange)="onValueChangeFirstName($event)" appLatinOnFocusOut appLettersOnly>
+                </gbs-input>
+            </div>
+            <div class="col-md-4" *ngIf="contractorType?.id === 1">
+                <label>Prezime<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputPrezime'" [value]="contractor?.lastName || ''"
+                    (valueChange)="onValueChangeLastName($event)" appLatinOnFocusOut appLettersOnly>
+                </gbs-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngIf="contractorType?.id === 2">
+                <label>Ime kompanije<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputImeKompanije'" [value]="contractor?.companyName || ''"
+                    (valueChange)="onValueChangeCompanyName($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4" *ngIf="!this.YesNoJMBG && contractorType?.id === 1">
+                <label>Datum rođenja<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputDatumRodjenja'" [value]="contractor?.dateBirth || ''"
+                    [disabled]="true" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4" *ngIf="isInsuredContractor && contractorType?.id === 1">
+                <label>Broj pasoša<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputBrPasosa'" [value]="contractor?.passportNumber || ''"
+                    (valueChange)="onValueChangePassportNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4">
+                <label>Mesto<span class="colorLabel">*</span></label>
+                <gbs-autocomplete [items]="items_city" [selected]="selectedValue_city"
+                    (selectionChange)="onSelectedChangeCity($event)" [cid]="'cityIdautocomplete'" appLatinOnFocusOut
+                    [selectedValue]="selectedValue_city">
+                </gbs-autocomplete>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <label>Ulica<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputUlica'" [value]="contractor?.street || ''"
+                    (valueChange)="onValueChangeStreet($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-4">
+                <label>Broj<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'inputBroj'" [value]="contractor?.houseNumber || ''"
+                    (valueChange)="onValueChangeHouseNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Broj mobilnog<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'tel'" [cid]="'inputBrMobilnog'" [value]="contractor?.mobileNumber || ''"
+                    (valueChange)="onValueChangeMobileNumber($event)" appLatinOnFocusOut
+                    placeholder="Format unosa: +3816">
+                </gbs-input>
+            </div>
+            <div class="col-md-6">
+                <label>Email<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'email'" [cid]="'inputEmail'" [value]="contractor?.email || ''"
+                    (valueChange)="onValueChangeEmail($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+        </div>
+    </div>
+</div>

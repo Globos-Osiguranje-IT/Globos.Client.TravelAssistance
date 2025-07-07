@@ -1,0 +1,105 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.custom-button {
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6c757d;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  gap: 10px;
+}
+
+.custom-button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-button.active-button {
+  background-color: #ff7f3f;
+  color: white;
+  position: relative;
+}
+
+.icon-container {
+  position: relative;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+i.ph.ph-user,
+i.ph.ph-users-three {
+  font-size: 5rem;
+  color: #6c757d;
+}
+
+.custom-button.active-button i.ph.ph-user,
+.custom-button.active-button i.ph-users-three {
+  color: #ffffff !important;
+}
+
+.check-circle {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #ffffff;
+  border: 2px solid #ff7f3f;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-circle i {
+  font-size: 1rem;
+  color: #ff7f3f;
+}
+
+.custom-button span {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Responsive: zadrži širinu dugmadi i centriraj ih */
+@media (max-width: 480px) {
+  .button-container {
+    justify-content: center;
+  }
+
+  .custom-button {
+    width: 150px !important;
+    height: 150px !important;
+    font-size: 1.1rem;
+
+    i.ph.ph-user,
+    i.ph.ph-users-three {
+      font-size: 5rem;
+    }
+
+    span {
+      font-size: 1rem;
+    }
+  }
+}

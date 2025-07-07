@@ -1,0 +1,28 @@
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <div class="shadow-sm rounded bg-white border p-4" style="max-width: 900px; width: 100%;">
+      
+      <div class="naslov d-flex align-items-center mb-3">
+        <h4 class="mb-0">Osiguranik</h4>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-4">
+          <gbs-input [type]="'text'" [cid]="'inputIme'" [placeholder]="'Ime*'" [value]="contractor?.firstName || ''"
+                     (valueChange)="onValueChangeFirstName($event)">
+          </gbs-input>
+        </div>
+        <div class="col-md-4">
+          <gbs-input [type]="'text'" [cid]="'inputPrezime'" [placeholder]="'Prezime*'" [value]="contractor?.lastName || ''"
+                     (valueChange)="onValueChangeLastName($event)">
+          </gbs-input>
+        </div>
+        <div class="col-md-4">
+          <gbs-input [type]="'text'" [cid]="'inputBrPasosa'" [placeholder]="'Broj pasoša*'" [value]="contractor?.passportNumber || ''"
+                     (valueChange)="onValueChangePassportNumber($event)">
+          </gbs-input>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  

@@ -1,0 +1,49 @@
+<div class="button-container">
+  <button *ngFor="let contractor of contractors" class="custom-button"
+    [ngClass]="{'active-button': contractor.id === contractorType?.id}" (click)="setContractorType(contractor)">
+    <i [ngClass]="contractor.id === 1 ? 'ph ph-user' : 'ph ph-buildings'"></i>
+    <span>{{ contractor.name | translate }}</span>
+    <div class="check-circle" *ngIf="contractor.id === contractorType?.id">
+      <i class="ph ph-check"></i>
+    </div>
+  </button>
+</div>
+
+
+
+<div *ngIf="contractorType?.id === enumContratorFizickoLice || contractorType?.id === enumContratorPravnoLice">
+  <gbs-contractor-info-feature  cid="contractorJMBG"
+                              [isInsuredContractorShared]="isInsuredContractorShared" 
+                              [contractorType]="contractorType"
+                              [client]="client"
+                              [contractor]="contractor"
+                              [items_city]="items_city"
+                              [contractor]="contractor"
+                              [selectedValue_city]="selectedCity"
+                              [contractorJmbg]="contractor?.registrationNumber"
+                              [allJmbgs]="allJmbgs"
+                              (contractorSelected)="onContractorSelect($event)"
+                              (insuredContractorChange)="onInsuredContractorChanged($event)"
+                              (contractorInfoChange)="onContractorInfoChange($event)"
+                              (contractorMappedToInsurantInfo)="onMappedInsurantInfoFromContractor($event)">
+  </gbs-contractor-info-feature>
+
+
+  <ng-container>
+    <div *ngIf=" this.agesList > 0">
+      <div *ngFor="let _ of createArray(this.agesList); let insurantIndex = index">
+        <gbs-insurant-info-feature  cid="insurantJMBG"
+          [contractorType]="contractorType"
+          [insurantIndex]="insurantIndex"
+          [isInsuredContractorShared]="isInsuredContractorShared"
+          [contractorJmbg]="contractor?.registrationNumber"
+          [allJmbgs]="allJmbgs"
+          (insurantInfoChange)="onInsurantInfoChange($event, insurantIndex)"
+          [foreignCitizenDataInput]="foreignCitizenList[insurantIndex]"
+          (foreignCitizenOutput)="onForeignCitizenChange($event)"
+          >
+        </gbs-insurant-info-feature>
+      </div>
+    </div>
+  </ng-container>
+</div>

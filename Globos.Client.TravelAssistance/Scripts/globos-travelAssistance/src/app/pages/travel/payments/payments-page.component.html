@@ -1,0 +1,92 @@
+<div class="summary-container">
+  <h2 class="page-title">Ugovoreni elementi osiguranja</h2>
+
+  <div class="card-grid">
+    <div class="custom-card">
+      <h5 class="card-title">Detalji ugovora:</h5>
+      <p><strong>Trajanje ugovora: </strong>od {{ policy?.StartDate | date:'dd.MM.yyyy.' }} do {{ policy?.EndDate | date:'dd.MM.yyyy.' }} &nbsp;</p>
+      <p><strong>Period pokrića: </strong>{{ getDaysDifference(policy?.StartDate, policy?.EndDate) }} dana &nbsp;</p>
+      <p><strong>Nivo pokrića: </strong>{{ policy?.InsuranceCategory?.name }} &nbsp;</p>
+      <p><strong>Osigurana suma: </strong>{{ getInsuredSumAmount(policy?.Tariff?.InsuredSumId) | number:'1.2-2' }} EUR &nbsp;</p>
+    </div>
+
+    <div class="custom-card" *ngIf="clientTypeId === 1">
+      <h5 class="card-title">Ugovarač osiguranja:</h5>
+      <p><strong>Ime: </strong>{{ (client?.FirstName || '') ? (client!.FirstName!.charAt(0).toUpperCase() + client!.FirstName!.slice(1).toLowerCase()) : '' }}&nbsp;</p>
+      <p><strong>Prezime: </strong>{{ (client?.LastName || '') ? (client!.LastName!.charAt(0).toUpperCase() + client!.LastName!.slice(1).toLowerCase()) : '' }} &nbsp;</p>
+      <p><strong>JMBG: </strong>{{ client?.RegistrationNumber }} &nbsp;</p>
+      <p *ngIf="policySaveRequest.Insurants[0].registrationNumber === client?.RegistrationNumber"><strong>Broj pasoša: </strong>{{ client?.PassportNumber }} &nbsp;</p>
+    </div>
+
+    <div class="custom-card" *ngIf="clientTypeId === 2">
+      <h5 class="card-title">Ugovarač osiguranja:</h5>
+      <p><strong>Naziv: </strong>{{ (client?.CompanyName || '')}}&nbsp;</p>
+      <p><strong>MBR: </strong>{{ client?.RegistrationNumber }} &nbsp;</p>
+      <p><strong>PIB: </strong>{{ client?.TaxIdentificationNumber }} &nbsp;</p>
+    </div>
+
+    <ng-container *ngIf="insurants && insurants.length > 0">
+      <div class="custom-card" *ngFor="let insurant of insurants; let i = index">
+        <h5 class="card-title">Osiguranik #{{ i + 1 }}:</h5>
+        <p><strong>Ime: </strong>{{ (insurant?.FirstName || '') ? (insurant!.FirstName!.charAt(0).toUpperCase() + insurant!.FirstName!.slice(1).toLowerCase()) : '' }}&nbsp;</p>
+        <p><strong>Prezime: </strong>{{ (insurant?.LastName || '') ? (insurant!.LastName!.charAt(0).toUpperCase() + insurant!.LastName!.slice(1).toLowerCase()) : '' }} &nbsp;</p>
+        <p><strong>JMBG: </strong>{{ insurant?.RegistrationNumber }} &nbsp;</p>
+        <p><strong>Broj pasoša: </strong>{{ insurant?.PassportNumber }} &nbsp;</p>
+      </div>
+    </ng-container>    
+    
+    <div class="custom-card full-width">
+      <h5 class="card-title">Premije:</h5>
+      <p><strong>Premija: </strong>{{ policy?.Amount | number:'1.2-2' }} RSD</p>
+      <p><strong>Doplatak: </strong>{{ ((this.additionalInsuranceAmount || 0))  | number:'1.2-2' }} RSD</p>
+      <!-- <p><strong>Pokriće covid 19 (0,00%): </strong> RSD</p> -->
+      <p><strong>Popust ( {{ policy?.ApplicationDiscount?.Discount }} %): </strong>{{(policy?.Discount || 0) | number:'1.2-2'}} RSD</p>
+      <p *ngIf="showroadinsurance===true"><strong>Pomoć na putu: </strong>{{(this.roadinsuranceAmount || 0) | number:'1.2-2'}} RSD</p>
+      <p *ngIf="showhomeinsurance===true"><strong>Osiguranje domaćinstva: </strong>{{(this.homeinsuranceAmount || 0) | number:'1.2-2'}} RSD</p>
+      <p><strong>Porez: </strong>{{ ((this.finalTax || 0))  | number:'1.2-2' }} RSD</p>
+      <p class="total-premium"><strong>Ukupno: </strong>{{ policy?.FinalAmount | number:'1.2-2' }} RSD</p>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <gbs-button
+      [cid]="'btnBack'"
+      [text]="'Nazad'"
+      [inputCssClass]="''"
+      [inputStyle]="{}"
+      (clickEvent)="goToPreviousStep()"
+      title="Nazad na prethodni korak"
+    ></gbs-button>
+    <!-- <gbs-button
+      [cid]="'btnBack'"
+      [text]="'Vrati se na početak'"  
+      title="Nazad na prvi korak"
+      [inputCssClass]="''"
+      [inputStyle]="{}"
+      (clickEvent)="navigateToHome()"
+    >
+    </gbs-button> -->
+
+    <ng-container *ngIf="checkPolicyDone">
+      <ng-container *ngIf="checkStatus === 1">
+        <div class="payment-form" [innerHTML]="paymentForm"></div>
+      </ng-container>
+
+      <ng-container *ngIf="checkStatus !== 1">
+        <div class="custom-card full-width error-message">
+          <p>{{ checkMessage || 'Polisa nije prošla proveru. Plaćanje nije moguće.' }}</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="checkStatus !== 1 && checkStatus !== 0">
+        <div class="custom-card full-width error-message">
+          <p>Došlo je do neočekivane greške. Pokušajte ponovo kasnije.</p>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!checkPolicyDone">
+      <p>Provera polise u toku...</p>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+@import "../variables.scss";
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family: Roboto, Helvetica, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+// body {
+//   overflow-y: scroll; // <- koristi se da postoji samo jedan scroll
+// }
+
+// html {
+//   overflow: hidden;
+// }
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+}
+
+.page-container {
+  flex: 1;
+  width: 100%;
+  // overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: none !important;
+  justify-content: flex-start;
+  padding: 10px 16px;
+}
+
+.content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 1100px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  position: sticky;
+  background-color: #fff;
+
+  @media (max-width: 768px) {
+    position: static;
+  }
+}
+
+.section-badge {
+  background-color: #ff7f3f !important;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 6px 20px;
+  border-radius: 24px;
+  display: inline-block;
+  // text-transform: uppercase;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container-header {
+  width: 100%;
+  max-width: 950px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.logo img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  padding: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 35px;
+    padding-top: 10px;
+  }
+}
+
+.logoFooter{
+  width: 25%;
+  height: 25%;
+  object-fit: contain;
+  padding: 5px;
+  margin-left: 165px;
+
+  @media (max-width: 768px) {
+    //flex-direction: column;
+    //align-items: flex-end;
+    gap: 35px;
+    padding-top: 10px;
+    width: 25%;
+    height: 25%;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+router-outlet {
+  width: 100%;
+}
+
+gbs-loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  width: 100%;
+  background-color: #fff;
+  //padding: 1rem 0;
+  //position: fixed;
+  // bottom: 0;
+  // left: 0;
+  //z-index: 999;
+  //box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  @media (max-width: 768px) {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+.footer-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #003c63;
+  color: #ffffff;
+  padding: 2rem 1rem;
+  padding-bottom: 2rem;
+  font-family: "Inter", sans-serif;
+
+  .footer-column {
+    //flex: 1 1 300px;
+    margin: 1rem;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ffffff22;
+      padding-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Sekcija za logoe – odvojena, sa belom pozadinom
+.logo-bar {
+  background-color: #ffffff;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.05);
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    img {
+      height: 40px;
+      max-width: 100px;
+      object-fit: contain;
+    }
+  }
+}
+
+// Responsive fallback
+@media (max-width: 768px) {
+  .footer-info {
+    //flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-column {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .logoFooter{
+    width: 35%;
+    height: 35%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-container {
+    padding: 16px 12px;
+  }
+
+  .container-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    padding: 10px;
+  
+  }
+}

@@ -1,0 +1,34 @@
+<div class="box-wrapper">
+  <div class="discount-wrapper">
+    <div class="input-group">
+      <div class="controls-row">
+        <div class="input-icon-wrapper input-narrow">
+          <mat-icon class="input-icon">flight_takeoff</mat-icon>
+          <gbs-input
+            [cid]="'discountCode'"
+            [placeholder]="'Unesite promo kod'"
+            [(value)]="discountCode"
+            [inputCssClass]="'form-control with-icon'"
+          ></gbs-input>
+        </div>
+        <div class="button-wrapper">
+          <gbs-button
+            [cid]="'primeni'"
+            [text]="'Primeni'"
+            [inputCssClass]="'apply-btn'"
+            (clickEvent)="applyDiscountMethod()"
+          ></gbs-button>
+        </div>
+      </div>
+      <div
+      class="message-row"
+      [ngClass]="{
+        'error': status === 0,
+        'success': status === 1 || status === 2
+      }"
+    >
+      {{ showMessage }}
+    </div>
+    </div>
+  </div>
+</div>

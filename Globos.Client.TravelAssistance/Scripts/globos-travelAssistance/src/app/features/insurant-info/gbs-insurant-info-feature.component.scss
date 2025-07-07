@@ -1,0 +1,29 @@
+h4 {
+    align-items: center;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.colorLabel {
+    color: red;
+}
+
+
+.orange-checkbox {
+
+    ::ng-deep input[type="checkbox"] {
+        //   accent-color: $gbs-color-eucalyptus;
+        width: 16px;
+        height: 16px;
+        // margin-right: 4px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+}
+
+
+.small-label {
+    font-size: 17px !important;
+    line-height: 1;
+}
+

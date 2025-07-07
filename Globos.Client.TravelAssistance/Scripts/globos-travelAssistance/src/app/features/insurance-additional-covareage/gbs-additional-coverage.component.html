@@ -1,0 +1,55 @@
+<div class="additional-box g-3 p-4 shadow-sm rounded bg-white mb-2 mt-2">
+  <div class="checkbox-column">
+    <div *ngFor="let checkbox of firstColumn()">
+      <gbs-checkbox *ngIf="checkbox.isActive && !(canShowWorkVisa && checkbox.id===insuranceEnum.RADNA_VIZA_GRAD)"
+        [cid]="checkbox.id.toString()"
+        [value]="checkbox.checked"
+        [label]="checkbox.name"
+        (valueChange)="onCheckboxChange(checkbox, $event)">
+      </gbs-checkbox>
+    </div>
+  </div>
+
+  <div class="checkbox-column"
+       [ngClass]="{
+         'with-premium-gap': selectedTab?.id === insuranceCoverageLevelEnum.PREMIUM,
+         'compact-gap': selectedTab?.id !== insuranceCoverageLevelEnum.PREMIUM
+       }">
+    <div *ngFor="let checkbox of secondColumn()">
+      <div *ngIf="checkbox.id !== 6 || selectedTab?.id === insuranceCoverageLevelEnum.PREMIUM">
+        <gbs-checkbox
+          [cid]="checkbox.id.toString()"
+          [value]="checkbox.checked"
+          [label]="checkbox.name"
+          *ngIf="
+          (checkbox.id !== insuranceEnum.OTKAZ_PUTOVANJA || canShowCancelTravelCheckbox) &&
+          !(canShowWorkVisa && checkbox.id===insuranceEnum.RADNA_VIZA_ADMIN)
+        "
+          (valueChange)="onCheckboxChange(checkbox, $event)">
+        </gbs-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- input za cenu aranžmana -->
+<div class="additional-box g-3 p-4 shadow-sm rounded bg-white mb-2 mt-2"
+     *ngIf="showArrangementInput">
+  <div class="warning-wrapper">
+    <span *ngIf="!isFamilySelected">
+      Maksimalna cena aranžmana za obračun premije je 350000 RSD. Ukoliko je cena aranžmana veća od 350000 RSD, premija osiguranja će biti obračunata na iznos od 350000 RSD.
+    </span>
+    <span *ngIf="isFamilySelected">
+      Maksimalna cena aranžmana za obračun premije je 600000 RSD. Ukoliko je cena aranžmana veća od 600000 RSD, premija osiguranja će biti obračunata na iznos od 600000 RSD.
+    </span>
+  </div>
+  <gbs-input
+    [cid]="'arrangementPrice'"
+    id="arrangementPrice"
+    placeholder="Cena aranžmana"
+    [label]="''"
+    type="number"
+    [value]="arrangementPrice || ''"
+    (inputChange)="onArrangementPriceChange($event)">
+  </gbs-input>
+</div>

@@ -1,0 +1,58 @@
+<div class="form-wrapper">
+  <app-step-summary-feature></app-step-summary-feature>
+</div>
+
+
+
+<gbs-contractor-type-feature [contractorTypeId]="contractorTypeId"  
+                             [contractors]="contractors"
+                             [contractorType]="contractorType"
+                             [contractor]="contractorInfoChange"
+                             [client]="client"
+                             [items_city]="items_city"
+                             [selectedCity]="selectedCity"
+                             [isInsuredContractorShared]="isInsuredContractorShared"
+                             (contractorSelected)="onContractorSelected($event)"
+                             (contractorInfoChange)="handleContractorInfo($event)"
+                             (insurantInfoChange)="handleInsurantInfo($event)" 
+                             (insuredLegalInfoChange)="handleInsuredLegalInfo($event)"
+                             (insuredContractorSharedChange)="handleInsuredContractorChange($event)"
+                             (passportErrorChange)="onPassportErrorChanged($event)">
+</gbs-contractor-type-feature>
+
+<div  *ngIf="passportError" class="warning-wrapper" id="warning-message">
+  <span> Broj pasoša mora biti jedinstven za svakog osiguranika, proverite unos.</span>
+</div>
+
+
+<gbs-domestic-road-travel 
+                          [roadAssistanceInsurance]="roadAssistanceInsurance"
+                          [domesticInsurance]="domesticInsurance"
+                          [tripCancellation]="tripCancellation"
+                          (roadChange)="handleRoadChange($event)" 
+                          (domesticChange)="handleDomesticChange($event)"
+                          (tripChange)="handleTripChange($event)">
+</gbs-domestic-road-travel>
+
+<div  class="form-wrapper" style="width: 97%; margin-top: 9px;">
+<gbs-destination [territorialCoverageId]="this.selectedOfferRequest.territorialCoverageId"
+                 [selectedDestinationId]="selectedDestinationId"
+                (destinationChange)="handleDestination($event)">
+</gbs-destination>
+</div>
+
+<div class="form-wrapper">
+  <gbs-consent-feature 
+                      [selectedConsents]="selectedConsents" 
+                      (consentChanged)="handleConsent($event)"></gbs-consent-feature>
+</div>
+
+<div class="button right-align">
+  <gbs-button cid="back-button" [inputCssClass]="'back-btn'" (click)="goToPreviousStep()" title="Nazad na prethodni korak" [text]="'Nazad'">
+  </gbs-button>
+  <gbs-button cid="next-button" [inputCssClass]="'next-btn'" (click)="goToNextStep()" [text]="'Dalje'">
+  </gbs-button>
+</div>
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>

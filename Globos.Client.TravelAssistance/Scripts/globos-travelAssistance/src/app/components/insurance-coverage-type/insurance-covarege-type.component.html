@@ -1,0 +1,12 @@
+<div class="cards-container">
+  <div class="card" *ngFor="let info of infooffers || cards; let i = index"
+      [class.active]="selectedCard?.finalAmount === info?.finalAmount"
+      (click)="selectCard(info)"
+      style="cursor: pointer;">
+    <h3>{{ selectedTab?.name?.toUpperCase() }} {{ info.osiguranaSuma | number: '.0' }} EUR</h3>
+    <h4>{{ info.coverageLevelId }}</h4>
+    <p><i>{{ info.territorialName }}</i></p>
+    <strong [ngClass]="(i === 1 || i === 2) ? 'shifted-strong' : ''">{{ info.finalAmount | number: '.1-2' }} RSD</strong>
+    <span class="old-price" *ngIf="info.discount">{{ (+info.additionalInsuranceAmount + +info.additionalInsuranceTax + +info.amount + +info.tax) | number: '.1-2' }} RSD</span>
+  </div>
+</div>

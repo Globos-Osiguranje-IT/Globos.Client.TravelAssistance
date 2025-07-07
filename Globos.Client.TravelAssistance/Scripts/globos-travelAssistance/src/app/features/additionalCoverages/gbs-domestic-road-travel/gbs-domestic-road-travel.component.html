@@ -1,0 +1,77 @@
+<div *ngIf="this.selectedAdditionalInsurances?.includes(additionalCoverage.OTKAZ_PUTOVANJA) || this.selectedAdditionalInsurances?.includes(additionalCoverage.OSIGURANJE_DOMACINSTVA) ||
+            this.selectedAdditionalInsurances?.includes(additionalCoverage.POMOC_NA_PUTU)"
+    class="container-fluid  justify-content-center">
+    <h3 style="margin-top: 2%;">Dopunsko osiguranje</h3>
+    <div class="box-wrapper" *ngIf="this.selectedAdditionalInsurances.includes(additionalCoverage.POMOC_NA_PUTU)">
+        <h4 class="mb-3">{{additionalCoverageText.POMOC_NA_PUTU}}</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Broj tablica<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'platesNumber'" [value]="road.platesNumber"
+                    (valueChange)="onValueChangePlatesNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-6">
+                <label>Broj šasije<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'chassisNumber'" [value]="road.chassisNumber"
+                    (valueChange)="onValueChangeChassisNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Marka vozila<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'vehicleBrand'" [value]="road.vehicleBrand"
+                    (valueChange)="onValueChangeVehicleBrand($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+            <div class="col-md-6">
+                <label>Tip vozila<span class="colorLabel">*</span></label>
+                <gbs-autocomplete  appLatinOnFocusOut [cid]="'vehicleType'" [label]="'Tip vozila'" [placeholder]="'Tip vozila'"
+                     [items]="vehicleTypeItems" [value]="road.vehicleType" [selected]="road.vehicleType
+                               ? { label: road.vehicleType, value: road.vehicleType }
+                               : { label: '', value: '' }"
+                             (valueChange)="onValueChangeVehicleType($event)">
+                </gbs-autocomplete>
+            </div>
+        </div>
+    </div>
+    <div class="box-wrapper" *ngIf="this.selectedAdditionalInsurances.includes(additionalCoverage.OSIGURANJE_DOMACINSTVA)">
+        <h4 class=" mb-3">{{additionalCoverageText.OSIGURANJE_DOMACINSTVA}}</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Adresa<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'address'" [value]="domestic.address" spellcheck="false" autocomplete="off" aria-autocomplete="none"
+                    (valueChange)="onValueChangeAddress($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-wrapper" *ngIf="this.selectedAdditionalInsurances.includes(additionalCoverage.OTKAZ_PUTOVANJA)">
+        <h4 class="mb-3">{{additionalCoverageText.OTKAZ_PUTOVANJA}}</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Putnička agencija<span class="colorLabel">*</span></label>
+                <gbs-autocomplete [items]="items_travelAgenciesComplete" [selected]="selectedAgency"
+                    [cid]="'travelAgencyId'" (selectionChange)="onSelectedChangeAgencies($event)"  [selectedValue]="selectedAgency" appLatinOnFocusOut>
+                </gbs-autocomplete>
+            </div>
+            <div class="col-md-6">
+                <label>Broj ugovora<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'contractNumber'" [value]="trip.contractNumber"
+                    (valueChange)="onValueChangeContractNumber($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Cena (RSD)<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'price'" [value]="trip.price.toString()" [disabled]="disablePrice"
+                    (valueChange)="onValueChangePrice($event)">
+                </gbs-input>
+            </div>
+        </div>
+    </div>
+
+</div>

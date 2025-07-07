@@ -1,0 +1,8 @@
+<gbs-dropdown
+  appDropdownRequired
+  [cid]="'destinationDropdown'"
+  [label]="'Destinacija' | translate"
+  [items]="destinationItems"
+  [value]="selectedDestinationId != null ? selectedDestinationId.toString() : ''"
+  (valueChange)="onDestinationChange($event)">
+</gbs-dropdown>

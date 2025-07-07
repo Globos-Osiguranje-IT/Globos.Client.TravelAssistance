@@ -1,0 +1,36 @@
+.colorLabel {
+    color: red;
+}
+
+
+::ng-deep .form-control[_ngcontent-ng-c1676363361] {
+
+    margin-top: 2px !important;
+    border-radius: 8px !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+    height: 49px !important;
+    margin-top: 4px !important;
+    flex: auto;
+    will-change: auto;
+
+    border-radius: 8px !important;
+}
+
+::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+    margin-top: 5px;
+}
+
+.box-wrapper {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); 
+    border-radius: 0.25rem;                    
+    background-color: #fff;                      
+    border: 1px solid #dee2e6;                     
+    padding: 1.5rem !important;     
+    max-width: 900px; 
+    width: 100%;               
+    margin-top: 3%;
+  }
+  

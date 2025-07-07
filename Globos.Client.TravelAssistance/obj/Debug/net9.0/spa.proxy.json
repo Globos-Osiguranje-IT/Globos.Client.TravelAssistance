@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:44352",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Users\\bojan.cipovic\\Desktop\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Scripts\\globos-webshop\\",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

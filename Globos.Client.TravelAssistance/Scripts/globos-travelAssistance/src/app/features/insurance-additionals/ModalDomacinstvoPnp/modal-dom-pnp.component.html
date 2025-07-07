@@ -1,0 +1,50 @@
+<div class="popup-container" style="text-align: center; justify-content: center">
+    <button class="close-button" (click)="onClose()">×</button>
+
+    <!-- <div class="icon-circle mt-3">
+        <img src="../../../../assets/water_damage.png" alt="Insurance icon" />
+    </div> -->
+
+    <p class="description">
+        Za vreme putovanja želim da dodatno ugovorim sledeće usluge:
+    </p>
+
+    <div class="insurance-options" *ngIf="shouldShowToggles">
+        <div *ngFor="let option of visibleOptionsFooter" class="option-row">
+
+            <mat-slide-toggle #matslidetoggle color="primary" [(ngModel)]="option.checked"
+                (ngModelChange)="onToggleChanged(option)">
+            </mat-slide-toggle>
+            <div class="option-info">
+                <span class="insurance-name">{{ option.name }}</span>
+                <span class="insurance-price">{{ option.price | number : "1.2-2" }} RSD</span>
+            </div>
+
+            <i class="ph-light ph-info" style="cursor: pointer; font-size: 20px; margin-left: 10px;" (click)="openDetails(option)"></i>
+           
+            <!-- (ngModelChange)="updateNextButtonState()"
+        (ngModelChange)="getAdditionalInsuranceAmount(option, option.checked); updateNextButtonState()" -->
+        </div>
+    </div>
+
+    <div class="total-action-section mt-3">
+        <div class="total-info mt-3" style="text-align: center !important">
+            <span class="total-label mt-3">Ukupno:</span>
+            <div class="total-amount-container">
+                <span class="total-value">{{
+                    getSelectedCoverageTotal() | number : "1.2-2"
+                    }}</span>
+                <span class="total-currency"> RSD</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="button mt-4 mb-3">
+        <gbs-button cid="next-button" [inputCssClass]="'next-btn'" [inputStyle]="nextButtonStyles"
+            (click)="goToNextStep()" [text]="'Dalje'">
+            <span class="button-content">
+                <mat-icon class="icon"><i class="ph ph-airplane-in-flight"></i></mat-icon>
+            </span>
+        </gbs-button>
+    </div>
+</div>

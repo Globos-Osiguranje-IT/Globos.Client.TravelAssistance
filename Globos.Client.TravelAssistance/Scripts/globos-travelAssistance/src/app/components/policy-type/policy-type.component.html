@@ -1,0 +1,39 @@
+<div class="policy-select-wrapper" *ngIf="!isFamilySelected">
+  <div class="header-option" *ngFor="let policy of policies" [class.active]="selectedPolicy?.id === policy.id"
+    (click)="selectPolicy(policy)">
+    <h5>{{ policy.name }}</h5>
+    <p *ngIf="policy.name == 'Jednokratno'">Jedna polisa, jedno putovanje</p>
+    <p *ngIf="policy.name == 'Godišnje'">Jedna polisa, više putovanja</p>
+  </div>
+</div>
+
+<gbs-date-and-passengers [selectedPolicy]="selectedPolicy" 
+                         [ageGroups]="ageGroups" 
+                         [passengers]="passengers"
+                         [selectedStartDate]="selectedStartDate"
+                         [selectedEndDate]="selectedEndDate"
+                         [selectedDate]="selectedDate"
+                         [isInSerbia]="isInSerbia"
+                         [days]="days"
+                         [selectedAnnualDay]="selectedAnnualDay"
+                         [selectedDaysOptions]="selectedDaysOptions"
+                         [dateAndPassengersAnnual]="dateAndPassengersAnnual"
+                         [selectedAdditionalCoverages]="selectedAdditionalCoverages"
+                         [isFamilySelected]="isFamilySelected"
+                         [showStartDateError]="showStartDateError" 
+                         [showEndDateError]="showEndDateError" 
+                         [showTerritoryError]="showTerritoryError" 
+                         [showTerritoryErrorAnnual]="showTerritoryErrorAnnual"
+                         [showStartDateMinError]="showStartDateMinError"
+                         [showPassengerGroupEmptyError]="showPassengerGroupEmptyError" 
+                         [showPassengerLimitExceededError]="showPassengerLimitExceededError" 
+                         [showDurationError]="showDurationError"
+                         [showPassengerGroupEmptyErrorAnnual]="showPassengerGroupEmptyErrorAnnual" 
+                         [showPassengerLimitExceededErrorAnnual]="showPassengerLimitExceededErrorAnnual"        
+                         [showNumberOfDaysError]="showNumberOfDaysError"              
+                         [show71Error]="show71Error"
+                         [show71ErrorAnnual]="show71ErrorAnnual"
+                         (dateAndPassengersChanged)="onDateAndPassengersChanged($event)"
+                         (dateAndPassengersAnnualChanged)="onDateAndPassengersAnnualChanged($event)"></gbs-date-and-passengers>
+
+                        

@@ -1,0 +1,20 @@
+<div class="container-fluid d-flex justify-content-center mt-4">
+  <div class="p-3 rounded bg-white border shadow-sm">
+
+    <div class="consent-item mb-3 mt-3" *ngFor="let consent of consentItems">
+
+      <gbs-checkbox [cid]=consent.id [label]="''" [value]="checkboxStates.get(consent.id) === true"
+        (checkedChange)="onCheckboxChange(consent.id, $event)" class="orange-checkbox">
+      </gbs-checkbox>
+
+      <span class="consent-label" [class.clickable]="!!consent.documentPath"
+        (click)="consent.documentPath ? openLink($event, consent.documentPath) : null">
+        <span style="color: red;" *ngIf="consent.isMandatory">*</span> {{ consent.name }}
+      </span>
+
+      <div *ngIf="isFieldInvalid(consent)" class="text-danger mt-1">
+        Obavezno je čekirati ovu stavku
+      </div>
+    </div>
+
+  </div>

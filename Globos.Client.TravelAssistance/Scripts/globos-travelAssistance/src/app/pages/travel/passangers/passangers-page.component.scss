@@ -1,0 +1,135 @@
+@import '../../../../variables.scss';
+
+.form-wrapper {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+::ng-deep .next-btn {
+  background-color: $gbs-color-mango-tango !important;
+  color: white !important;
+  font-weight: bold;
+  font-size: 20px !important;
+  padding: 12px 30px;
+  border-radius: 10px !important;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem; 
+  justify-content: flex-end;
+  gap: 12px;
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+  border: none;
+  cursor: pointer;
+  min-width: 140px;
+  max-width: 180px !important;
+  height: 55px !important;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.right-align {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+::ng-deep .next-btn:hover {
+  transform: scale(1.05);
+}
+
+::ng-deep .next-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease-in-out;
+}
+
+::ng-deep .next-btn:disabled {
+  background-color: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+::ng-deep .back-btn {
+  background-color: $gbs-color-star-dust !important;
+  color: white !important;
+  font-weight: bold;
+  font-size: 20px !important;
+  padding: 12px 30px;
+  border-radius: 10px !important;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem; 
+  justify-content: flex-end;
+  gap: 12px;
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+  border: none;
+  cursor: pointer;
+  min-width: 140px;
+  max-width: 180px !important;
+  height: 55px !important;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  margin-right: 15px;
+}
+
+::ng-deep .back-btn:hover {
+  transform: scale(1.05);
+}
+
+::ng-deep .back-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease-in-out;
+}
+
+::ng-deep .back-btn:disabled {
+  background-color: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .next-btn {
+      width: 100%;
+      max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+.error-message {
+  border: 1px solid #f44336;  
+  background-color: #ffebee;  
+  color: #b71c1c;             
+  padding: 0.75rem 1rem;       
+  margin: 1rem 0;              
+  border-radius: 4px;          
+  font-weight: 600;            
+  font-size: 0.95rem;          
+  line-height: 1.4;            
+}
+.warning-wrapper {
+  background-color: #f8d7da; 
+  border: 1px solid #f5c6cb; 
+  color: #721c24; 
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.warning-wrapper span {
+  font-size: 14px;
+  font-weight: bold;
+}

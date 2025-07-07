@@ -1,0 +1,163 @@
+<h2 class="dialog-title mt-2">TABELA POKRIĆA</h2>
+<div *ngIf="data.pnp == 8" class="table-responsive" style="width: 100%; padding: 1rem 1rem;">
+
+    <table class="table custom-table" style="width: 75%; margin: 0 auto;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">ASISTENCIJA I OPIS</th>
+                <th style="text-align: center;">POKRIĆA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Osiguranje od požara i nekih drugih opasnosti
+                    Građevinski objekat (kuća/stan)
+                </td>
+                <td style="text-align: center;">22.500 EUR</td>
+            </tr>
+            <tr>
+                <td>Osiguranje od požara i nekih drugih opasnosti
+                    Stvari domaćinstva
+                </td>
+                <td style="text-align: center;">4.500 EUR</td>
+            </tr>
+            <tr>
+                <td>Osiguranje od izliva vode iz instalacija
+                    Građevinski objekat (kuća/stan)
+                </td>
+                <td style="text-align: center;">450 EUR</td>
+            </tr>
+            <tr>
+                <td>Osiguranje od izliva vode iz instalacija
+                    Stvari domaćinstva
+                </td>
+                <td style="text-align: center;">1.125 EUR</td>
+            </tr>
+            <tr>
+                <td>Osiguranje od loma stakla</td>
+                <td style="text-align: center;">112.50 EUR</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="data.pnp == 9" class="table-responsive" style="width: 100%; padding: 1rem 1rem;">
+    <table class="table custom-table">
+        <thead>
+            <tr style="text-align: center;">
+                <th colspan="2">ASISTENCIJA I OPIS</th>
+                <th>CORIS PLUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-weight: 600;">
+                <td colspan="2" style="text-align: center;">Trajanje osiguranja</td>
+                <td style="text-align: center;">Do 1 mesec</td>
+            </tr>
+            <tr>
+                <td>Servisiranje informacija</td>
+                <td>
+                    Saveti o postupanju u slučaju saobraćajne nezgode, u slučaju nastanka kvara ili krađe; 
+                    info o lokacijama i kontaktima servisa; udaljenostima destinacija; o iznosima putarine; 
+                    vremenskim uslovima; stanju na putevima i graničnim prelazima; prosleđivanje info članovima porodice, 
+                    kolegama, prijateljima, policiji ili hitnoj pomoći
+                </td>
+                <td style="text-align: center;">NEOGRANIČENO</td>
+            </tr>
+            <tr>
+                <td>Organizacija pomoći na putu (Srbija i Evropa)</td>
+                <td>
+                    Organizacija popravke u slučaju manjeg kvara na licu mesta; organizacija vuče do najbližeg servisa 
+                    koji može osposobiti vozilo, sedišta ili prebivališta korisnika; organizacija prevoza vozača i putnika do 
+                    prebivališta ili odredišta ako je vozilo ukradeno ili se ne može popraviti; organizacija prenoćišta za putnike i vozača; 
+                    organizacija najma zamenskog vozila
+                </td>
+                <td style="text-align: center;">NEOGRANIČENO</td>
+            </tr>
+            <tr>
+                <td>Popravka vozila</td>
+                <td>
+                    U slučaju manjeg kvara koji se može otkloniti na mestu događaja
+                </td>
+                <td style="text-align: center;">do 50 EUR
+                    (za slučaj koji nastane na teritoriji Evrope uključujući Srbiju)</td>
+            </tr>
+            <tr>
+                <td>Prevoz vozila u slučaju saobraćajne nezgode</td>
+                <td>
+                    Prevoz (šlepovanje) vozila ukoliko se vozilo na mestu događaja ne može osposobiti za nastavak putovanja.
+                    Prevoz se organizuje do najbližeg auto-servisa ili auto-otpada. U slučaju saobraćajne 
+                    nezgode uslov za organizaciju prevoza vozila je da je policija izvršila uviđaj i da je sačinjen policijski zapisnik o nezgodi.
+                </td>
+                <td style="text-align: center;">Do 250 EUR
+                    (za slučaj koji nastane na teritoriji Evrope uključujući Srbiju)</td>
+            </tr>
+            <tr>
+                <td>Izvlačenje vozila</td>
+                <td>
+                    Organizacija izvlačenja vozila u slučaju kada se vozilo našlo u provaliji, jarku, blatu, vodi i sl.
+                </td>
+                <td style="text-align: center;">do 50 EUR</td>
+            </tr>
+            <tr>
+                <td>Prevoz vozača i putnika</td>
+                <td>
+                    Prevoz do mesta prebivališta ili do odredišta u slučaju da se vozilo ne može popraviti ili je ukradeno
+                </td>
+                <td style="text-align: center;">Slučaj na teritoriji Srbije: do 15 EUR po osobi,
+                    odnosno do 50 EUR za osobe zajedno
+                    Slučaj izvan teritorije Srbije (Evropa): do 40 EUR po osobi,
+                    odnosno do 200 EUR za sve osobe zajedno</td>
+            </tr>
+            <tr>
+                <td>Prenoćište za vozača i putnike</td>
+                <td>
+                    Za vreme dok je vozilo u servisu. Uključeni troškovi noćenja
+                </td>
+                <td style="text-align: center;">Slučaj izvan teritorije Srbije (Evropa): max 40 EUR po noćenju, po osobi, max 2 noćenja</td>
+            </tr>
+            <tr>
+                <td>Zamensko vozilo</td>
+                <td>
+                    Organizacija najma vozila u slučaju da popravka vozila traje duže od 24h i da je udaljenost do krajnjeg odredišta veća od 100 km
+                </td>
+                <td style="text-align: center;">do 50 EUR po danu, max 2 dana, za slučaj koji nastane na teritoriji Evrope izvan Srbije</td>
+            </tr>
+            <tr>
+                <td>Asistentska kartica</td>
+                <td>
+                    Identifikaciona PVC kartica koja sadrži osnovne informacije za korišćenje asistencije i popusta
+                </td>
+                <td style="text-align: center;">UKLJUČENO</td>
+            </tr>
+            <tr>
+                <td>COFUS Osiguran popust</td>
+                <td>
+                    Mogućnost korišćenja popusta prilikom kupovine kod partnera u sistemu COFUS osiguran popust u zemlji i inostranstvu
+                </td>
+                <td style="text-align: center;">UKLJUČENO</td>
+            </tr>
+            <tr>
+                <td>SMS obaveštenje</td>
+                <td>
+                    Slanje 2 SMS poruke klijentu u toku godine: rođendanska čestitka i podsetnik pred istek registracije vozila
+                </td>
+                <td style="text-align: center;">UKLJUČENO</td>
+            </tr>
+            <tr>
+                <td>Broj slučajeva slučajeva na godišnjem nivou (za godišnje premije), odnosno broj slučajeva za mesečnu premiju</td>
+                <td>
+                    Bez pokrića troškova
+                </td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td>Broj slučajeva slučajeva na godišnjem nivou (za godišnje premije), odnosno broj slučajeva za mesečnu premiju</td>
+                <td>
+                    Sa pokrićem troškova
+                </td>
+                <td style="text-align: center;">1</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

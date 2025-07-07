@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\milos.radisic\source\repos\Globos-Osiguranje-IT\Globos.Client.WebShop\Globos.Client.WebShop\bin\Release\net9.0\publish\</_PublishTargetUrl>
+    <History>True|2025-05-07T10:02:46.1795232Z||;False|2025-05-07T12:00:00.8268525+02:00||;False|2025-05-07T11:54:28.6546620+02:00||;True|2024-12-31T13:27:27.5846458+01:00||;True|2024-12-31T13:18:25.5023623+01:00||;True|2024-12-31T13:13:47.1053323+01:00||;True|2024-12-31T13:09:02.8010249+01:00||;True|2024-12-31T13:08:29.2738499+01:00||;True|2024-12-31T13:07:40.9704745+01:00||;True|2024-12-31T12:44:34.2035515+01:00||;True|2024-12-31T12:14:46.3666990+01:00||;True|2024-12-31T12:13:29.6982266+01:00||;True|2024-12-30T13:50:32.7256741+01:00||;True|2024-12-30T13:45:00.9332833+01:00||;True|2024-12-30T13:40:49.4073574+01:00||;True|2024-12-30T13:35:59.0818059+01:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

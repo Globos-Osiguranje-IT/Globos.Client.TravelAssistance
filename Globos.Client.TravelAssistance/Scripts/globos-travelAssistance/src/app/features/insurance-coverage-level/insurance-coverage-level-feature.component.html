@@ -1,0 +1,23 @@
+<div *ngIf="showCoverageError" class="warning-wrapper mt-2">
+  <span>Obavezan je izbor jedne od ponuda osiguranja.</span>
+</div>
+<div class="tab-container">
+  <button
+  *ngFor="let tab of tabs"
+  [class.active]="selectedTab?.id === tab.id"
+  (click)="changeTab(tab)"
+  [disabled]="tab.name === 'STANDARD' && isPremiumOnlySelected"
+>{{ tab.name }}
+</button>
+    <i *ngIf="tabs.length > 0 " class="ph-light ph-info" style="cursor: pointer; font-size: 24px;" (click)="openAsistencijaDialog()"></i>
+  </div>
+
+  <div *ngIf="showInfoMessage" class="info-wrapper mt-2">
+    <span>Za putnike starije od 70 godina i trajanje preko 30 dana, moguće je samo teritorijalno pokriće 'CEO SVET bez SAD-a, Kanade, Australije, Novog Zelanda i Japana', do najviše 60 dana.</span>
+  </div>
+
+  <div *ngIf="showInfoMessageAnnual" class="info-wrapper mt-2">
+    <span>Za putnike starije od 70 godina i trajanje preko 30 dana, moguće je samo teritorijalno pokriće 'CEO SVET bez SAD-a, Kanade, Australije, Novog Zelanda i Japana', do najviše 60 dana.</span>
+  </div>
+<gbs-insurance-covarege-type [infooffers]="policyClientService.infooffers" [card]="card" *ngIf="selectedTab != null" 
+[selectedTab]="selectedTab" (selectedCardChange)="onSelectedCardChange($event)"></gbs-insurance-covarege-type>

@@ -1,0 +1,146 @@
+@import '../../../variables.scss';
+
+.checkbox-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+.checkbox-column gbs-checkbox {
+  display: flex;
+  align-items: flex-start; // bolje poravnanje labela
+  flex-wrap: wrap; // dozvoljava lomljenje ako treba
+  word-break: break-word;
+}
+
+.checkbox-column gbs-checkbox .checkbox-label {
+  margin-left: 8px;
+  font-weight: 500;
+  color: #333;
+  white-space: normal; // omogucava normalan prelaz teksta
+}
+
+::ng-deep .row.g-3.p-4.shadow-sm.rounded.bg-white.mb-4 {
+  padding: 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important; // uklonjen scale jer pravi probleme
+  border-top: 2px solid #dee2e6;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep input[type="checkbox"] {
+  accent-color: $gbs-color-globos-blue;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.rounded {
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.16) !important;
+}
+
+.additional-box {
+  width: 100%;
+  max-width: 890px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  font-size: 14px;
+    // ovo garantuje da se ne širi van ekrana
+    overflow-x: hidden;
+}
+
+.checkbox-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.with-premium-gap {
+  gap: 0.75rem; // veći razmak kada je PREMIUM
+}
+
+.compact-gap {
+  gap: 0.5rem; // manji razmak kada nije PREMIUM
+}
+
+
+@media (max-width: 768px) {
+  .additional-box {
+    flex-direction: column;
+    padding: 16px;
+    width: 100% !important;
+    max-width: 370px;
+  }
+
+  .checkbox-column {
+    width: 100%;
+    flex: unset !important;
+  }
+
+  .checkbox-column gbs-checkbox {
+    flex-wrap: wrap;
+    word-break: break-word;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  :host ::ng-deep .additional-box {
+    padding: 1rem !important;
+    max-width: 750px !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    width: 100% !important;
+    justify-content: space-between;
+  }
+
+  .additional-box > div {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 10px !important;
+    box-sizing: border-box;
+  }
+
+  .checkbox-column {
+    width: 100%;
+    flex: unset !important;
+  }
+
+  .checkbox-column gbs-checkbox {
+    flex-wrap: wrap;
+    word-break: break-word;
+    white-space: normal;
+  }
+}
+
+.warning-wrapper {
+  background-color: #f8d7da; /* Light red background */
+  border: 1px solid #f5c6cb; /* Lighter red border */
+  color: #721c24; /* Dark red text color */
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.warning-wrapper span {
+  font-size: 14px;
+  font-weight: bold;
+}

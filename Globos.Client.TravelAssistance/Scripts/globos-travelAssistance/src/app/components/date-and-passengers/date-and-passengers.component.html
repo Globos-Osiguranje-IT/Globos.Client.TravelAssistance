@@ -1,0 +1,162 @@
+<div *ngIf="selectedPolicy?.id === selectedJEDNOKRATNO" class="policy-box g-3 p-4 rounded bg-white mb-4 mt-2">
+    <div>
+        <h5 class="mb-3">Period putovanja:</h5>
+        <div class="mb-3 input-icon-container" id="startDatumField">
+            <div #startDateWrapper class="mb-3 input-icon-container" id="startDatumField">
+                <gbs-date-picker #picker [value]="selectedStartDate" [minDate]="today" [maxDate]="maxDate" id="startDatePicker"
+                    [cid]="'datePicker1'" [icon]="airplaneTakeoff" [label]="''" [labelCssClass]="''"
+                    [labelStyle]="{ color: '' }" [inputCssClass]="'date-picker-input'"
+                    [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
+                    [placeholder]="'Početni datum'" (dateChange)="onStartDateChange($event)" (blurred)="onStartDateBlur()">
+                </gbs-date-picker>
+                <div *ngIf="showStartDateError" class="text-danger mt-1">
+                    Obavezno je uneti početak putovanja.
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="validateMinStartDate(this.selectedStartDate)">
+            <label class="mb-1 territory-label" style="font-weight: bold;">Da li se nalazite na teritoriji Republike Srbije?</label>
+            <div class="radio-container mb-2 mt-2 d-flex flex-wrap gap-3 territory-wrapper" [class.border-error]="showTerritoryError || showStartDateMinError">
+                <gbs-radio [cid]="'radio1'" id="radio1" [group]="'putnici'" [label]="'Da'" [value]="'Da'" [labelStyle]="{'margin-top':'5px'}" [ngStyle]="{'margin-left': '10px'}" [checked]="isInSerbia===true"  (radioChange)="onRadioChange($event)" class="mr-4"></gbs-radio>
+                <gbs-radio [cid]="'radio2'" id="radio2" [group]="'putnici'" [label]="'Ne'" [value]="'Ne'" [labelStyle]="{'margin-top':'5px'}" [ngStyle]="{'margin-left': '10px'}" [checked]="isInSerbia===false" (radioChange)="onRadioChange($event)" class="ml-4"></gbs-radio>
+            
+                <div *ngIf="showTerritoryError" class="alert alert-danger p-2 mt-2 territory-error">
+                    Obavezan je odgovor na pitanje.
+                </div>
+                <div *ngIf="showStartDateMinError===true" class="alert alert-danger p-2 mt-2 territory-error">
+                    Početak putovanja mora biti više od 4 dana nakon datuma kupovine polise.
+                </div>
+            </div>
+        </div>
+
+        <div class="policy-container">
+            <div class="mb-3 d-flex align-items-center">
+                <h5 for="daysCount" class="me-3">Broj dana</h5>
+                <div class="days-input-group">
+                    <button class="btn btn-outline-secondary btnPlus" type="button" (click)="decreaseDays()">-</button>
+                    <!-- <span class="px-3 fw-bold">{{ days }}</span> -->
+                    <input class="daysClass" [type]="'number'" [value]="days"
+                    (change)="onValueChangeDaysNumber($event)" [disabled]="selectedStartDate == ''"/>
+                    <button class="btn btn-outline-secondary btnMinus" type="button" (click)="increaseDays()">+</button>
+                </div>
+            </div>
+            <div *ngIf="showNumberOfDaysError===true" class="text-danger mt-2">
+                <div *ngIf="!hasWorkVisa && !hasWorkVisaAdmin && days>183">
+                    Putovanje ne može trajati duže od 183 dana.
+                    Duže trajanje putovanja (do 365 dana) je moguće samo uz doplatak za radnu vizu.
+                </div>
+                <div *ngIf="(hasWorkVisa || hasWorkVisaAdmin) && days>365">
+                    Putovanje ne može trajati duže od 365 dana.
+                </div>
+            </div>
+            <div *ngIf="show71Error===true" class="text-danger mt-2">
+                Maksimalan broj dana sa putnicima starijim od 71 godine je 60.
+            </div>
+        </div>
+
+        <div class="mb-3 input-icon-container" id="endDatumField">
+            <gbs-date-picker #picker [value]="selectedEndDate" [minDate]="toDate(selectedStartDate) || today" [maxDate]="maxDate"
+                [cid]="'datePicker2'" [icon]="airplaneLanding" [label]="''" [labelCssClass]="''"
+                [labelStyle]="{ color: '' }" [inputCssClass]="'date-picker-input'"
+                [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
+                [placeholder]="'Krajnji datum'" (dateChange)="onEndDateChange($event)" (blurred)="onEndDateBlur()">
+            </gbs-date-picker>
+            <div *ngIf="showEndDateError" class="text-danger mt-1">
+                Obavezno je uneti kraj putovanja.
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="mb-3">Unesite broj putnika:</h5>
+        <div class="mb-3 d-flex align-items-center justify-content-between"  *ngFor="let ageGroup of ageGroups">
+            <label class="me-3" *ngIf="ageGroup.ageFrom != 71">Od {{ ageGroup.ageFrom }}  do {{ ageGroup.ageTo }} godina</label>
+            <label class="me-3" *ngIf="ageGroup.ageFrom == 71">Preko {{ ageGroup.ageFrom }} godine</label>
+            <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" (click)="decreasePassenger('age' + ageGroup.ageFrom)">-</button>
+                <span class="form-control text-center">{{passengers['age' + ageGroup.ageFrom]}}</span>
+                <button class="btn btn-outline-secondary" type="button" (click)="increasePassenger('age' + ageGroup.ageFrom)">+</button>
+            </div>
+        </div>
+        <div *ngIf="showPassengerGroupEmptyError===true" class="text-danger mt-2">
+            Obavezno je uneti bar jednu osobu.
+        </div>
+        <div *ngIf="showPassengerLimitExceededError" class="text-danger mt-2">
+            Broj putnika prelazi dozvoljeni limit: maksimalno 9 za individualno, ili 2 odrasla (do 70 god) i 6 dece (do 19 god) za porodično osiguranje.
+        </div>
+        <div *ngIf="isFamilySelected">
+            <p style="color: rgb(185, 185, 6);">
+                *Za porodično osiguranje, unesite najmanje jedno dete (do 19 godina) i jednu odraslu osobu (20 do 70 godina).
+              </p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedPolicy?.id === selectedGODISNJE" class="policy-box g-3 p-4 rounded bg-white mb-4 mt-2">
+    <div>
+        <h5 class="mb-3">Period putovanja:</h5>
+        <div class="mb-3 input-icon-container" id="startDatumField">
+            <gbs-date-picker #picker [value]="selectedDate" [minDate]="today" [maxDate]="maxDate"
+                [cid]="'datePickerGod'" [icon]="airplaneTakeoff" [label]="''" [labelCssClass]="''"
+                [labelStyle]="{ color: '' }" [inputCssClass]="'date-picker-input'"
+                [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
+                [placeholder]="'Početni datum'" (dateChange)="onDateChange($event)" (blurred)="onStartDateAnnualBlur()">
+            </gbs-date-picker>
+            <div *ngIf="showStartDateError" class="text-danger mt-1">
+                Obavezno je uneti početak putovanja.
+            </div>
+        </div>
+        
+        <div *ngIf="validateMinStartDate(this.selectedDate)">
+            <label class="mb-1  territory-label" style="font-weight: bold;">Da li se nalazite na teritoriji Republike Srbije?</label>
+            <div class="radio-container mb-2 d-flex flex-wrap gap-2 territory-wrapper" [class.border-error]="showTerritoryErrorAnnual || showStartDateMinError">
+                <gbs-radio [cid]="'radio1'" id="radio1" [group]="'putnici'" [label]="'Da'" [value]="'Da'" [labelStyle]="{'margin-top':'5px'}" [ngStyle]="{'margin-left': '10px'}" [checked]="isInSerbia===true"  (radioChange)="onRadioChange($event)" class="mr-4"></gbs-radio>
+                <gbs-radio [cid]="'radio2'" id="radio2" [group]="'putnici'" [label]="'Ne'" [value]="'Ne'" [labelStyle]="{'margin-top':'5px'}" [ngStyle]="{'margin-left': '10px'}" [checked]="isInSerbia===false"  (radioChange)="onRadioChange($event)" class="ml-4"></gbs-radio>
+            
+                <div *ngIf="showTerritoryErrorAnnual" class="alert alert-danger p-2 mt-2 territory-error">
+                    Obavezan je odgovor na pitanje.
+                </div>
+                <div *ngIf="showStartDateMinError" class="alert alert-danger p-2 mt-2 territory-error">
+                   Početak putovanja mora biti više od 4 dana nakon datuma kupovine polise.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h5>Broj dana</h5>
+            <div class="d-flex flex-wrap gap-2 days-buttons-container">
+                <button *ngFor="let day of selectedDaysOptions" 
+                         class="btn btn-outline-secondary"
+                         [ngClass]="{'btn-gray': selectedAnnualDay === day}" 
+                         [class.active]="selectedAnnualDay === day"
+                         (click)="setAnnualDays(day)">
+                    {{ day.periodDays }}
+                </button>
+                <div *ngIf="show71ErrorAnnual===true" class="text-danger mt-2">
+                    Maksimalan broj dana sa putnicima starijih od 71 godina je 60.
+                </div>
+                <div *ngIf="showDurationError===true" class="text-danger mt-2">
+                    Obavezan je izbor trajanja putovanja.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="mb-3">Unesite broj putnika:</h5>
+        <div class="mb-3 d-flex align-items-center justify-content-between"  *ngFor="let ageGroup of ageGroups">
+            <label class="me-3" *ngIf="ageGroup.ageFrom != 71">Od {{ ageGroup.ageFrom }}  do {{ ageGroup.ageTo }} godina</label>
+            <label class="me-3" *ngIf="ageGroup.ageFrom == 71">Preko {{ ageGroup.ageFrom }} godine</label>
+            <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" (click)="decreasePassenger('age' + ageGroup.ageFrom)">-</button>
+                <span class="form-control text-center">{{passengers['age' + ageGroup.ageFrom]}}</span>
+                <button class="btn btn-outline-secondary" type="button" (click)="increasePassenger('age' + ageGroup.ageFrom)">+</button>
+            </div>
+        </div>
+        <div *ngIf="showPassengerGroupEmptyErrorAnnual" class="text-danger mt-2">
+            Obavezno je uneti bar jednu osobu.
+        </div>
+        <div *ngIf="showPassengerLimitExceededErrorAnnual" class="text-danger mt-2">
+            Broj putnika prelazi dozvoljeni limit: maksimalno 1 za godišnje osiguranje.
+        </div>
+    </div>
+</div>

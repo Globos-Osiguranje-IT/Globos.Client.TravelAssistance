@@ -1,0 +1,121 @@
+.box-wrapper {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 1.5rem !important;
+  max-width: 900px;
+  width: 97%;
+  margin: 0rem auto 0 auto;
+}
+
+.discount-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-narrow {
+  width: 250px;
+}
+
+.input-icon {
+  position: absolute;
+  top: 55%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #1976d2;
+  z-index: 2;
+}
+
+::ng-deep .with-icon {
+  padding-left: 50px !important;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  height: 45px;
+}
+
+::ng-deep .apply-btn {
+  background-color: #ff7f3f !important;
+  color: white !important;
+  font-size: 20px !important;
+  padding: 12px 30px;
+  border-radius: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+  border: none;
+  cursor: pointer;
+  min-width: 120px;
+  max-width: 160px !important;
+  height: 45px !important;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  margin-top: 7px;
+}
+
+.input-group {
+  .controls-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }button-wrapper
+  .message-row {
+    width: 100%;
+    font-size: 0.9rem;
+    text-align: center;
+  
+    &.error {
+      color: #d32f2f; 
+    }
+  
+    &.success {
+      color: #388e3c; 
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+
+    .input-icon-wrapper {
+      width: 100%;
+    }
+
+    // .button-wrapper {
+    //   width: 100%;
+    //   justify-content: center;
+
+      gbs-button {
+        width: 100%;
+      }
+    //}
+  }
+
+  .input-group {
+    gap: 0.5rem;
+  }
+}
+

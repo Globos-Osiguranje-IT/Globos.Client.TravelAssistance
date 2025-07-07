@@ -1,0 +1,68 @@
+<div class="container-fluid d-flex justify-content-center mt-3">
+  <div class="shadow-sm rounded bg-white border p-4" style="max-width: 900px; width: 100%;">
+
+    <div class="naslov d-flex align-items-center justify-content-between mb-3">
+      <h4 class="mb-0">
+        {{ 'Unesite podatke za osiguranika ' + textAges }}
+      </h4>
+    
+      <div class="d-flex align-items-center">
+        <gbs-checkbox
+          [cid]="'straniDrz'"
+          [(value)]="foreignCitizen"
+          class="orange-checkbox"
+          (valueChange)="foreignCitizenChange($event)">
+        </gbs-checkbox>
+        <label class="mb-0 ms-2 small-label">
+          Strani državljanin
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngIf="this.foreignCitizen" class=" mb-4 mt-1 ms-auto d-flex align-items-center">
+        <gbs-checkbox [cid]="'Imabroj'" [value]="YesNoJMBG" (valueChange)="YesNoJMBGChange($event)"
+          class="orange-checkbox"></gbs-checkbox>
+        <label class="mb-0 ms-2 small-label">Osiguranik nema matični broj</label>
+      </div>
+
+      <div class="row">
+        <div *ngIf="this.YesNoJMBG && this.foreignCitizen " class="col-md-4">
+          <label style="margin-bottom: 13px;">Datum rođenja<span class="colorLabel">*</span></label>
+          <gbs-date-picker [cid]="'insurantDatumRodjenja'" (dateChange)="onValueChangeDateForeignBirth($event)" [maxDate]="maxSelectableDate"
+            [placeholder]="'Izaberite datum rođenja'" [value]="dateForeignBirth" [allJmbgs]="allJmbgs"  [contractorJmbg]="contractorJmbg"  appLatinOnFocusOut></gbs-date-picker>
+        </div>
+
+        <div class="col-md-4" *ngIf="!this.YesNoJMBG">
+          <label>JMBG<span class="colorLabel">*</span></label>
+          <gbs-input [type]="'number'"
+            [cid]="YesNoJMBG?  'insurantYesNoForeign' : (foreignCitizen? 'insurantforeignCitizen' :  'insurantJMBG')"
+            [value]="contractor?.registrationNumber || ''" (valueChange)="onValueChangeRegistrationNumber($event)"
+            [maxlength]="'13'" appLatinOnFocusOut [allJmbgs]="allJmbgs" [contractorJmbg]="contractorJmbg" >>
+          </gbs-input>
+        </div>
+        <div class="col-md-4">
+          <label>Ime<span class="colorLabel">*</span></label>
+          <gbs-input [type]="'text'" [cid]="'inputIme'" [value]="contractor?.firstName || ''"
+            (valueChange)="onValueChangeFirstName($event)" appLatinOnFocusOut appLettersOnly>
+          </gbs-input>
+        </div>
+        <div class="col-md-4">
+          <label>Prezime<span class="colorLabel">*</span></label>
+          <gbs-input [type]="'text'" [cid]="'inputPrezime'" [value]="contractor?.lastName || ''"
+            (valueChange)="onValueChangeLastName($event)" appLatinOnFocusOut appLettersOnly>
+          </gbs-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label>Broj pasoša<span class="colorLabel">*</span></label>
+          <gbs-input [type]="'text'" [cid]="'inputBrPasosa'" [value]="contractor?.passportNumber || ''"
+            (valueChange)="onValueChangePassportNumber($event)" appLatinOnFocusOut>
+          </gbs-input>
+        </div>
+      </div>
+
+    </div>
+  </div>

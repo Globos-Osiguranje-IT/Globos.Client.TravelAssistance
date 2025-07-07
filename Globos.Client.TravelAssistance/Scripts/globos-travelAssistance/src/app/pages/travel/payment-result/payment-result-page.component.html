@@ -1,0 +1,155 @@
+<div class="payment-result-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Obrađujemo vašu transakciju...</p>
+  </div>
+
+  <!-- Success state -->
+  <div *ngIf="!isLoading && result === 1" class="payment-result success animated">
+    <div class="lottie-container" id="lottieSuccess"></div>
+
+    <!-- Show this message immediately if animation fails -->
+    <div *ngIf="animationError" class="payment-text visible">
+      <div class="fallback-icon success-icon">✓</div>
+      <h2>Uspešno plaćeno!</h2>
+      <div class="payment-details">
+        <p>Transakcija je uspešno završena. Hvala što koristite naše usluge!</p>
+        <br>
+        <p>Datum i vreme transakcije: {{transactionDateTime}}</p>
+
+        <p class="clientData-container" *ngIf="clientTypeId === 1">
+          <span class="clientData-label">Podaci o klijentu:</span>
+          <span class="clientData-value">{{ policyData.client.firstName }} {{policyData.client.lastName}} <br>
+           <b>E-mail:</b> {{policySaveRequest.Client.email.email}}</span>
+        </p>
+
+        <p class="clientData-container" *ngIf="clientTypeId === 2">
+          <span class="clientData-label">Podaci o klijentu:</span> <br>
+          <span class="clientData-value">{{ policyData.client.companyName }} <br>
+           <b>E-mail:</b> {{policySaveRequest.Client.email.email}}</span>
+        </p>
+
+        <br>
+
+        <div class="transaction-info-container">
+          <div class="transaction-info">
+            <span class="transaction-label">ID transakcije:</span>
+            <span class="transaction-value">{{ paymentDetails.TRANSACTIONID }}</span>
+          </div>
+          <div class="transaction-info">
+            <span class="transaction-label">Iznos:</span>
+            <span class="transaction-value">{{ paymentDetails.KRAJNJI | number:'1.2-2' }} RSD</span>
+          </div>
+        </div>
+
+        <p class="printPreviewPolicy">
+          Vaša polisa će biti dostavljena na navedenu e-mail adresu, a možete je odmah preuzeti
+          <span class="clickable-link" (click)="printPreviewPolicy()">ovde</span>.
+        </p>
+
+        <br>
+
+        <p class="">
+          <span class="insurer-label">Podaci o trgovcu: </span><br>
+          <span class="insurer-value"><b>Naziv:</b> Globos osiguranje a.d.o &nbsp;&nbsp; <br><b>Sedište:</b> Milutina
+            Milankovića br.
+            23, Beograd (Novi Beograd) &nbsp;&nbsp;<br>
+            <b>Matični broj:</b> 06936253 <b>PIB:</b> 100001079</span>
+        </p>
+
+      </div>
+      <div class="button-wrapper">
+        <button (click)="navigateToHome()" class="btn btn-primary">Vratite se na početak</button>
+      </div>
+    </div>
+
+    <!-- Show this after animation completes -->
+    <div [ngClass]="{'payment-text': true, 'visible': animationComplete && !animationError}">
+      <h2>Uspešno plaćeno!</h2>
+      <div class="payment-details">
+        <p>Transakcija je uspešno završena. Hvala što koristite naše usluge!</p>
+        <br>
+        <p> <b>Datum i vreme transakcije:</b> {{transactionDateTime}}</p>
+
+
+        <p class="clientData-container" *ngIf="clientTypeId === 1">
+          <span class="clientData-label">Podaci o klijentu: </span>
+          <span class="clientData-value">{{ policyData.client.firstName }} {{policyData.client.lastName}} <br>
+            <b>E-mail:</b> {{policySaveRequest.Client.email.email}}</span>
+        </p>
+
+        <p class="clientData-container" *ngIf="clientTypeId === 2">
+          <span class="clientData-label">Podaci o klijentu: </span> <br>
+          <span class="clientData-value">{{ policyData.client.companyName }} <br>
+           <b>E-mail:</b> {{policySaveRequest.Client.email.email}} </span>
+        </p>
+
+        <br>
+        <div class="transaction-info-container">
+          <div class="transaction-info">
+            <span class="transaction-label">ID transakcije:</span>
+            <span class="transaction-value">{{ paymentDetails.TRANSACTIONID }}</span>
+          </div>
+          <div class="transaction-info">
+            <span class="transaction-label">Iznos:</span>
+            <span class="transaction-value">{{ paymentDetails.KRAJNJI | number:'1.2-2' }} RSD</span>
+          </div>
+        </div>
+
+        <p class="printPreviewPolicy">
+          Vaša polisa će biti dostavljena na navedenu e-mail adresu, a možete je odmah preuzeti
+          <span class="clickable-link" (click)="printPreviewPolicy()">ovde</span>.
+        </p>
+
+        <br>
+
+        <p class="">
+          <span class="insurer-label">Podaci o trgovcu: </span><br>
+          <span class="insurer-value"><b>Naziv:</b> Globos osiguranje a.d.o &nbsp;&nbsp; <br> <b>Sedište:</b> Milutina
+            Milankovića br. 23, Beograd (Novi Beograd) &nbsp;&nbsp;<br>
+            <b>Matični broj:</b> 06936253 <b>PIB:</b> 100001079</span>
+        </p>
+
+      </div>
+      <div class="button-wrapper">
+        <button (click)="navigateToHome()" class="btn btn-primary">Vratite se na početak</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="!isLoading && result === 0" class="payment-result failure animated">
+    <div class="lottie-container" id="lottieError"></div>
+
+    <!-- Show this message immediately if animation fails -->
+    <div *ngIf="animationError" class="payment-text visible">
+      <div class="fallback-icon error-icon">✗</div>
+      <h2>Transakcija nije uspela</h2>
+      <p>Nažalost, došlo je do greške. Molimo pokušajte ponovo.</p>
+      <div class="payment-details">
+        <div class="transaction-info">
+          <span class="transaction-label">Status:</span>
+          <span class="transaction-value">Neuspešno</span>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button (click)="retryPayment()" class="btn btn-danger">Pokušajte ponovo</button>
+      </div>
+    </div>
+
+    <!-- Show this after animation completes -->
+    <div [ngClass]="{'payment-text': true, 'visible': animationComplete && !animationError}">
+      <h2>Transakcija nije uspela</h2>
+      <p>Nažalost, došlo je do greške. Molimo pokušajte ponovo.</p>
+      <div class="payment-details">
+        <div class="transaction-info">
+          <span class="transaction-label">Status:</span>
+          <span class="transaction-value">Neuspešno</span>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button (click)="retryPayment()" class="btn btn-danger">Pokušajte ponovo</button>
+      </div>
+    </div>
+  </div>
+</div>

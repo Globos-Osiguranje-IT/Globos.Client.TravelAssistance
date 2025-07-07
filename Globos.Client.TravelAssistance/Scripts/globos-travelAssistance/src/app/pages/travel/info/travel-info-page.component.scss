@@ -1,0 +1,95 @@
+
+.warning-wrapper {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .warning-wrapper span {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  // .sticky-bar {
+  //     // position: fixed;
+  //     bottom: 0;
+  //     left: 50%;
+  //     transform: translateX(-50%);
+  //     // width: 97%;
+  //     // max-width: 900px;
+  //     padding: 20px;
+  //     background-color: white;
+  //     z-index: 1000;
+  //     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  //     border-radius: 12px;
+  //     transition: bottom 0.25s ease-in-out;
+  //     border-radius: 0.25rem;
+
+  //     // desktop prikaz
+  //     @media (min-width: 769px) {
+  //       position: fixed;
+  //     }
+
+  //     // mobilni i tablet prikaz
+  //     @media (max-width: 768px) {
+  //       position: static;
+  //       transform: none;
+  //       box-shadow: none;
+  //       border-radius: 0;
+  //     }
+  // }
+
+  // .sticky-bar {
+  //   width: 100%;
+  //   max-width: 900px;
+  //   padding: 20px;
+  //   background-color: white;
+  //   z-index: 1000;
+  //   transition: bottom 0.25s ease-in-out;
+  // }
+  
+  // .fixed-sticky {
+  //   position: fixed;
+  //   bottom: 0;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  //   border-radius: 12px 12px 0 0;
+  // }
+  
+  // .static-sticky {
+  //   position: static;
+  //   transform: none;
+  //   box-shadow: none;
+  //   border-radius: 0;
+  // }
+
+  .sticky-bar {
+    width: 100%;
+    //max-width: 900px;
+    padding: 20px;
+    background-color: white;
+    //z-index: 1000;
+    transition: bottom 0.25s ease-in-out;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    // border-radius: 12px 12px 0 0;
+  
+    // prilagođavanje na manjim ekranima
+    @media (max-width: 768px) {
+      max-width: 100%;
+      padding: 16px;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  
+    @media (max-width: 480px) {
+      padding: 12px;
+    }
+  }
+  
+  
+  
+  

@@ -1,0 +1,92 @@
+<div *ngIf="validationResult==false" class="warning-wrapper" id="warning-message">
+  <span>Forma nije ispravno popunjena. Molimo proverite sva obavezna polja označena crvenom bojom i unesite tražene podatke pre slanja.</span>
+</div>
+
+
+<gbs-insurance-category-feature [insuranceTypeId]="insuranceTypeId" 
+                                [insuranceType]="insuranceType" 
+                                (categorySelected)="onCategorySelected($event)">
+</gbs-insurance-category-feature>
+
+<br>
+
+<gbs-insurance-type-feature [showStartDateError]="showStartDateError" 
+                            [showEndDateError]="showEndDateError" 
+                            [showTerritoryError]="showTerritoryError" 
+                            [showTerritoryErrorAnnual]="showTerritoryErrorAnnual" 
+                            [showStartDateMinError]="showStartDateMinError" 
+                            [showPassengerGroupEmptyError]="showPassengerGroupEmptyError" 
+                            [showPassengerLimitExceededError]="showPassengerLimitExceededError" 
+                            [showPassengerGroupEmptyErrorAnnual]="showPassengerGroupEmptyErrorAnnual" 
+                            [showPassengerLimitExceededErrorAnnual]="showPassengerLimitExceededErrorAnnual"
+                            [show71Error]="show71Error"
+                            [show71ErrorAnnual]="show71ErrorAnnual"
+                            [showDurationError]="showDurationError"
+                            [showNumberOfDaysError]="showNumberOfDaysError"
+                            [selectedPolicy]="selectedPolicy"
+                            [policies]="policies"
+                            [dateAndPassengers]="dateAndPassengers"
+                            [dateAndPassengersAnnual]="dateAndPassengersAnnual"
+                            [passengers]="{}"
+                            [selectedStartDate]="this.dateAndPassengers?.startDate || ''"
+                            [selectedEndDate]="this.dateAndPassengers?.endDate || ''"
+                            [selectedDate]="this.dateAndPassengersAnnual?.startDate || ''"
+                            [isInSerbia]="null"
+                            [selectedAnnualDay]="this.dateAndPassengersAnnual?.days"
+                            [days]="this.dateAndPassengers?.numberOfDays || 1"
+                            [isFamilySelected]="isFamilySelected" 
+                            [selectedDaysOptions]="selectedDaysOptions"
+                            [selectedAdditionalCoverages]="selectedAdditionalCoverages"
+                            (typeSelected)="onTypeSelected($event)" 
+                            (dateAndPassengersChanged)="onDateAndPassengersChanged($event)" 
+                            (dateAndPassengersAnnualChanged)="onDateAndPassengersAnnualChanged($event)">
+</gbs-insurance-type-feature>
+
+<gbs-additional-coverage [selectedAdditionalCoverages]="selectedAdditionalCoverages"
+                         [canShowCancelTravelCheckbox]="canShowCancelTravel" 
+                         [canShowWorkVisa]="canShowWorkVisa"
+                         [isFamilySelected]="isFamilySelected" 
+                         [selectedTab]="selectedTab"
+                         [arrangementPrice]="arrangementPrice || ''"
+                         (selectionChanged)="onSelectionChange($event)" 
+                         (arrangementPriceChanged)="onArrangementPriceChanged($event)"
+                         (premiumOnlyStateChanged)="onPremiumOnlyChange($event)"
+                         >
+</gbs-additional-coverage>
+
+<br>
+
+<gbs-discount (applyDiscount)="getInfoOffer()"
+              [discountCode]="this.selectedDiscount || ''">
+</gbs-discount>
+
+<br>
+
+<gbs-insurance-coverage-level-feature [selectedTab]="selectedTab || null" 
+                                      [card]="selectedCard"
+                                      [tabs]="this.tabs"
+                                      [cards]="this.cards"
+                                      (selectedCardChange)="onSelectedCardFromCoverage($event)" 
+                                      [showCoverageError]="showCoverageError"
+                                      [showInfoMessage]="showInfoMessage"
+                                      [showInfoMessageAnnual]="showInfoMessageAnnual"
+                                      (selectedTabChange)="onselectedTabChange($event)" 
+                                      [isPremiumOnlySelected]="isPremiumOnlySelected">
+</gbs-insurance-coverage-level-feature>
+
+
+<!-- <div class="stickyFeature"> -->
+  <div class="sticky-limit-wrapper">
+      <div class="sticky-bar"
+      [ngClass]="{ 'static-sticky': isMobile, 'fixed-sticky': !isMobile }">
+        <gbs-insurance-additionals-feature [selectedPolicyType]="policyType" 
+                                      [startDateInput]="startDateInput" 
+                                      [endDateInput]="endDateInput" 
+                                      [startDateAnnual]="startDateAnnual" 
+                                      [amount]="selectedAmount"
+                                      (nextClicked)="onNextButtonClicked()">
+                                      
+        </gbs-insurance-additionals-feature>
+      </div>
+  </div>
+<!-- </div>  -->

@@ -1,0 +1,124 @@
+@import '../../../variables.scss';
+
+// .header-option {
+//   background-color: $gbs-color-light-gray;
+//   border: 1px solid $gbs-color-soft-gray;
+//   border-radius: 8px;
+//   padding: 15px;
+//   text-align: center;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+
+    
+// &.active {
+//   background-color: $gbs-color-linen;
+//   border-color: $gbs-color-light-salmon;
+// }
+// }
+
+// .header-option h5 {
+//   margin: 0;
+//   font-size: 1.2rem;
+//   font-weight: bold;
+// }
+
+// .header-option p {
+//   margin: 5px 0 0 0;
+//   color: $gbs-color-slate-gray;
+// }
+
+// .row{
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+.policy-select-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.header-option {
+  width: 450px;
+  min-height: 90px;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-option.active {
+  border-color: #ffa94d;
+  background-color: #fff8e6;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1), 4px 0 8px rgba(0, 0, 0, 0.1) !important; // levo i desno
+  z-index: 1;
+  position: relative;
+}
+
+
+.header-option h5 {
+  font-weight: bold;
+}
+
+.header-option p {
+  font-size: 14px;
+  color: $gbs-color-slate-gray;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .policy-select-wrapper {
+    display: flex;
+    flex-direction: column; /* ili potpuno izbaci ovu liniju */
+    flex-wrap: wrap; /* da prelamaju ako nema mesta */
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100%;
+    padding: 0 16px;
+    //gap: 16px;
+  }
+
+  .header-option {
+    //width: 45%; /* ili neka druga vrednost u % ako želiš 2 u redu */
+    max-width: 350px;
+    min-width: 140px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .policy-select-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .header-option {
+    width: 370px;
+  min-height: 90px;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+  
+}
+
+

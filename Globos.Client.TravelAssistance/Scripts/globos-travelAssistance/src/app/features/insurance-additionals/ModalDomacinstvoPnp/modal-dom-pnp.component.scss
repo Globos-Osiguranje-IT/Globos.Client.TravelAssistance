@@ -1,0 +1,194 @@
+@import "../../../../variables.scss";
+
+// .popup-backdrop {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.4);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   z-index: 1000;
+// }
+
+// .popup-container {
+//   background: white;
+//   border-radius: 12px;
+//   padding: 24px;
+//   width: 400px;
+//   position: relative;
+//   text-align: center;
+//   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+// }
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.icon-circle {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    //   background-color: #003b5c;
+    border: 2px solid $gbs-color-globos-blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.icon-circle img {
+    width: 76px;
+    height: 76px;
+}
+
+.description {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: $gbs-color-onyx;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.total {
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+//plavi
+.insurance-options {
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+//crveni
+.option-row {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    // gap: 10px;
+    padding-right: 50px;
+}
+
+//zeleni
+.option-info {
+    width: 100%;
+    //   padding-right: 10px;
+}
+
+.insurance-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: $gbs-color-onyx;
+    margin: 0 20px;
+}
+
+.insurance-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: $gbs-color-onyx;
+}
+
+mat-slide-toggle {
+    // width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+
+}
+
+.total-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $gbs-color-globos-blue;
+    margin-top: 10px;
+}
+
+.total-currency {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $gbs-color-globos-blue;
+    margin-top: 10px;
+}
+
+.total-label {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+::ng-deep .next-btn {
+    border: 2px solid red;
+  background-color: $gbs-color-mango-tango;
+  color: white !important;
+  font-weight: bold;
+  font-size: 20px !important;
+  padding: 12px 30px;
+  border-radius: 10px !important;
+//   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease-in-out;
+  border: none;
+  cursor: pointer;
+  min-width: 140px;
+  max-width: 180px !important;
+  height: 55px !important;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  margin: 0 auto;
+}
+
+::ng-deep .next-btn:hover {
+  transform: scale(1.05);
+}
+
+::ng-deep .next-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease-in-out;
+}
+
+::ng-deep .next-btn:disabled {
+  background-color: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+::ng-deep .next-btn i {
+  font-size: 20px;
+}
+
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .dialog-container {
+    padding: 12px;
+  }
+}
