@@ -1,45 +1,45 @@
-/.vs
-/Globos.Client.WebShop/bin
-/Globos.Client.WebShop/obj
+# === .NET ===
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+bin/
+obj/
+*.csproj.user
 
-# Compiled output
-/Globos.Client.WebShop/Scripts/globos-webshop/dist
-/Globos.Client.WebShop/Scripts/globos-webshop/tmp
-/Globos.Client.WebShop/Scripts/globos-webshop/out-tsc
-/Globos.Client.WebShop/Scripts/globos-webshop/bazel-out
+# === Node / Angular ===
+node_modules/
+dist/
+tmp/
+out-tsc/
+.bazel-out/
+.angular/cache/
+coverage/
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+npm-debug.log*
+yarn-error.log*
 
-# Node
-/Globos.Client.WebShop/Scripts/globos-webshop/node_modules
-npm-debug.log
-yarn-error.log
+# === IDEs and Editors ===
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# IDEs and editors
-/Globos.Client.WebShop/Scripts/globos-webshop/.idea/
-/Globos.Client.WebShop/Scripts/globos-webshop/.project
-/Globos.Client.WebShop/Scripts/globos-webshop/.classpath
-/Globos.Client.WebShop/Scripts/globos-webshop/.c9/
-/Globos.Client.WebShop/Scripts/globos-webshop/*.launch
-/Globos.Client.WebShop/Scripts/globos-webshop/.settings/
-/Globos.Client.WebShop/Scripts/globos-webshop/*.sublime-workspace
+# === VS Code ===
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
 
-# Visual Studio Code
-/Globos.Client.WebShop/Scripts/globos-webshop/.vscode/*
-/Globos.Client.WebShop/Scripts/globos-webshop/!.vscode/settings.json
-/Globos.Client.WebShop/Scripts/globos-webshop/!.vscode/tasks.json
-/Globos.Client.WebShop/Scripts/globos-webshop/!.vscode/launch.json
-/Globos.Client.WebShop/Scripts/globos-webshop/!.vscode/extensions.json
-/Globos.Client.WebShop/Scripts/globos-webshop/.history/*
-
-# Miscellaneous
-/Globos.Client.WebShop/Scripts/globos-webshop/.angular/cache
-/Globos.Client.WebShop/Scripts/globos-webshop/*.sass-cache/
-/Globos.Client.WebShop/Scripts/globos-webshop/connect.lock
-/Globos.Client.WebShop/Scripts/globos-webshop/coverage
-/Globos.Client.WebShop/Scripts/globos-webshop/libpeerconnection.log
-/Globos.Client.WebShop/Scripts/globos-webshop/testem.log
-/Globos.Client.WebShop/Scripts/globos-webshop/typings
-
-# System files
+# === System Files ===
 .DS_Store
 Thumbs.db
-/Globos.Client.WebShop/Globos.Client.WebShop.csproj.user
