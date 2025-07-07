@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>6509c648-f934-4f7e-aa6a-cd6c6fda9f2a</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <FrontendRoot>Scripts\globos-webshop\</FrontendRoot>
-    <SpaRoot>Scripts\globos-webshop\</SpaRoot>
+	<FrontendRoot>Scripts\globos-travelAssistance\</FrontendRoot>
+	<SpaRoot>Scripts\globos-travelAssistance\</SpaRoot>
     <SpaProxyServerUrl>https://localhost:44352</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
   </PropertyGroup>

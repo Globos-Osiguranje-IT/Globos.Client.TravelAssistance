@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:44352",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Scripts\\globos-webshop\\",
+"WorkingDirectory": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Scripts\\globos-travelAssistance\\",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

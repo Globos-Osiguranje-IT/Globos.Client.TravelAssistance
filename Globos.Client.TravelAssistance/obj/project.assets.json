@@ -5732,11 +5732,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bojan.cipovic\\Desktop\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
+      "projectUniqueName": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
       "projectName": "Globos.Client.TravelAssistance",
-      "projectPath": "C:\\Users\\bojan.cipovic\\Desktop\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
+      "projectPath": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
       "packagesPath": "C:\\Users\\bojan.cipovic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bojan.cipovic\\Desktop\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\obj\\",
+      "outputPath": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
