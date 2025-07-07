@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Globos.Client.TravelAssistance")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9fd1822c401122011a2ebb7c6fedadd115288ae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df434d4a890a10bf2a5464cd2de24c17cccef53d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Globos.Client.TravelAssistance")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Globos.Client.TravelAssistance")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,20 +14,21 @@
 
   <ItemGroup>
     <Content Remove="Scripts\**" />
-    <Compile Remove="Scripts\**" />
-    <EmbeddedResource Remove="Scripts\**" />
-    <None Remove="Scripts\**" />
-    <Compile Remove="Scripts\globos-webshop\.vscode\**" />
-    <Compile Remove="Scripts\globos-webshop\node_modules\**" />
-    <Content Remove="Scripts\globos-webshop\.vscode\**" />
-    <Content Remove="Scripts\globos-webshop\node_modules\**" />
-    <EmbeddedResource Remove="Scripts\globos-webshop\.vscode\**" />
-    <EmbeddedResource Remove="Scripts\globos-webshop\node_modules\**" />
-    <None Remove="Scripts\globos-webshop\.vscode\**" />
-    <None Remove="Scripts\globos-webshop\node_modules\**" />
+	<Compile Remove="Scripts\**" />
+	<EmbeddedResource Remove="Scripts\**" />
+	<None Remove="Scripts\**" />
+	<Compile Remove="Scripts\globos-travelAssistance\.vscode\**" />
+	<Compile Remove="Scripts\globos-travelAssistance\node_modules\**" />
+	<Content Remove="Scripts\globos-travelAssistance\.vscode\**" />
+	<Content Remove="Scripts\globos-travelAssistance\node_modules\**" />
+	<EmbeddedResource Remove="Scripts\globos-travelAssistance\.vscode\**" />
+	<EmbeddedResource Remove="Scripts\globos-travelAssistance\node_modules\**" />
+	<None Remove="Scripts\globos-travelAssistance\.vscode\**" />
+	<None Remove="Scripts\globos-travelAssistance\node_modules\**" />
   </ItemGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
     <PackageReference Include="Duende.AccessTokenManagement" Version="3.2.0" />
     <PackageReference Include="Duende.AccessTokenManagement.OpenIdConnect" Version="3.2.0" />
     <PackageReference Include="Duende.IdentityModel" Version="7.0.0" />
