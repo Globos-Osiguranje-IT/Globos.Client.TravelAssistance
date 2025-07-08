@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,9 +20,9 @@ import { RouterTrackingService } from '../../services/router-tracking.service';
 export class PolicyMainComponent {
 
   steps = [
-    { title: 'Informacije o putovanju', subtitle: 'Izaberite period putovanja i pokriće.', completed: true, route: '/info'},
-    { title: 'Putnici', subtitle: 'Unos informacija o putnicima.', completed: false, route: '/passanger' },
-    { title: 'Plaćanje', subtitle: 'Plaćanje karticom.', completed: false, route: '/payment' },
+    { title: 'Odaberi paket', subtitle: '', completed: true, route: '/info'},
+    { title: 'Podaci', subtitle: '', completed: false, route: '/passanger' },
+    { title: 'Pregled', subtitle: '', completed: false, route: '/payment' },
   ]
 
   constructor(

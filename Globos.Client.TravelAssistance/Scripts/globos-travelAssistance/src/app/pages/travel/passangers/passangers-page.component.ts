@@ -1,6 +1,4 @@
-
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { StepSummaryFeatureComponent } from "../../../features/stepper-feature/step-summary/step-summary-feature/step-summary-feature.component";
 import { ConsentFeatureComponent } from "../../../features/consent/consent-feature/consent-feature.component";
 import { ContractorTypeFeatureComponent } from '../../../features/contractor-type/contractor-type-feature.component';
 import { City, CodebookResponse } from '../../../http/dto/responses/codebook-response.model';
@@ -13,23 +11,19 @@ import { Consent } from '../../../features/consent/consent-feature/model/consent
 import { PolicyClientService } from '../../../http/policy-client.service';
 import { GbsDomesticRoadTravelComponent } from '../../../features/additionalCoverages/gbs-domestic-road-travel/gbs-domestic-road-travel.component';
 import { CommonModule } from '@angular/common';
-import { DestinationFeatureComponent } from '../../../features/destination-feature/destination-feature.component';
 import { Destination } from '../../../features/destination/models/destination';
 import { LoaderService } from '../../../services/loader.service';
 import { Router } from '@angular/router';
-import { AllValidationsDirective } from '../../../validations/client-validation/allValidations';
-import { DropdownRequiredDirective } from '../../../validations/client-validation/dropdown-required-directive';
 import { JmbgValidationService } from '../../../validations/client-validation/jmbg-validation.service';
 import { CashedCodebookClientService } from '../../../http/cashed-codebook-client.service';
 import { DestinationComponent } from "../../../features/destination/destination.component";
 import { ClientValidationService } from '../../../validations/client-validation/client-validation.service';
 
-
 @Component({
   selector: 'app-passangers-page',
   standalone: true,
-  imports: [StepSummaryFeatureComponent, CommonModule, ConsentFeatureComponent, ContractorTypeFeatureComponent, GbsButtonComponent,
-    GbsDomesticRoadTravelComponent, DestinationFeatureComponent, AllValidationsDirective, DestinationComponent],
+  imports: [CommonModule, ConsentFeatureComponent, ContractorTypeFeatureComponent, GbsButtonComponent,
+    GbsDomesticRoadTravelComponent, DestinationComponent],
   templateUrl: './passangers-page.component.html',
   styleUrl: './passangers-page.component.scss'
 })
@@ -37,8 +31,6 @@ export class PassangersPageComponent implements OnInit {
   errorMessage: string | null = null;
 
   @ViewChild(ConsentFeatureComponent) consentComponent!: ConsentFeatureComponent;
-
-
 
   foreignCitizen: any;
   infoOfferRequest: any;
