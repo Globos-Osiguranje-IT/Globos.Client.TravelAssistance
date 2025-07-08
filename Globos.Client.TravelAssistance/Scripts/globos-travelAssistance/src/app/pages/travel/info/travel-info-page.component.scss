@@ -1,95 +1,77 @@
+:host {
+  display: block;
+  width: 100%;
+}
 
-.warning-wrapper {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.travel-info-wrapper {
+  max-width: 100%;
+  margin: auto;
+  padding: 0px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.coverage-summary-box {
+  max-width: 80%;
+  margin: 0 auto;
+  width: 100%; // Bitno da bude tu da bi poštovao max-width
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .action-link {
+      color: #1e88e5;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .plus-icon {
+      color: #1e88e5;
+      font-size: 1.1rem;
+    }
   }
-  
-  .warning-wrapper span {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  // .sticky-bar {
-  //     // position: fixed;
-  //     bottom: 0;
-  //     left: 50%;
-  //     transform: translateX(-50%);
-  //     // width: 97%;
-  //     // max-width: 900px;
-  //     padding: 20px;
-  //     background-color: white;
-  //     z-index: 1000;
-  //     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  //     border-radius: 12px;
-  //     transition: bottom 0.25s ease-in-out;
-  //     border-radius: 0.25rem;
 
-  //     // desktop prikaz
-  //     @media (min-width: 769px) {
-  //       position: fixed;
-  //     }
-
-  //     // mobilni i tablet prikaz
-  //     @media (max-width: 768px) {
-  //       position: static;
-  //       transform: none;
-  //       box-shadow: none;
-  //       border-radius: 0;
-  //     }
-  // }
-
-  // .sticky-bar {
-  //   width: 100%;
-  //   max-width: 900px;
-  //   padding: 20px;
-  //   background-color: white;
-  //   z-index: 1000;
-  //   transition: bottom 0.25s ease-in-out;
-  // }
-  
-  // .fixed-sticky {
-  //   position: fixed;
-  //   bottom: 0;
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  //   border-radius: 12px 12px 0 0;
-  // }
-  
-  // .static-sticky {
-  //   position: static;
-  //   transform: none;
-  //   box-shadow: none;
-  //   border-radius: 0;
-  // }
-
-  .sticky-bar {
+  .coverage-table {
     width: 100%;
-    //max-width: 900px;
-    padding: 20px;
-    background-color: white;
-    //z-index: 1000;
-    transition: bottom 0.25s ease-in-out;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-    // border-radius: 12px 12px 0 0;
-  
-    // prilagođavanje na manjim ekranima
-    @media (max-width: 768px) {
-      max-width: 100%;
-      padding: 16px;
-      box-shadow: none;
-      border-radius: 0;
-    }
-  
-    @media (max-width: 480px) {
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.95rem;
+
+    th,
+    td {
       padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      font-weight: 600;
+      color: #666;
+    }
+
+    td {
+      font-weight: 500;
     }
   }
-  
-  
-  
-  
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}

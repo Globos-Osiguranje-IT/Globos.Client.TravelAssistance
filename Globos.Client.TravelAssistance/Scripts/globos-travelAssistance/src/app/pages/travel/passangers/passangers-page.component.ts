@@ -115,12 +115,12 @@ export class PassangersPageComponent implements OnInit {
     })
   
 
-    this.fillField();
-    this.fillPolicyOffer();
-    this.fillRestAdditionalInsurances();
-    this.fillContractorTypeAndClient();
-    this.fillConsentsAndDestination();
-    this.fillAditionalCoverages();
+    // this.fillField();
+    // this.fillPolicyOffer();
+    // this.fillRestAdditionalInsurances();
+    // this.fillContractorTypeAndClient();
+    // this.fillConsentsAndDestination();
+    // this.fillAditionalCoverages();
   }
 
   mapCitiesToAutocomplete(cities: City[]): CityAutoComplete[] {

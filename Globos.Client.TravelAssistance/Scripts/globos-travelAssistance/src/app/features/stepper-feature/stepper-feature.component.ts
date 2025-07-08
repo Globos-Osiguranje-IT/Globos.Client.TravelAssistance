@@ -51,24 +51,24 @@ export class StepperFeatureComponent {
   }
 
   navigateToStep(stepRoute: string, targetIndex: number): void {
-    if (this.currentStepIndex === 0 && targetIndex === 2) {
-      return;
-    }
+    // if (this.currentStepIndex === 0 && targetIndex === 2) {
+    //   return;
+    // }
 
-    if (this.currentStepIndex === 0 && targetIndex === 1) {
-      if (!this.sessionValidForStep1()) {
-        return;
-      }
-      if (!this.runAllValidations()) {
-        return;
-      }
-    }
+    // if (this.currentStepIndex === 0 && targetIndex === 1) {
+    //   if (!this.sessionValidForStep1()) {
+    //     return;
+    //   }
+    //   if (!this.runAllValidations()) {
+    //     return;
+    //   }
+    // }
 
-    if (this.currentStepIndex === 1 && targetIndex === 2) {
-      if (!this.sessionValidForStep2()) {
-        return;
-      }
-    }
+    // if (this.currentStepIndex === 1 && targetIndex === 2) {
+    //   if (!this.sessionValidForStep2()) {
+    //     return;
+    //   }
+    // }
 
     this.navigateTo(stepRoute);
   }

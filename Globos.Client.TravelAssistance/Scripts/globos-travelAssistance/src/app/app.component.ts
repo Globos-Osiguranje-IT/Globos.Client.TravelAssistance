@@ -30,12 +30,6 @@ export class AppComponent implements OnInit {
     this.gtagService.injectGtag();
     this.gtagService.injectMetaDescription();
 
-    // if (window.location.search.includes('_gl=')) {
-    //   const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
-    //   window.history.replaceState({}, document.title, cleanUrl);
-    // }
-
-
     this.selectedLanguage = this.languageService.getLanguage();
     this.translateService.setTranslations(Translations)
 
