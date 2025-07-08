@@ -89,7 +89,7 @@ export class PaymentsPageComponent implements OnInit {
         await Promise.all([
           this.loadClientData(),
           this.loadInsurantsData(),
-          this.loadInsuredSums(),
+          //this.loadInsuredSums(),
           this.loadPolicyData(),
           this.loadInvoiceData(),
           this.loadAnnexesData(),
@@ -154,20 +154,20 @@ export class PaymentsPageComponent implements OnInit {
     });
   }
 
-  async loadInsuredSums(): Promise<void> {
-    // this.codeBook.getInsuredSum().subscribe((response: any) => {
-    //   this.insuredSums = response;
-    // })
-    return new Promise<void>((resolve, reject) => {
-      this.cashedSessionService.getInsuredSum().subscribe({
-        next: (response: any) => {
-          this.insuredSums = response;
-          resolve();
-        },
-        error: reject
-      });
-    });
-  }
+  // async loadInsuredSums(): Promise<void> {
+  //   // this.codeBook.getInsuredSum().subscribe((response: any) => {
+  //   //   this.insuredSums = response;
+  //   // })
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.cashedSessionService.getInsuredSum().subscribe({
+  //       next: (response: any) => {
+  //         this.insuredSums = response;
+  //         resolve();
+  //       },
+  //       error: reject
+  //     });
+  //   });
+  // }
 
   async checkPolicyCore(): Promise<void> {
     const response: any = await firstValueFrom(this.payment.checkPolicyCore(this.policyId));

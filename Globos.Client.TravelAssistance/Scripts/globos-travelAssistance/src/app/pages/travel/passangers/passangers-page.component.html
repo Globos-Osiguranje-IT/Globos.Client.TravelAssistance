@@ -18,16 +18,6 @@
   <span> Broj pasoša mora biti jedinstven za svakog osiguranika, proverite unos.</span>
 </div>
 
-
-<gbs-domestic-road-travel 
-                          [roadAssistanceInsurance]="roadAssistanceInsurance"
-                          [domesticInsurance]="domesticInsurance"
-                          [tripCancellation]="tripCancellation"
-                          (roadChange)="handleRoadChange($event)" 
-                          (domesticChange)="handleDomesticChange($event)"
-                          (tripChange)="handleTripChange($event)">
-</gbs-domestic-road-travel>
-
 <div  class="form-wrapper" style="width: 97%; margin-top: 9px;">
 <gbs-destination [territorialCoverageId]="this.selectedOfferRequest.territorialCoverageId"
                  [selectedDestinationId]="selectedDestinationId"

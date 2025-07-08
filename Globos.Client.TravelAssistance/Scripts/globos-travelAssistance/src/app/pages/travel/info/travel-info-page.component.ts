@@ -65,7 +65,7 @@ export class TravelInfoPageComponent implements AfterViewInit {
     'box-shadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
     'border': 'none',
     'cursor': 'pointer',
-    'transition': 'transform 0.1s ease-in-out'
+    'transition': 'transform 0.1s ease-in-out',
   };
 
   constructor(
@@ -83,6 +83,7 @@ export class TravelInfoPageComponent implements AfterViewInit {
 
     this.cashedService.getCoverageLevels().subscribe({
       next: (res) => {
+        console.log(res, 'sta je ovo')
         this.loader.show();
 
         if (res) {
@@ -92,7 +93,6 @@ export class TravelInfoPageComponent implements AfterViewInit {
         }
       },
       error: (error) => {
-        console.error('Error: ', error);
         this.loader.hide();
       },
     });
