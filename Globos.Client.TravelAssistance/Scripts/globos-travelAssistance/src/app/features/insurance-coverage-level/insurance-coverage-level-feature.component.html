@@ -2,29 +2,13 @@
   <span>Obavezan je izbor jedne od ponuda osiguranja.</span>
 </div>
 
-<div class="tab-container">
+<div class="tab-toggle-container">
   <button
     *ngFor="let tab of tabs"
     [class.active]="selectedTab?.id === tab.id"
     (click)="changeTab(tab)"
-    [disabled]="tab.name === 'PLUS' && isPremiumOnlySelected"
+    [disabled]="tab.name === 'STANDARD' && isPremiumOnlySelected"
   >
     {{ tab.name }}
   </button>
-</div>
-
-<div *ngIf="showInfoMessage" class="info-wrapper mt-2">
-  <span
-    >Za putnike starije od 70 godina i trajanje preko 30 dana, moguće je samo
-    teritorijalno pokriće 'CEO SVET bez SAD-a, Kanade, Australije, Novog Zelanda
-    i Japana', do najviše 60 dana.</span
-  >
-</div>
-
-<div *ngIf="showInfoMessageAnnual" class="info-wrapper mt-2">
-  <span
-    >Za putnike starije od 70 godina i trajanje preko 30 dana, moguće je samo
-    teritorijalno pokriće 'CEO SVET bez SAD-a, Kanade, Australije, Novog Zelanda
-    i Japana', do najviše 60 dana.</span
-  >
 </div>

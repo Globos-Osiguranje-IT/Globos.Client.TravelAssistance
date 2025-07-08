@@ -13,15 +13,10 @@
   box-sizing: border-box;
 }
 
-.button-wrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .coverage-summary-box {
   max-width: 80%;
   margin: 0 auto;
-  width: 100%; // Bitno da bude tu da bi poštovao max-width
+  width: 100%;
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 16px;
@@ -70,8 +65,27 @@
   }
 }
 
-.button-wrapper {
+.level-wrapper {
+  max-width: 80%;
+  margin: 0 auto;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
+  justify-content: flex-start;
+  padding-left: 150px;
+}
+
+.level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.level-inner {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.dalje-button {
+  flex-shrink: 0;
 }

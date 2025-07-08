@@ -5,7 +5,6 @@ import { PolicyInfoOfferPrikaz } from './model/plansModel.model';
 import { InusranceCoverageLevelResponse } from '../../http/dto/responses/codebook-response.model';
 import { CodebookClientService } from '../../http/codebook-client.service';
 import { PolicyClientService } from '../../http/policy-client.service';
-import { CashedCodebookClientService } from '../../http/cashed-codebook-client.service';
 
 @Component({
   selector: 'gbs-insurance-coverage-level-feature',
@@ -20,16 +19,11 @@ import { CashedCodebookClientService } from '../../http/cashed-codebook-client.s
 })
 export class InsuranceCoverageLevelFeatureComponent {
   @Input() showCoverageError: boolean = false;
-  @Input() showInfoMessage: boolean = false;
-  @Input() showInfoMessageAnnual: boolean = false;
-
   @Input() selectedTab: InusranceCoverageLevelResponse | null = null;
-
   @Input() card?: PolicyInfoOfferPrikaz;
   @Input() cards: PolicyInfoOfferPrikaz[] = [];
   @Input() tabs: InusranceCoverageLevelResponse[] = [];
   @Input() selectedCard: any = undefined;
-
   @Input() isPremiumOnlySelected?: boolean;
 
   @Output() selectedTabChange = new EventEmitter<InusranceCoverageLevelResponse>();
@@ -37,8 +31,7 @@ export class InsuranceCoverageLevelFeatureComponent {
 
   constructor(
     public policyClientService: PolicyClientService,
-    private codeBookService: CodebookClientService,
-    private cashedService: CashedCodebookClientService
+    private codeBookService: CodebookClientService
   ) {}
 
   ngOnInit() {
@@ -47,15 +40,10 @@ export class InsuranceCoverageLevelFeatureComponent {
     this.codeBookService.getTerritorialCoverage().subscribe((resTeritorial) => {
       localStorage.setItem('territorialCoverage', JSON.stringify(resTeritorial));
     });
-
-    this.cashedService.getInsuredSum().subscribe({
-      next: (res) => {},
-      error: (err) => {},
-    });
   }
 
   changeTab(tab: InusranceCoverageLevelResponse) {
-    if (tab.name === 'PLUS' && this.isPremiumOnlySelected) {
+    if (tab.name === 'STANDARD' && this.isPremiumOnlySelected) {
       return;
     }
 
