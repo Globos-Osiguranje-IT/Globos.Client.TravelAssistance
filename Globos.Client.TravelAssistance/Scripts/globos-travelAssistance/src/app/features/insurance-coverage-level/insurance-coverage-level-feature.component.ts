@@ -17,6 +17,7 @@ import { PolicyClientService } from '../../http/policy-client.service';
   templateUrl: './insurance-coverage-level-feature.component.html',
   styleUrl: './insurance-coverage-level-feature.component.scss',
 })
+
 export class InsuranceCoverageLevelFeatureComponent {
   @Input() showCoverageError: boolean = false;
   @Input() selectedTab: InusranceCoverageLevelResponse | null = null;
@@ -43,7 +44,7 @@ export class InsuranceCoverageLevelFeatureComponent {
   }
 
   changeTab(tab: InusranceCoverageLevelResponse) {
-    if (tab.name === 'STANDARD' && this.isPremiumOnlySelected) {
+    if (tab.id === 1 && this.isPremiumOnlySelected) {
       return;
     }
 

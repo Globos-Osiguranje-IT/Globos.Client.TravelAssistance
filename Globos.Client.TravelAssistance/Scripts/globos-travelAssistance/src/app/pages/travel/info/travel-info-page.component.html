@@ -27,27 +27,27 @@
     </table>
   </div>
 
-  <div class="level-wrapper">
-    <div class="level-row">
-      <div class="level-inner">
-        <gbs-insurance-coverage-level-feature
-          [selectedTab]="selectedTab || null"
-          [card]="selectedCard"
-          [tabs]="this.tabs"
-          (selectedCardChange)="onSelectedCardFromCoverage($event)"
-          (selectedTabChange)="onselectedTabChange($event)"
-          [isPremiumOnlySelected]="isPremiumOnlySelected"
-        ></gbs-insurance-coverage-level-feature>
-      </div>
+  <div class="coverage-summary-box">
+    <h2>Izaberite paket osiguranja</h2>
 
-      <gbs-button
-        [cid]="'dugmeZaDalje'"
-        [text]="'Dalje'"
-        [inputStyle]="nextButtonStyles"
-        [size]="Large"
-        class="dalje-button"
-        (clickEvent)="onNextButtonClicked()"
-      ></gbs-button>
+    <div class="level-wrapper">
+      <div class="level-row">
+        <div class="level-inner">
+          <gbs-insurance-coverage-level-feature
+            [selectedTab]="selectedTab || null"
+            [tabs]="this.tabs"
+            (selectedTabChange)="onselectedTabChange($event)"
+          ></gbs-insurance-coverage-level-feature>
+        </div>
+
+        <gbs-button
+          [cid]="'dugmeZaDalje'"
+          [text]="'Napred >'"
+          [inputStyle]="nextButtonStyles"
+          [size]="Large"
+          (clickEvent)="onNextButtonClicked()"
+        ></gbs-button>
+      </div>
     </div>
   </div>
 </div>
