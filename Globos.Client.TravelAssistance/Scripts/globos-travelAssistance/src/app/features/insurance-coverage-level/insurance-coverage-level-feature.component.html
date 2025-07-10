@@ -1,10 +1,6 @@
-<div *ngIf="showCoverageError" class="warning-wrapper mt-2">
-  <span>Obavezan je izbor jedne od ponuda osiguranja.</span>
-</div>
-
 <div class="tab-toggle-container">
   <button
-    *ngFor="let tab of tabs"
+    *ngFor="let tab of tabs; trackBy: trackById"
     [class.active]="selectedTab?.id === tab.id"
     (click)="changeTab(tab)"
     [disabled]="tab.name === 'STANDARD' && isPremiumOnlySelected"

@@ -1,41 +1,33 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @include mat.core();
 
-$globos-webshop-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
+$globos-webshop-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    density: (
+      scale: 0,
+    ),
   )
-));
+);
 
 :root {
   @include mat.all-component-themes($globos-webshop-theme);
 }
-$globos-webshop-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
-  )
-));
 
-html, body {
-  height: auto;
-  min-height: 100%;
+// === RESET I OSNOVNI STILOVI ===
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   overflow-x: hidden;
 }
 
-// :root {
-//   @include mat.all-component-themes($globos-webshop-theme);
-// }
-
+// === RESPONSIVE ===
 @media (max-width: 768px) {
   .container-header {
     width: 95%;
@@ -49,7 +41,8 @@ html, body {
     padding: 10px;
   }
 
-  .container, .content {
+  .container,
+  .content {
     width: 95%;
     padding: 10px;
   }
@@ -59,5 +52,3 @@ html, body {
     padding: 10px;
   }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
