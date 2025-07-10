@@ -2,12 +2,9 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceCoverageLevelFeatureComponent } from '../../../features/insurance-coverage-level/insurance-coverage-level-feature.component';
-import { InsuredSumResponse, InusranceCoverageLevelResponse, TerritorialCoverageResponse } from '../../../http/dto/responses/codebook-response.model';
+import { InusranceCoverageLevelResponse } from '../../../http/dto/responses/codebook-response.model';
 import { LoaderService } from '../../../services/loader.service';
-import { PolicyClientService } from '../../../http/policy-client.service';
 import { CashedCodebookClientService } from '../../../http/cashed-codebook-client.service';
-import { PolicyInfoOfferPrikaz } from '../../../features/insurance-coverage-level/model/plansModel.model';
-import { MatDialog } from '@angular/material/dialog';
 import { ButtonSize, ButtonType, GbsButtonComponent } from 'ng-globos-core';
 import { InfoPonudaComponent } from '../../../components/info-ponuda/info-ponuda.component';
 import { Router } from '@angular/router';
@@ -21,6 +18,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     InsuranceCoverageLevelFeatureComponent,
     GbsButtonComponent,
+    InfoPonudaComponent,
   ],
   templateUrl: './travel-info-page.component.html',
   styleUrl: './travel-info-page.component.scss',
@@ -32,8 +30,10 @@ export class TravelInfoPageComponent{
 
   tabs: InusranceCoverageLevelResponse[] = [];
   selectedCoverageCard: any = {};
+
+  showInfoModal = false;
   
-  @Input() selectedTab: InusranceCoverageLevelResponse | null = null;
+  @Input() selectedTab?: InusranceCoverageLevelResponse;
 
   nextButtonStyles = {
     'display': 'flex',
@@ -57,75 +57,47 @@ export class TravelInfoPageComponent{
 
   constructor(
     private loader: LoaderService,
-    private policyClientService: PolicyClientService,
     private cashedService: CashedCodebookClientService,
-    private dialog: MatDialog,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.loader.show();
+
     this.cashedService.getCoverageLevels().subscribe({
       next: (res) => {
+        this.loader.hide();
+
         if (res?.length) {
           res.pop();
           this.tabs = res;
-          this.selectedTab ||= this.tabs.find(x => x.id === 1) || null;
-          this.loader.hide();
+
+          const savedTabId = localStorage.getItem('selectedTab');
+          const matchedTab = this.tabs.find(tab => tab.id === Number(savedTabId));
+
+          this.selectedTab = matchedTab || this.tabs.find(x => x.id === 1);
         }
       },
-      error: () => this.loader.hide(),
+      error: () => {
+        this.loader.hide();
+      },
     });
   }
 
   onselectedTabChange(event: InusranceCoverageLevelResponse) {
-    console.log(event, 'sta je event')
     this.selectedTab = event;
-
-    this.policyClientService.policyInfoOfferRequest.coverrageLevelId = event.id;
-    this.policyClientService.policyInfoOfferRequest.insurancePurchaseDate = new Date().toJSON().slice(0, 10);
-
-    localStorage.setItem('step1RequestObject', JSON.stringify(this.policyClientService.policyInfoOfferRequest));
+    localStorage.setItem('selectedTab', event.id.toString())
   }
 
   onNextButtonClicked() {
-    this.router.navigate(['putno-osiguranje', 'info'])
+    this.router.navigate(['putno-osiguranje', 'passanger'])
   }
 
-  getInfoOffer() {
-    this.loader.show();
-    this.policyClientService.postInfooffer().subscribe((result) => {
-      // console.log("STA JE RESULT: ", result)
-      if (result) {
-        this.loader.hide();
-        let teritorijaHelper: TerritorialCoverageResponse[] = JSON.parse(
-          localStorage.getItem('territorialCoverage') || '{}'
-        );
-        let osiguranaSumaHelper: InsuredSumResponse[] = JSON.parse(
-          localStorage.getItem('insuredSum') || '{}'
-        );
-
-        this.policyClientService.infooffers = [];
-
-        this.policyClientService.infooffers = result.map((item) => ({
-          ...item,
-          osiguranaSuma: osiguranaSumaHelper.find((os) => os.id === item.insuranceSumId)?.amount ?? 0,
-          territorialName: teritorijaHelper.find((t) => t.id === item.territorialCoverageId)?.name ?? '',
-        }));
-
-        localStorage.setItem('infoOffers', JSON.stringify(this.policyClientService.infooffers));
-      } else {
-        this.loader.hide();
-      }
-    });
+  openInfoModal() {
+    this.showInfoModal = true;
   }
 
-  openAsistencijaDialog() {
-    const dialogRef = this.dialog.open(InfoPonudaComponent, {
-      width: '80vw',
-      maxWidth: 'none',
-      maxHeight: '90vh',
-      panelClass: 'custom-dialog-container',
-    });
+  closeInfoModal() {
+    this.showInfoModal = false;
   }
 }

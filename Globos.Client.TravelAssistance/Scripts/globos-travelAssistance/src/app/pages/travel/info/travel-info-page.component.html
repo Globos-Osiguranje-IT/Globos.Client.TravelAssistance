@@ -3,9 +3,9 @@
     <h2>
       Uporedna tabela paketa
       <i
-        class="ph-light ph-info"
-        style="cursor: pointer; font-size: 24px"
-        (click)="openAsistencijaDialog()"
+        class="ph-light ph-info pulsing-info-icon"
+        style="cursor: pointer; font-size: 28px"
+        (click)="openInfoModal()"
       ></i>
     </h2>
 
@@ -42,12 +42,18 @@
 
         <gbs-button
           [cid]="'dugmeZaDalje'"
-          [text]="'Napred >'"
+          [text]="'Dalje >'"
           [inputStyle]="nextButtonStyles"
           [size]="Large"
           (clickEvent)="onNextButtonClicked()"
         ></gbs-button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showInfoModal" (click)="closeInfoModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <app-info-ponuda></app-info-ponuda>
   </div>
 </div>
