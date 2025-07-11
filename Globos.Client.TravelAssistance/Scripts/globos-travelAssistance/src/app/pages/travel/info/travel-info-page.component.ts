@@ -69,7 +69,6 @@ export class TravelInfoPageComponent{
         this.loader.hide();
 
         if (res?.length) {
-          res.pop();
           this.tabs = res;
 
           const savedTabId = localStorage.getItem('selectedTab');
