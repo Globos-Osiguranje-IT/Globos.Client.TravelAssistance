@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InusranceCoverageLevelResponse } from '../../http/dto/responses/codebook-response.model';
+import { InfoOfferResponse, InusranceCoverageLevelResponse } from '../../http/dto/responses/codebook-response.model';
 import { CodebookClientService } from '../../http/codebook-client.service';
 
 @Component({
@@ -16,11 +16,11 @@ import { CodebookClientService } from '../../http/codebook-client.service';
   styleUrl: './insurance-coverage-level-feature.component.scss',
 })
 export class InsuranceCoverageLevelFeatureComponent {
-  @Input() selectedTab: InusranceCoverageLevelResponse | null = null;
-  @Input() tabs: InusranceCoverageLevelResponse[] = [];
+  @Input() selectedTab: InfoOfferResponse | null = null;
+  @Input() tabs: InfoOfferResponse[] = [];
   @Input() isPremiumOnlySelected = false;
 
-  @Output() selectedTabChange = new EventEmitter<InusranceCoverageLevelResponse>();
+  @Output() selectedTabChange = new EventEmitter<InfoOfferResponse>();
 
   constructor(private codeBookService: CodebookClientService) {}
 
@@ -32,12 +32,12 @@ export class InsuranceCoverageLevelFeatureComponent {
     });
   }
 
-  changeTab(tab: InusranceCoverageLevelResponse): void {
-    if (this.selectedTab?.id === tab.id || (tab.name === 'STANDARD' && this.isPremiumOnlySelected)) return;
+  changeTab(tab: InfoOfferResponse): void {
+    if (this.selectedTab?.coverrageLevelId === tab.coverrageLevelId || (tab.coverrageLevelName === 'STANDARD' && this.isPremiumOnlySelected)) return;
     this.selectedTabChange.emit(tab);
   }
 
-  trackById(_: number, item: InusranceCoverageLevelResponse): number {
-    return item.id;
+  trackById(_: number, item: InfoOfferResponse): number {
+    return item.coverrageLevelId;
   }
 }

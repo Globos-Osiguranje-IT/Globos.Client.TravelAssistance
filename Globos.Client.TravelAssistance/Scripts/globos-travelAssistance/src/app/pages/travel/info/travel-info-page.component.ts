@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InsuranceCoverageLevelFeatureComponent } from '../../../features/insurance-coverage-level/insurance-coverage-level-feature.component';
-import { InusranceCoverageLevelResponse } from '../../../http/dto/responses/codebook-response.model';
+import { InfoOfferResponse } from '../../../http/dto/responses/codebook-response.model';
 import { LoaderService } from '../../../services/loader.service';
-import { CashedCodebookClientService } from '../../../http/cashed-codebook-client.service';
 import { ButtonSize, ButtonType, GbsButtonComponent } from 'ng-globos-core';
 import { InfoPonudaComponent } from '../../../components/info-ponuda/info-ponuda.component';
 import { Router } from '@angular/router';
@@ -28,14 +27,14 @@ export class TravelInfoPageComponent {
   Large = ButtonSize.Large;
   Type = ButtonType.Positive;
 
-  tabs: InusranceCoverageLevelResponse[] = [];
+  tabs: InfoOfferResponse[] = [];
   selectedCoverageCard: any = {};
   planName: string[] = [];
   planAmount: number[] = [];
 
   showInfoModal = false;
 
-  @Input() selectedTab?: InusranceCoverageLevelResponse;
+  @Input() selectedTab?: InfoOfferResponse;
 
   nextButtonStyles = {
     'display': 'flex',
@@ -59,7 +58,6 @@ export class TravelInfoPageComponent {
 
   constructor(
     private loader: LoaderService,
-    private cashedService: CashedCodebookClientService,
     private policyService: PolicyClientService,
     private router: Router
   ) {}
@@ -69,27 +67,28 @@ export class TravelInfoPageComponent {
 
     this.policyService.Infooffer().subscribe({
       next: (offers: any[]) => {
-        this.planName = offers.map((o) => o.coverrageLevelName);
-        this.planAmount = offers.map((o) => o.finalAmount);
-      },
-      error: (err) => {
-        console.error('Greška pri Infooffer:', err);
-      },
-    });
-
-    this.cashedService.getCoverageLevels().subscribe({
-      next: (res) => {
         this.loader.hide();
 
-        if (res?.length) {
-          this.tabs = res;
+        if (offers?.length) {
+          this.tabs = offers;
+        }
 
-          const savedTabId = localStorage.getItem('selectedTab');
-          const matchedTab = this.tabs.find(
-            (tab) => tab.id === Number(savedTabId)
-          );
+        this.planName = offers.map((o) => o.coverrageLevelName);
+        this.planAmount = offers.map((o) => o.finalAmount);
 
-          this.selectedTab = matchedTab || this.tabs.find((x) => x.id === 1);
+        const raw = localStorage.getItem('selectedTab');
+        if (raw) {
+          try {
+            const saved: InfoOfferResponse = JSON.parse(raw);
+            this.selectedTab =
+              this.tabs.find(
+                (t) => t.coverrageLevelId === saved.coverrageLevelId
+              ) ?? this.tabs[0];
+          } catch {
+            this.selectedTab = this.tabs[0];
+          }
+        } else {
+          this.selectedTab = this.tabs[0];
         }
       },
       error: () => {
@@ -98,9 +97,9 @@ export class TravelInfoPageComponent {
     });
   }
 
-  onselectedTabChange(event: InusranceCoverageLevelResponse) {
+  onselectedTabChange(event: InfoOfferResponse) {
     this.selectedTab = event;
-    localStorage.setItem('selectedTab', event.id.toString());
+    localStorage.setItem('selectedTab', JSON.stringify(event));
   }
 
   onNextButtonClicked() {

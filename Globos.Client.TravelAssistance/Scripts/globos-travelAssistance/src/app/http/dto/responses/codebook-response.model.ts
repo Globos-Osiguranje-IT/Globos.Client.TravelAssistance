@@ -1,4 +1,3 @@
-
 export interface InsuranceCategoryResponse {
   id: number;
   name: string;
@@ -14,15 +13,25 @@ export interface InusranceCoverageLevelResponse {
   name: string;
 }
 
+export interface InfoOfferResponse {
+  amount: number;
+  coverrageLevelId: number;
+  coverrageLevelName: string;
+  discount?: number;
+  discountId?: number;
+  finalAmount: number;
+  tax?: number;
+}
+
 export interface InsuranceTypeResponse {
   id: number;
   name: string;
 }
 
 export interface InsuredAgeGroupsResponse {
-  id: number,
-  ageFrom: number,
-  ageTo: number
+  id: number;
+  ageFrom: number;
+  ageTo: number;
 }
 
 export interface TerritorialCoverageResponse {
@@ -40,9 +49,9 @@ export interface InsuranceAdditionalCoverageResponse {
 }
 
 export interface City {
-  id: number,
-  name: string,
-  zip: string
+  id: number;
+  name: string;
+  zip: string;
 }
 
 export interface InsuranceTypePeriodPackageResponse {
@@ -63,4 +72,3 @@ export interface DestinationTerritorialCoverage {
   territorialCoverageId: number;
   isActive: boolean;
 }
-
