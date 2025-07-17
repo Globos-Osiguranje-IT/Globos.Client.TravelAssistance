@@ -313,7 +313,7 @@ export class ContractorTypeFeatureComponent implements OnInit {
   }
 
   onContractorSelect(event: any): void {
-    // this.contractorSelected.emit(event);
+    this.contractorSelected.emit(event);
     // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASSSSSSSSSSSSSSSSSSS Selected contractor:", event);
   }
 }
