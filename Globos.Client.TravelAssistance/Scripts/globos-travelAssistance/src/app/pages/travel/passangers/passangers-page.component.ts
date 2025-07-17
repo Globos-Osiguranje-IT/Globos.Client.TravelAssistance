@@ -18,6 +18,7 @@ import { CashedCodebookClientService } from '../../../http/cashed-codebook-clien
 import { DestinationComponent } from "../../../features/destination/destination.component";
 import { ClientValidationService } from '../../../validations/client-validation/client-validation.service';
 import { GbsContractorInfoFeatureComponent } from "../../../features/contractor-info/gbs-contractor-info-feature.component";
+import { GbsDomesticRoadTravelComponent } from '../../../features/additionalCoverages/gbs-domestic-road-travel/gbs-domestic-road-travel.component';
 
 @Component({
   selector: 'app-passangers-page',
