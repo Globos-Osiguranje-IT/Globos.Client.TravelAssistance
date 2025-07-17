@@ -8,6 +8,7 @@ import { CashedCodebookClientService } from '../../../http/cashed-codebook-clien
 import { ButtonSize, ButtonType, GbsButtonComponent } from 'ng-globos-core';
 import { InfoPonudaComponent } from '../../../components/info-ponuda/info-ponuda.component';
 import { Router } from '@angular/router';
+import { PolicyClientService } from '../../../http/policy-client.service';
 
 @Component({
   selector: 'app-travel-info-page',
@@ -23,16 +24,17 @@ import { Router } from '@angular/router';
   templateUrl: './travel-info-page.component.html',
   styleUrl: './travel-info-page.component.scss',
 })
-
-export class TravelInfoPageComponent{
+export class TravelInfoPageComponent {
   Large = ButtonSize.Large;
   Type = ButtonType.Positive;
 
   tabs: InusranceCoverageLevelResponse[] = [];
   selectedCoverageCard: any = {};
+  planName: string[] = [];
+  planAmount: number[] = [];
 
   showInfoModal = false;
-  
+
   @Input() selectedTab?: InusranceCoverageLevelResponse;
 
   nextButtonStyles = {
@@ -58,11 +60,22 @@ export class TravelInfoPageComponent{
   constructor(
     private loader: LoaderService,
     private cashedService: CashedCodebookClientService,
+    private policyService: PolicyClientService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.loader.show();
+
+    this.policyService.Infooffer().subscribe({
+      next: (offers: any[]) => {
+        this.planName = offers.map((o) => o.coverrageLevelName);
+        this.planAmount = offers.map((o) => o.finalAmount);
+      },
+      error: (err) => {
+        console.error('Greška pri Infooffer:', err);
+      },
+    });
 
     this.cashedService.getCoverageLevels().subscribe({
       next: (res) => {
@@ -72,9 +85,11 @@ export class TravelInfoPageComponent{
           this.tabs = res;
 
           const savedTabId = localStorage.getItem('selectedTab');
-          const matchedTab = this.tabs.find(tab => tab.id === Number(savedTabId));
+          const matchedTab = this.tabs.find(
+            (tab) => tab.id === Number(savedTabId)
+          );
 
-          this.selectedTab = matchedTab || this.tabs.find(x => x.id === 1);
+          this.selectedTab = matchedTab || this.tabs.find((x) => x.id === 1);
         }
       },
       error: () => {
@@ -85,11 +100,11 @@ export class TravelInfoPageComponent{
 
   onselectedTabChange(event: InusranceCoverageLevelResponse) {
     this.selectedTab = event;
-    localStorage.setItem('selectedTab', event.id.toString())
+    localStorage.setItem('selectedTab', event.id.toString());
   }
 
   onNextButtonClicked() {
-    this.router.navigate(['pomoc-na-putu', 'passanger'])
+    this.router.navigate(['pomoc-na-putu', 'passanger']);
   }
 
   openInfoModal() {

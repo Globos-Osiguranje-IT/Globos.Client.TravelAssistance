@@ -209,19 +209,18 @@ export class PolicyClientService {
     Headers: {}
   }
 
-  postInfooffer(): Observable<PolicyInfoOfferResponse[]> {
+  Infooffer(): Observable<PolicyInfoOfferResponse[]> {
+    let postRequest: PostRequest = {
+      Url: `/policy/infooffer`,
+      Body: {},
+      Headers: { Accept: 'application/json' },
+    };
 
-    var infoOfferRequest = sessionStorage.getItem("step1RequestObject");
-
-    if (infoOfferRequest == null) infoOfferRequest = '{}';
-
-    this.postRequestInfooffer.Body = JSON.parse(infoOfferRequest);
-
-    return this.proxy.post('/travel/postRequest/', this.postRequestInfooffer).pipe(
+    return this.proxy.post('/travel/postRequest/', postRequest).pipe(
       map((response: any) => {
         return response?.response ?? [];
       })
-    )
+    );
   }
 
   private postRequestAdditionalInsurance: PostRequest = {

@@ -13,15 +13,13 @@
       <thead>
         <tr>
           <th>Asistencija i Opis</th>
-          <th>CORIS Plus</th>
-          <th>CORIS Premium</th>
+          <th *ngFor="let plan of planName">{{ plan }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Godišnja premija osiguranja (RSD)</strong></td>
-          <td>2.250,00</td>
-          <td>3.900,00</td>
+          <th *ngFor="let plan of planAmount">{{ plan }}</th>
         </tr>
       </tbody>
     </table>
