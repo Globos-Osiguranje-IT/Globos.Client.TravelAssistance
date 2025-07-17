@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-    { path: '', redirectTo: '/putno-osiguranje', pathMatch: 'full' },
+    { path: '', redirectTo: '/pomoc-na-putu', pathMatch: 'full' },
     {
-        path: 'putno-osiguranje',
+        path: 'pomoc-na-putu',
         loadComponent: () => import('./pages/travel/policy-main.component').then(m => m.PolicyMainComponent),
         children: [
             {

@@ -9,7 +9,6 @@ import { AdditionalCoverages, ConsentRequest, DomesticInsurance, PolicySaveReque
 import { GbsButtonComponent } from "ng-globos-core";
 import { Consent } from '../../../features/consent/consent-feature/model/consent-item.model';
 import { PolicyClientService } from '../../../http/policy-client.service';
-import { GbsDomesticRoadTravelComponent } from '../../../features/additionalCoverages/gbs-domestic-road-travel/gbs-domestic-road-travel.component';
 import { CommonModule } from '@angular/common';
 import { Destination } from '../../../features/destination/models/destination';
 import { LoaderService } from '../../../services/loader.service';
@@ -99,12 +98,12 @@ export class PassangersPageComponent implements OnInit {
     window.scrollTo(0, 0);
     // console.log(this.additionalCoverageListId)
 
-    this.cashedSession.getContractorType().subscribe({
-      next: (res) => {
-        this.contractors = res;
-      },
-      error: (error) => console.error("Error: ", error)
-    });
+    // this.cashedSession.getContractorType().subscribe({
+    //   next: (res) => {
+    //     this.contractors = res;
+    //   },
+    //   error: (error) => console.error("Error: ", error)
+    // });
 
     this.cashedSession.getCity().subscribe({
       next: (res) => {
