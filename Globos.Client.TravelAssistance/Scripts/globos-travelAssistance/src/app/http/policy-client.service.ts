@@ -58,29 +58,34 @@ export class PolicyClientService {
 
   policySaveRequest: PolicySaveRequest = {
     PolicyOffer: {
-      insuranceCategoryId: 0,
-      insuranceTypeId: 0,
-      destinationId: 0,
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(),   
       policyDate: new Date(),
-      additionalCoverages: [],
-      tariffId: 0,
-      tariffGroupId: 0,
-      tariffSubgroupId: 0,
-      currencyId: CurrencyEnum.RSD,
-      insuredSumId: 0,
+      currencyId: 1, 
       coverrageLevelId: 0,
-      territorialCoverageId: 0,
       amount: 0,
       tax: 0,
       finalAmount: 0,
-      insurantsPerAgeGroups: [],
       note: '',
-      issuancePlace: 'WEB',
-      travelInsuranceDiscount: 0,
-      travelInsuranceFinalAmount: 0,
-      taxTravelInsuranceAfterDiscount: 0
+      issuancePlace: '',
+      platesNumber: '',
+      chassisNumber: '',
+      vehicleBrand: '',
+      vehicleType: '',
+
+      id: undefined,
+      discountId: undefined,
+      paymentAuthorizationNumber: '',
+      stornoReason: '',
+      policyNumberPrefix: '',
+      discount: 0,
+      isDefferedInvoicing: false,
+      clientAddressId: undefined,
+      clientPhoneNumberId: undefined,
+      clientEmailId: undefined,
+      invoiceId: undefined,
+      policyNumber: '',
+      agentCode: '',
     },
     Client: {
       clientTypeId: 0,
@@ -89,7 +94,6 @@ export class PolicyClientService {
       registrationNumber: '',
       residency: 'Srpsko',
     },
-    Insurants: [],
     Consents: []
   };
 
@@ -101,8 +105,10 @@ export class PolicyClientService {
     discount: 0,
     taxAfterDiscount: 0,
     finalAmountAfterDiscount: 0,
-    
+
     roadAssistanceInsurance: {
+      startDate: new Date(),
+      endDate:  new Date(),
       platesNumber: '',
       chassisNumber: '',
       vehicleBrand: '',

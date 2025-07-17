@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GbsInputComponent, GbsAutocompleteComponent } from 'ng-globos-core';
+import { GbsInputComponent, GbsAutocompleteComponent , GbsDatePickerComponent} from 'ng-globos-core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RoadAssistanceInsurance, DomesticInsurance, TripCancellation } from '../../../http/dto/requests/policy.model';
-import { AdditionalCoverageTextEnum, InsuranceAdditionalCoverageEnum } from '../../../enums';
+import { AdditionalCoverageTextEnum, Icons, InsuranceAdditionalCoverageEnum } from '../../../enums';
 import { CashedCodebookClientService } from '../../../http/cashed-codebook-client.service';
 import { TravelAgencies, TravelAgenciesComplete } from '../model/domestic-road-travel.model';
 import { AllValidationsDirective } from '../../../validations/client-validation/allValidations';
@@ -12,13 +12,25 @@ import { Client } from '../../contractor-info/model/gbs-contractor-info.model';
 @Component({
   selector: 'gbs-domestic-road-travel',
   standalone: true,
-  imports: [CommonModule, FormsModule, GbsInputComponent, GbsAutocompleteComponent, AllValidationsDirective],
+  imports: [CommonModule, FormsModule, GbsInputComponent, GbsAutocompleteComponent, AllValidationsDirective, GbsDatePickerComponent],
   templateUrl: './gbs-domestic-road-travel.component.html',
   styleUrl: './gbs-domestic-road-travel.component.scss'
 })
 export class GbsDomesticRoadTravelComponent {
 
+  airplaneTakeoff: Icons = Icons.AirplaneTakeOff;
+  airplaneLanding: Icons = Icons.AirplaneLanding;
+  
+  today: Date = new Date();
+  maxDate: Date = new Date(2100, 0, 1);
+  minDate: Date | null = new Date(1940, 0, 1);
+  @Input() selectedStartDate: string = '';
+  @Input() selectedEndDate: string = '';
+  
+
   road: RoadAssistanceInsurance = {
+    startDate: new Date(),
+    endDate: new Date(),
     platesNumber: '',
     chassisNumber: '',
     vehicleBrand: '',
@@ -59,8 +71,8 @@ export class GbsDomesticRoadTravelComponent {
   @Input() client?: Client;
 
   @Output() roadChange = new EventEmitter<RoadAssistanceInsurance>();
-  @Output() domesticChange = new EventEmitter<DomesticInsurance>();
-  @Output() tripChange = new EventEmitter<TripCancellation>();
+  // @Output() domesticChange = new EventEmitter<DomesticInsurance>();
+  // @Output() tripChange = new EventEmitter<TripCancellation>();
 
   constructor(private cashedSessionService: CashedCodebookClientService) { }
 
@@ -70,11 +82,11 @@ export class GbsDomesticRoadTravelComponent {
     if (this.roadAssistanceInsurance)
       this.road = this.roadAssistanceInsurance;
 
-    if (this.domesticInsurance)
-      this.domestic = this.domesticInsurance;
+    // if (this.domesticInsurance)
+    //   this.domestic = this.domesticInsurance;
 
-    if(this.tripCancellation)
-      this.trip = this.tripCancellation;
+    // if(this.tripCancellation)
+    //   this.trip = this.tripCancellation;
 
     this.fillPolicyOffer()
   }
@@ -83,13 +95,13 @@ export class GbsDomesticRoadTravelComponent {
     sessionStorage.setItem('tripCancellation', JSON.stringify(this.tripCancellation));
   }
 
-  mapAgenciesToAutocomplete(agencies: TravelAgencies[]): TravelAgenciesComplete[] {
-    return agencies.map((agency) => ({
-      label: agency.name,
-      value: agency.id.toString(),
-      cid: agency.name || ''
-    }));
-  }
+  // mapAgenciesToAutocomplete(agencies: TravelAgencies[]): TravelAgenciesComplete[] {
+  //   return agencies.map((agency) => ({
+  //     label: agency.name,
+  //     value: agency.id.toString(),
+  //     cid: agency.name || ''
+  //   }));
+  // }
 
   fillPolicyOffer() {
 
@@ -111,30 +123,30 @@ export class GbsDomesticRoadTravelComponent {
     }
 
 
-    this.cashedSessionService.getTravelAgency().subscribe({
-      next: (res) => {
-        // console.log("agencije")
-        // console.log(res)
-        this.items_travelAgenciesComplete = this.mapAgenciesToAutocomplete(res);
+    // this.cashedSessionService.getTravelAgency().subscribe({
+    //   next: (res) => {
+    //     // console.log("agencije")
+    //     // console.log(res)
+    //     // this.items_travelAgenciesComplete = this.mapAgenciesToAutocomplete(res);
 
-        const savedTrip = sessionStorage.getItem('tripCancellation');
-        if (savedTrip) {
-          this.tripCancellation = JSON.parse(savedTrip);
+    //     const savedTrip = sessionStorage.getItem('tripCancellation');
+    //     if (savedTrip) {
+    //       this.tripCancellation = JSON.parse(savedTrip);
 
-          const selectedId = this.tripCancellation.travelAgencyId.toString();
-          const agency = this.items_travelAgenciesComplete.find(a => a.value === selectedId);
-          if (agency) {
-            this.selectedAgency = agency;
-          }
-        }
-      },
-      error: (error) => console.error("Erorr: ", error)
-    })
+    //       const selectedId = this.tripCancellation.travelAgencyId.toString();
+    //       const agency = this.items_travelAgenciesComplete.find(a => a.value === selectedId);
+    //       if (agency) {
+    //         this.selectedAgency = agency;
+    //       }
+    //     }
+    //   },
+    //   error: (error) => console.error("Erorr: ", error)
+    // })
   }
 
   private saveToSession(): void {
     sessionStorage.setItem('roadAssistanceInsurance', JSON.stringify(this.roadAssistanceInsurance));
-    sessionStorage.setItem('domesticInsurance', JSON.stringify(this.domesticInsurance));
+    // sessionStorage.setItem('domesticInsurance', JSON.stringify(this.domesticInsurance));
   }
 
   onValueChangePlatesNumber(value: string) {
@@ -181,29 +193,64 @@ export class GbsDomesticRoadTravelComponent {
 
     this.roadChange.emit(this.roadAssistanceInsurance);
   }
+  
 
-  onValueChangeAddress(value: string) {
-    if (!this.domesticInsurance) {
-      this.domesticInsurance = {};
+  onValueChangeStartDate(value: string) {
+    if (!this.roadAssistanceInsurance) {
+      this.roadAssistanceInsurance = {};
     }
-    this.domesticInsurance.address = value;
+
+    const startDate = new Date(value);
+  
+    this.selectedStartDate = startDate.toISOString();
+    const endDate = new Date(startDate);
+    endDate.setFullYear(endDate.getFullYear() + 1);
+    this.selectedEndDate = endDate.toISOString(); 
+
+
+    this.roadAssistanceInsurance.startDate = value;
+    this.roadAssistanceInsurance.endDate =  this.selectedEndDate;
 
     this.saveToSession();
 
-    this.domesticChange.emit(this.domesticInsurance);
+    this.roadChange.emit(this.roadAssistanceInsurance);
   }
 
-  onValueChangeContractNumber(value: string) {
-    if (!this.tripCancellation) {
-      this.tripCancellation = {};
-    }
-    this.tripCancellation.contractNumber = value;
-    this.saveTripToSession();
+  // onValueChangeEndDate(value: string) {
+  //   if (!this.roadAssistanceInsurance) {
+  //     this.roadAssistanceInsurance = {};
+  //   }
+  //   this.roadAssistanceInsurance.endDate = value;
 
-    this.saveToSession();
+  //   this.saveToSession();
 
-    this.tripChange.emit(this.tripCancellation);
-  }
+  //   this.roadChange.emit(this.roadAssistanceInsurance);
+  // }
+
+
+
+  // onValueChangeAddress(value: string) {
+  //   if (!this.domesticInsurance) {
+  //     this.domesticInsurance = {};
+  //   }
+  //   this.domesticInsurance.address = value;
+
+  //   this.saveToSession();
+
+  //   this.domesticChange.emit(this.domesticInsurance);
+  // }
+
+  // onValueChangeContractNumber(value: string) {
+  //   if (!this.tripCancellation) {
+  //     this.tripCancellation = {};
+  //   }
+  //   this.tripCancellation.contractNumber = value;
+  //   this.saveTripToSession();
+
+  //   this.saveToSession();
+
+  //   this.tripChange.emit(this.tripCancellation);
+  // }
 
 
   onValueChangePrice(value: string) {
@@ -213,7 +260,7 @@ export class GbsDomesticRoadTravelComponent {
     this.tripCancellation.price = parseInt(value);
     this.saveTripToSession();
     this.tripCancellation.price = parseInt(value);
-    this.tripChange.emit(this.tripCancellation);
+    // this.tripChange.emit(this.tripCancellation);
   }
 
 
@@ -229,9 +276,58 @@ export class GbsDomesticRoadTravelComponent {
     this.tripCancellation.travelAgencyName = event.label;
     this.tripCancellation.price = this.infoOfferRequest.arrangementPrice
     this.saveTripToSession();
-    this.tripChange.emit(this.tripCancellation);
+    // this.tripChange.emit(this.tripCancellation);
   }
 
 
+  // onStartDateChange(event: any) {
+    
+  //   this.selectedStartDate = event;
 
+    
+   
+  // }
+
+  onStartDateChange(event: any) {
+    const startDate = new Date(event);
+  
+    this.selectedStartDate = startDate.toISOString();
+    const endDate = new Date(startDate);
+    endDate.setFullYear(endDate.getFullYear() + 1);
+    this.selectedEndDate = endDate.toISOString(); 
+  }
+  
+
+
+
+  toDate(dateStr: string | Date | null): Date | null {
+    if (!dateStr) return null;
+
+    if (dateStr instanceof Date) {
+      return dateStr;
+    }
+  
+    if (typeof dateStr === 'string') {
+      if (dateStr.includes('T')) {
+        const isoDate = new Date(dateStr);
+        return isNaN(isoDate.getTime()) ? null : isoDate;
+      }
+  
+      const parts = dateStr.split('.');
+      if (parts.length === 3) {
+        const [day, month, year] = parts;
+        const localDate = new Date(
+          Number(year),
+          Number(month) - 1,
+          Number(day)
+        );
+        return isNaN(localDate.getTime()) ? null : localDate;
+      }
+  
+      const fallback = new Date(dateStr);
+      return isNaN(fallback.getTime()) ? null : fallback;
+    }
+  
+    return null;
+  }
 }

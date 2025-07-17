@@ -24,13 +24,19 @@
 }
 
 .box-wrapper {
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); 
-    border-radius: 0.25rem;                    
-    background-color: #fff;                      
-    border: 1px solid #dee2e6;                     
-    padding: 1.5rem !important;     
-    max-width: 900px; 
-    width: 100%;               
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 1.5rem !important;
+    max-width: 900px;
+    width: 100%;
     margin-top: 3%;
-  }
-  
+}
+
+
+ ::ng-deep .form-control[_ngcontent-ng-c363313511] {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+
+}

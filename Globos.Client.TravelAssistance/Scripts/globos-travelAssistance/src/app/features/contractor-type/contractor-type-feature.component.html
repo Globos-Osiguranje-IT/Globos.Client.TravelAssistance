@@ -10,7 +10,6 @@
 </div>
 
 
-
 <div *ngIf="contractorType?.id === enumContratorFizickoLice || contractorType?.id === enumContratorPravnoLice">
   <gbs-contractor-info-feature  cid="contractorJMBG"
                               [isInsuredContractorShared]="isInsuredContractorShared" 
@@ -29,21 +28,5 @@
   </gbs-contractor-info-feature>
 
 
-  <ng-container>
-    <div *ngIf=" this.agesList > 0">
-      <div *ngFor="let _ of createArray(this.agesList); let insurantIndex = index">
-        <gbs-insurant-info-feature  cid="insurantJMBG"
-          [contractorType]="contractorType"
-          [insurantIndex]="insurantIndex"
-          [isInsuredContractorShared]="isInsuredContractorShared"
-          [contractorJmbg]="contractor?.registrationNumber"
-          [allJmbgs]="allJmbgs"
-          (insurantInfoChange)="onInsurantInfoChange($event, insurantIndex)"
-          [foreignCitizenDataInput]="foreignCitizenList[insurantIndex]"
-          (foreignCitizenOutput)="onForeignCitizenChange($event)"
-          >
-        </gbs-insurant-info-feature>
-      </div>
-    </div>
-  </ng-container>
+
 </div>

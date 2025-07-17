@@ -6,9 +6,9 @@ export enum Icons {
   Check = 'ph ph-check',
   User = 'ph ph-user',
   UserThree = 'ph ph-users-three',
-  AirplaneTakeOff = 'ph ph-airplane-takeoff',
-  AirplaneLanding = 'ph ph-airplane-landing',
-  AirplaneInflight = 'ph ph-airplane-in-flight',
+  AirplaneTakeOff = 'ph ph-car-profile',
+  AirplaneLanding = 'ph ph-car-profile',
+  AirplaneInflight = 'ph ph-car-profile',
 }
 
 export const InsuredAgeGroupMap: any[] = [
