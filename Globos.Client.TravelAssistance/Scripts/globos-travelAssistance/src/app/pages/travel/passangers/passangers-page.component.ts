@@ -99,12 +99,12 @@ export class PassangersPageComponent implements OnInit {
     window.scrollTo(0, 0);
     // console.log(this.additionalCoverageListId)
 
-    // this.cashedSession.getContractorType().subscribe({
-    //   next: (res) => {
-    //     this.contractors = res;
-    //   },
-    //   error: (error) => console.error("Error: ", error)
-    // });
+    this.cashedSession.getContractorType().subscribe({
+      next: (res) => {
+        this.contractors = res;
+      },
+      error: (error) => console.error("Error: ", error)
+    });
 
     this.cashedSession.getCity().subscribe({
       next: (res) => {
@@ -195,57 +195,21 @@ export class PassangersPageComponent implements OnInit {
 
       this.additionalCoverageListId = this.infoOfferRequest.additionalCoverageIDs;
       this.policyClientService.policySaveRequest.PolicyOffer.coverrageLevelId = this.infoOfferRequest.coverrageLevelId;
-      this.policyClientService.policySaveRequest.PolicyOffer.endDate = this.infoOfferRequest.endDate;
-      // this.policyClientService.policySaveRequest.PolicyOffer.insuranceCategoryId = this.infoOfferRequest.insuranceCategoryId;
+      // this.policyClientService.policySaveRequest.PolicyOffer.endDate = this.infoOfferRequest.endDate;
       this.policyClientService.policySaveRequest.PolicyOffer.policyDate = this.infoOfferRequest.insurancePurchaseDate;
-      // this.policyClientService.policySaveRequest.PolicyOffer.insuranceTypeId = this.infoOfferRequest.insuranceTypeId;
-      // this.policyClientService.policySaveRequest.PolicyOffer.insuranceTypePeriodPackageId = this.infoOfferRequest.insuranceTypePeriodPackageId;
-      // this.policyClientService.policySaveRequest.PolicyOffer.insurantsPerAgeGroups = this.infoOfferRequest.insurantsPerAgeGroups;
-      // this.policyClientService.policySaveRequest.PolicyOffer.isForStudents = this.infoOfferRequest.isForStudents;
-      // this.policyClientService.policySaveRequest.PolicyOffer.startDate = this.infoOfferRequest.startDate;
-      // if(selectedOfferJSON){
-      //   this.policyClientService.policySaveRequest.PolicyOffer
-      // }
-      // this.policyClientService.policySaveRequest.PolicyOffer.additionalCoverages = this.infoOfferRequest.additionalCoverageIDs;
+ 
 
     }
     if (selectedOfferJSON) {
       this.selectedOfferRequest = JSON.parse(selectedOfferJSON);
-      // console.log("selectedOfferRequest PODACI", this.selectedOfferRequest)
-      // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceAmount = this.selectedOfferRequest.additionalInsuranceAmount;
-      // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceTax = this.selectedOfferRequest.additionalInsuranceTax;
       this.policyClientService.policySaveRequest.PolicyOffer.amount = this.selectedOfferRequest.amount;
       this.policyClientService.policySaveRequest.PolicyOffer.discount = this.selectedOfferRequest.discount;
       this.policyClientService.policySaveRequest.PolicyOffer.discountId = this.selectedOfferRequest.discountId;
-      // this.policyClientService.policySaveRequest.PolicyOffer.travelInsuranceDiscount = this.selectedOfferRequest.travelInsuranceDiscount;
-      // this.policyClientService.policySaveRequest.PolicyOffer.travelInsuranceFinalAmount = this.selectedOfferRequest.travelInsuranceFinalAmount;
-      // this.policyClientService.policySaveRequest.PolicyOffer.taxTravelInsuranceAfterDiscount = this.selectedOfferRequest.taxTravelInsuranceAfterDiscount;
+
       this.policyClientService.policySaveRequest.PolicyOffer.finalAmount = this.selectedOfferRequest.finalAmount;
-      // this.policyClientService.policySaveRequest.PolicyOffer.insuredSumId = this.selectedOfferRequest.insuranceSumId;
-      // this.policyClientService.policySaveRequest.PolicyOffer.tariffId = this.selectedOfferRequest.tariffId;
       this.policyClientService.policySaveRequest.PolicyOffer.tax = this.selectedOfferRequest.tax;
-      // this.policyClientService.policySaveRequest.PolicyOffer.territorialCoverageId = this.selectedOfferRequest.territorialCoverageId;
     }
 
-    // if (homeInsuranceJSON) {
-    //   var homeinsurance = JSON.parse(homeInsuranceJSON)
-
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.amount += homeinsurance.amount;
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceAmount += homeinsurance.amount
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceTax += homeinsurance.taxAmount
-    //   this.policyClientService.policySaveRequest.PolicyOffer.finalAmount += homeinsurance.finalAmount;
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.tax += homeinsurance.taxAmount;
-    // }
-
-    // if (trafficInsuranceJSON) {
-    //   var trafficinsurance = JSON.parse(trafficInsuranceJSON)
-
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.amount += trafficinsurance.amount;
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceAmount += trafficinsurance.amount
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.additionalInsuranceTax += trafficinsurance.taxAmount
-    //   this.policyClientService.policySaveRequest.PolicyOffer.finalAmount += trafficinsurance.finalAmount;
-    //   // this.policyClientService.policySaveRequest.PolicyOffer.tax += trafficinsurance.taxAmount;
-    // }
   }
 
   fillField() {
@@ -302,7 +266,7 @@ export class PassangersPageComponent implements OnInit {
     }
   }
 
-  //cuva i popunjava iz sesije destinaciju i consents (checkboxove)
+
   fillConsentsAndDestination() {
     const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
 
@@ -316,36 +280,8 @@ export class PassangersPageComponent implements OnInit {
       });
       this.consent = consentSessionHelper;
 
-      // this.destination = this.selectedDestination
     }
   }
-
-  //cuva i popunjava iz sesije podatke o road i domestic insurance (kada su na prvoj strani cekirana 2 togla iz futera)
-  // fillAditionalCoverages() {
-  //   const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
-  //   const roadAssistanceInsuranceSession = sessionStorage.getItem('roadAssistanceInsurance');
-  //   const domesticInsuranceSession = sessionStorage.getItem('domesticInsurance');
-  //   const tripCancellationSession = sessionStorage.getItem('tripCancellation');
-
-  //   // console.log(roadAssistanceInsuranceSession)
-
-  //   if (policySaveRequestSession) {
-  //     const roadAssistanceInsuranceHelper: RoadAssistanceInsurance = roadAssistanceInsuranceSession ? JSON.parse(roadAssistanceInsuranceSession) : null;
-
-  //     if (roadAssistanceInsuranceHelper) {
-  //       this.platesNumber = roadAssistanceInsuranceHelper.platesNumber;
-  //       this.chassisNumber = roadAssistanceInsuranceHelper.chassisNumber;
-  //       this.vehicleBrand = roadAssistanceInsuranceHelper.vehicleBrand;
-  //       this.vehicleType = roadAssistanceInsuranceHelper.vehicleType
-
-  //       this.roadAssistanceInsurance = roadAssistanceInsuranceHelper;
-  //       this.fillRoadAssistanceInsurance();
-  //     }
-
-  //   }
-
-  //   this.assemblePolicyRequest();
-  // }
 
   onContractorSelected(event: CodebookResponse) {
     this.codebookResponse = event;
@@ -355,14 +291,12 @@ export class PassangersPageComponent implements OnInit {
   handleContractorInfo(info: ContractorInfo): void {
     this.contractorInfoChange = info;
 
-    // this.addRemoveFromList();
     this.assemblePolicyRequest();
   }
 
   handleInsurantInfo(infoList: InsurantInfo[]): void {
     this.insurantInfoList = infoList;
 
-    // this.addRemoveFromList();
     this.assemblePolicyRequest();
   }
 
@@ -376,13 +310,13 @@ export class PassangersPageComponent implements OnInit {
     this.assemblePolicyRequest();
   }
 
-  handleDestination(info: Destination): void {
-    // console.log("Destination passanger", info)
-    this.destination = info;
+  // handleDestination(info: Destination): void {
+  //   // console.log("Destination passanger", info)
+  //   this.destination = info;
 
-    // this.policyClientService.policySaveRequest.PolicyOffer.destinationId = Number(this.destination.value);
-    this.assemblePolicyRequest();
-  }
+  //   // this.policyClientService.policySaveRequest.PolicyOffer.destinationId = Number(this.destination.value);
+  //   this.assemblePolicyRequest();
+  // }
 
   handleRoadChange(road: RoadAssistanceInsurance): void {
     this.roadAssistanceInsurance = road;
@@ -415,10 +349,6 @@ export class PassangersPageComponent implements OnInit {
       this.PolicySaveRequest = {
         PolicyOffer: this.policyClientService.policySaveRequest.PolicyOffer,
         Client: this.mapContractorInfoToClient(this.contractorInfoChange),
-        // Insurants: this.insurantInfoList
-        //   .filter(insurant => insurant !== null && insurant !== undefined)
-        //   .map(insurant => this.mapInsurantInfoToClient(insurant)),
-
         Consents: this.consent?.map(consentItem => this.mapConsent(consentItem)) ?? []
       };
       sessionStorage.setItem('policySaveRequest', JSON.stringify(this.PolicySaveRequest));
