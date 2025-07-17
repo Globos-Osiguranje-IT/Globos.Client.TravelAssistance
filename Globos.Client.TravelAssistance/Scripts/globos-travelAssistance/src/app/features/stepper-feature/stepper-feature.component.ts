@@ -98,7 +98,7 @@ export class StepperFeatureComponent {
   
   private navigateTo(stepRoute: string): void {
     const sanitizedRoute = stepRoute.startsWith('/') ? stepRoute.slice(1) : stepRoute;
-    this.router.navigate(['putno-osiguranje', sanitizedRoute]);
+    this.router.navigate(['pomoc-na-putu', sanitizedRoute]);
     this.makeRequest();
   }
 
