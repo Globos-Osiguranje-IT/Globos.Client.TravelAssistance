@@ -9,7 +9,8 @@
 
   <gbs-contractor-type-feature [contractorTypeId]="contractorTypeId" [contractors]="contractors"
     [contractorType]="contractorType" [contractor]="contractorInfoChange" [client]="client" [items_city]="items_city"
-    [selectedCity]="selectedCity" (contractorSelected)="onContractorSelected($event)"
+    [selectedCity]="selectedCity"
+     (contractorSelected)="onContractorSelected($event)"
     (contractorInfoChange)="handleContractorInfo($event)" (insurantInfoChange)="handleInsurantInfo($event)"
     (insuredLegalInfoChange)="handleInsuredLegalInfo($event)"
     (insuredContractorSharedChange)="handleInsuredContractorChange($event)"

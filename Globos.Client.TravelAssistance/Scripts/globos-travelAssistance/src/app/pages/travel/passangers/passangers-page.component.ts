@@ -283,8 +283,10 @@ export class PassangersPageComponent implements OnInit {
     }
   }
 
+  
   onContractorSelected(event: CodebookResponse) {
     this.codebookResponse = event;
+    console.log("this.codebookResponse", this.codebookResponse)
     this.assemblePolicyRequest();
   }
 
@@ -358,7 +360,7 @@ export class PassangersPageComponent implements OnInit {
 
   private mapContractorInfoToClient(contractor: ContractorInfo): Client {
     return {
-      clientTypeId: 1, //this.codebookResponse.id,  //sredi ovo
+      clientTypeId: this.codebookResponse.id,  //sredi ovo
       firstName: contractor.firstName || '',
       lastName: contractor.lastName || '',
       registrationNumber: contractor.registrationNumber || '',
