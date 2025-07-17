@@ -89,7 +89,7 @@ export class TravelInfoPageComponent{
   }
 
   onNextButtonClicked() {
-    this.router.navigate(['putno-osiguranje', 'passanger'])
+    this.router.navigate(['pomoc-na-putu', 'passanger'])
   }
 
   openInfoModal() {
