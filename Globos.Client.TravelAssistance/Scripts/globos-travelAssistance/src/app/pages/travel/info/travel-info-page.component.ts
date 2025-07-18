@@ -68,32 +68,31 @@ export class TravelInfoPageComponent {
     this.policyService.Infooffer().subscribe({
       next: (offers: any[]) => {
         this.loader.hide();
-
-        if (offers?.length) {
-          this.tabs = offers;
-        }
-
+        this.tabs = offers;
         this.planName = offers.map((o) => o.coverrageLevelName);
         this.planAmount = offers.map((o) => o.finalAmount);
 
         const raw = localStorage.getItem('selectedTab');
+        console.log(raw, 'sta je ovo')
+        let defaultTab: InfoOfferResponse;
         if (raw) {
           try {
-            const saved: InfoOfferResponse = JSON.parse(raw);
-            this.selectedTab =
+            const saved = JSON.parse(raw) as InfoOfferResponse;
+            defaultTab =
               this.tabs.find(
                 (t) => t.coverrageLevelId === saved.coverrageLevelId
               ) ?? this.tabs[0];
           } catch {
-            this.selectedTab = this.tabs[0];
+            defaultTab = this.tabs[0];
           }
         } else {
-          this.selectedTab = this.tabs[0];
+          defaultTab = this.tabs[0];
         }
+
+        this.selectedTab = defaultTab;
+        localStorage.setItem('selectedTab', JSON.stringify(defaultTab));
       },
-      error: () => {
-        this.loader.hide();
-      },
+      error: () => this.loader.hide(),
     });
   }
 
