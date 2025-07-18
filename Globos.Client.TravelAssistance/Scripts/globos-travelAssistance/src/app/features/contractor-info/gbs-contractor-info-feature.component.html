@@ -32,7 +32,8 @@
             <div *ngIf="this.YesNoJMBG && this.foreignCitizen && contractorType?.id === 1" class="col-md-4">
                 <label style="margin-bottom: 11px;">Datum rođenja<span class="colorLabel">*</span></label>
                 <gbs-date-picker [cid]="'contractorDatumRodjenja'" (dateChange)="onValueChangeDateForeignBirth($event)" 
-                [maxDate]="maxSelectableDate" [placeholder]="'Izaberite datum rođenja'" [value]="dateForeignBirth" [contractorJmbg]="contractorJmbg"  [allJmbgs]="allJmbgs" appLatinOnFocusOut ></gbs-date-picker>
+                [maxDate]="maxSelectableDate" [placeholder]="'Izaberite datum rođenja'" [value]="dateForeignBirth" 
+                [contractorJmbg]="contractorJmbg"  [allJmbgs]="allJmbgs" appLatinOnFocusOut ></gbs-date-picker>
             </div>
 
 

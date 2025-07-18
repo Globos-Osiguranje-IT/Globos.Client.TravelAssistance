@@ -1,16 +1,16 @@
-
-
 <div class="form-wrapper">
 
-  <gbs-domestic-road-travel 
-  [roadAssistanceInsurance]="roadAssistanceInsurance" 
-  (roadChange)="handleRoadChange($event)">
+  <p class="paragraf" >* Ne mogu se osigurati vozila namenjena za taxi i rent-a-car vožnje, policijska vozila, kao i vozila koja učestvuju u moto trkama.<br>
+  * Osiguranjem se mogu obuhvatiti vozila nosivosti do 3,50 tone.<br>
+  * Osiguranje počinje da važi od 23:59h za izabrani datum.</p>
+
+
+  <gbs-domestic-road-travel [roadAssistanceInsurance]="roadAssistanceInsurance" (roadChange)="handleRoadChange($event)">
   </gbs-domestic-road-travel>
 
   <gbs-contractor-type-feature [contractorTypeId]="contractorTypeId" [contractors]="contractors"
     [contractorType]="contractorType" [contractor]="contractorInfoChange" [client]="client" [items_city]="items_city"
-    [selectedCity]="selectedCity"
-     (contractorSelected)="onContractorSelected($event)"
+    [selectedCity]="selectedCity" (contractorSelected)="onContractorSelected($event)"
     (contractorInfoChange)="handleContractorInfo($event)" (insurantInfoChange)="handleInsurantInfo($event)"
     (insuredLegalInfoChange)="handleInsuredLegalInfo($event)"
     (insuredContractorSharedChange)="handleInsuredContractorChange($event)"

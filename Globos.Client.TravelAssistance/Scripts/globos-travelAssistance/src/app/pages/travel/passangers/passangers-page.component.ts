@@ -213,11 +213,20 @@ export class PassangersPageComponent implements OnInit {
   }
 
   fillField() {
-    const infoOfferRequestJSON = sessionStorage.getItem('step1RequestObject');
+    const infoOfferRequestJSON = localStorage.getItem('step1RequestObject');
     if (infoOfferRequestJSON) {
       // console.log("infoOfferRequestJSON PODACI", infoOfferRequestJSON)
       const infoOfferRequest = JSON.parse(infoOfferRequestJSON);
     }
+
+    const selectedTabRequestJSON = localStorage.getItem('selectedTab');
+    if (selectedTabRequestJSON) {
+     
+      const selectedTabRequest = JSON.parse(selectedTabRequestJSON);
+      console.log("selectedTabRequest PODACI", selectedTabRequest)
+    }
+
+
   }
 
 

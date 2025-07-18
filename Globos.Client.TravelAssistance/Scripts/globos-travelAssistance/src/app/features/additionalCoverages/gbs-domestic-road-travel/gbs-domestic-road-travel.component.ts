@@ -288,14 +288,14 @@ export class GbsDomesticRoadTravelComponent {
    
   // }
 
-  onStartDateChange(event: any) {
-    const startDate = new Date(event);
+  // onStartDateChange(event: any) {
+  //   const startDate = new Date(event);
   
-    this.selectedStartDate = startDate.toISOString();
-    const endDate = new Date(startDate);
-    endDate.setFullYear(endDate.getFullYear() + 1);
-    this.selectedEndDate = endDate.toISOString(); 
-  }
+  //   this.selectedStartDate = startDate.toISOString();
+  //   const endDate = new Date(startDate);
+  //   endDate.setFullYear(endDate.getFullYear() + 1);
+  //   this.selectedEndDate = endDate.toISOString(); 
+  // }
   
 
 
