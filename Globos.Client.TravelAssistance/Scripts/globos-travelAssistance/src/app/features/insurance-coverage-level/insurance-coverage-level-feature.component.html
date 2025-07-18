@@ -3,7 +3,6 @@
     *ngFor="let tab of tabs; trackBy: trackById"
     [class.active]="selectedTab?.coverrageLevelId === tab.coverrageLevelId"
     (click)="changeTab(tab)"
-    [disabled]="tab.coverrageLevelName === 'CORIS Plus' && isPremiumOnlySelected"
   >
     {{ tab.coverrageLevelName }}
   </button>
