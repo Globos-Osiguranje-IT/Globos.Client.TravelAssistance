@@ -60,6 +60,7 @@ export class PassangersPageComponent implements OnInit {
   roadAssistanceInsuranceObj: AdditionalCoverages | any = null;
   domesticInsuranceObj: AdditionalCoverages | any = null;
   tripCancellationObj: AdditionalCoverages | any = null;
+  selectedTabRequest: any;
 
   contractors: CodebookResponse[] = [];
   passportError: boolean = false;
@@ -194,20 +195,14 @@ export class PassangersPageComponent implements OnInit {
       this.infoOfferRequest = JSON.parse(infoOfferRequestJSON);
 
       this.additionalCoverageListId = this.infoOfferRequest.additionalCoverageIDs;
-      this.policyClientService.policySaveRequest.PolicyOffer.coverrageLevelId = this.infoOfferRequest.coverrageLevelId;
+     // 
       // this.policyClientService.policySaveRequest.PolicyOffer.endDate = this.infoOfferRequest.endDate;
       this.policyClientService.policySaveRequest.PolicyOffer.policyDate = this.infoOfferRequest.insurancePurchaseDate;
  
 
     }
     if (selectedOfferJSON) {
-      this.selectedOfferRequest = JSON.parse(selectedOfferJSON);
-      this.policyClientService.policySaveRequest.PolicyOffer.amount = this.selectedOfferRequest.amount;
-      this.policyClientService.policySaveRequest.PolicyOffer.discount = this.selectedOfferRequest.discount;
-      this.policyClientService.policySaveRequest.PolicyOffer.discountId = this.selectedOfferRequest.discountId;
-
-      this.policyClientService.policySaveRequest.PolicyOffer.finalAmount = this.selectedOfferRequest.finalAmount;
-      this.policyClientService.policySaveRequest.PolicyOffer.tax = this.selectedOfferRequest.tax;
+     
     }
 
   }
@@ -222,8 +217,15 @@ export class PassangersPageComponent implements OnInit {
     const selectedTabRequestJSON = localStorage.getItem('selectedTab');
     if (selectedTabRequestJSON) {
      
-      const selectedTabRequest = JSON.parse(selectedTabRequestJSON);
-      console.log("selectedTabRequest PODACI", selectedTabRequest)
+      this.selectedTabRequest = JSON.parse(selectedTabRequestJSON);
+      console.log("selectedTabRequest PODACI", this.selectedTabRequest)
+
+      this.policyClientService.policySaveRequest.PolicyOffer.amount = this.selectedTabRequest.amount;
+      this.policyClientService.policySaveRequest.PolicyOffer.coverrageLevelId = this.selectedTabRequest.coverrageLevelId;
+      this.policyClientService.policySaveRequest.PolicyOffer.discount = this.selectedTabRequest.discount;
+      this.policyClientService.policySaveRequest.PolicyOffer.discountId = this.selectedTabRequest.discountId;
+      this.policyClientService.policySaveRequest.PolicyOffer.finalAmount = this.selectedTabRequest.finalAmount;
+      this.policyClientService.policySaveRequest.PolicyOffer.tax = this.selectedTabRequest.tax;
     }
 
 
