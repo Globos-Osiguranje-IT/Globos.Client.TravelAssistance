@@ -73,7 +73,6 @@ export class TravelInfoPageComponent {
         this.planAmount = offers.map((o) => o.finalAmount);
 
         const raw = localStorage.getItem('selectedTab');
-        console.log(raw, 'sta je ovo')
         let defaultTab: InfoOfferResponse;
         if (raw) {
           try {
