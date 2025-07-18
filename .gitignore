@@ -1,4 +1,6 @@
-# === .NET ===
+#############################
+#         .NET              #
+#############################
 *.user
 *.suo
 *.userosscache
@@ -8,13 +10,16 @@ bin/
 obj/
 *.csproj.user
 
-# === Node / Angular ===
+#############################
+#    Node / Angular / TS    #
+#############################
 node_modules/
 dist/
 tmp/
 out-tsc/
 .bazel-out/
 .angular/cache/
+.angular/cache/**
 coverage/
 connect.lock
 libpeerconnection.log
@@ -22,8 +27,24 @@ testem.log
 typings/
 npm-debug.log*
 yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
 
-# === IDEs and Editors ===
+# TypeScript build info
+*.tsbuildinfo
+
+# Angular specific - ignore all cache js/map files
+.angular/cache/**/*.js
+.angular/cache/**/*.js.map
+
+# Optional: Ignore JS/MAP in src (if not using TS strict everywhere)
+src/**/*.js
+src/**/*.js.map
+
+#############################
+#      Editors/IDEs         #
+#############################
 .idea/
 .project
 .classpath
@@ -31,8 +52,7 @@ yarn-error.log*
 *.launch
 .settings/
 *.sublime-workspace
-
-# === VS Code ===
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -40,6 +60,25 @@ yarn-error.log*
 !.vscode/extensions.json
 .history/
 
-# === System Files ===
+#############################
+#      System Files         #
+#############################
 .DS_Store
 Thumbs.db
+
+#############################
+#    Miscellaneous/Other    #
+#############################
+*.log
+*.tmp
+*.bak
+
+# Ignore environment files except example/template
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Globalno ignoriši Angular cache u svim podfolderima
+**/.angular/cache/
+**/.angular/cache/**
