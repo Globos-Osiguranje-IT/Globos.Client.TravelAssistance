@@ -43,3 +43,15 @@ yarn-error.log*
 # === System Files ===
 .DS_Store
 Thumbs.db
+
+# Angular/TypeScript cache dodatak
+*.tsbuildinfo
+
+# JS i MAP fajlovi iz Angular cache foldera
+.angular/cache/**/*.js
+.angular/cache/**/*.js.map
+
+# Opciono, ako ti negde cure JS/MAP fajlovi u src:
+src/**/*.js
+src/**/*.js.map
+
