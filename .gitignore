@@ -9,6 +9,16 @@
 bin/
 obj/
 *.csproj.user
+*.nuget.cache
+*.nuget.g.props
+*.nuget.g.targets
+*.assets.cache
+*.AssemblyInfoInputs.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+project.assets.json
+project.nuget.cache
+*.AssemblyInfo.cs
+spa.proxy.json
 
 #############################
 #    Node / Angular / TS    #
