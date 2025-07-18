@@ -80,7 +80,7 @@ div[ng-reflect-ng-if] {
 ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) 
 .mat-mdc-form-field-input-control.mdc-text-field__input, 
 .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-  margin-top: 5px;
+  // margin-top: 5px;
 }
 
 .naslov {
@@ -96,7 +96,7 @@ div[ng-reflect-ng-if] {
 
 label {
   display: block;
-  margin-bottom: 4px; 
+  margin-bottom: 2px; 
   font-weight: 500;
   font-size: 14px;
 }
@@ -104,7 +104,7 @@ label {
 gbs-input, gbs-dropdown {
   display: block;
   width: 100%;
-  margin-bottom: 12px;
+  // margin-bottom: 12px;
 }
  
 @media (max-width: 768px) {

@@ -8,7 +8,7 @@
                     id="startDatePicker" [cid]="'datePicker1'" [icon]="airplaneTakeoff" [label]="''"
                     [labelCssClass]="''" [labelStyle]="{ color: '' }" [inputCssClass]="'date-picker-input'"
                     [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
-                    [placeholder]="'Izaberite datum'" (dateChange)="onValueChangeStartDate($event)">
+                    [placeholder]="'Izaberite datum'" (dateChange)="onValueChangeStartDate($event)" appLatinOnFocusOut>
                 </gbs-date-picker>
                 <!-- <div *ngIf="showStartDateError" class="text-danger mt-1">
                 Obavezno je uneti početak putovanja.
