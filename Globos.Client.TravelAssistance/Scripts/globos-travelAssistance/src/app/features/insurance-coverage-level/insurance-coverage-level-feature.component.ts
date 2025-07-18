@@ -33,7 +33,7 @@ export class InsuranceCoverageLevelFeatureComponent {
   }
 
   changeTab(tab: InfoOfferResponse): void {
-    if (this.selectedTab?.coverrageLevelId === tab.coverrageLevelId || (tab.coverrageLevelName === 'STANDARD' && this.isPremiumOnlySelected)) return;
+    if (this.selectedTab?.coverrageLevelId === tab.coverrageLevelId) return;
     this.selectedTabChange.emit(tab);
   }
 
