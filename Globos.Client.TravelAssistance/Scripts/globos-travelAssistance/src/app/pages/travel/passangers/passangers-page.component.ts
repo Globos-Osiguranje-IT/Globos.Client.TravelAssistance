@@ -380,9 +380,9 @@ export class PassangersPageComponent implements OnInit {
       birthDate: contractor.dateBirth ? this.parseCustomDate(contractor.dateBirth) : undefined,
       passportNumber: contractor.passportNumber || '',
       residency: 'Srpsko',
-      address: contractor.street && contractor.houseNumber && contractor.cityId ? {
+      address: contractor.street  && contractor.cityId ? {
         street: contractor.street,
-        houseNumber: contractor.houseNumber,
+        houseNumber:'',
         cityId: parseInt(contractor.cityId)
       } : undefined,
       phone: contractor.mobileNumber ? {
