@@ -59,7 +59,6 @@ export class GbsContractorInfoFeatureComponent implements OnInit {
   items = InsuredAgeGroupMap;
   isInsuredContractor: boolean = false;
   foreignCitizen: boolean = false;
-  YesNoJMBG: boolean = false;
   dateForeignBirthText: any;
   dateForeignBirth: any;
   @Output() insuredContractorChange = new EventEmitter<boolean>();
@@ -85,7 +84,6 @@ export class GbsContractorInfoFeatureComponent implements OnInit {
 
 
     this.foreignCitizen = foreignCitizen.foreignCitizen ?? false;
-    this.YesNoJMBG = foreignCitizen.foreignRNYesNo ?? false;
     this.dateForeignBirthText = foreignCitizen.foreignRegistrationNumber;
     this.dateForeignBirth = foreignCitizen.dateForeignBirth;
 
@@ -271,34 +269,10 @@ export class GbsContractorInfoFeatureComponent implements OnInit {
     this.foreignCitizenData.foreignCitizen = this.foreignCitizen
     sessionStorage.setItem('foreignCitizen', JSON.stringify(this.foreignCitizenData));
 
-    if( this.foreignCitizen ==false){
-      this.YesNoJMBG = false;
-    }
+  
   }
 
-  YesNoJMBGChange(event: any) {
-    this.YesNoJMBG = event;
-
-    this.foreignCitizenData.foreignRNYesNo = this.YesNoJMBG
-
-    if (this.YesNoJMBG == false) {
-      this.onValueChangeRegistrationNumber("")
-      this.dateForeignBirthText = ''
-      this.dateForeignBirth = null
-      this.foreignCitizenData.foreignRegistrationNumber = ''
-      this.foreignCitizenData.dateForeignBirth = undefined
-    }
-
-    if (this.YesNoJMBG == true) {
-      this.dateForeignBirth = null
-    }
-
-    this.foreignCitizenData.foreignCitizen = this.foreignCitizen
-
-    sessionStorage.setItem('foreignCitizen', JSON.stringify(this.foreignCitizenData));
-    // console.log(this.contractor.registrationNumber)
-
-  }
+     // this.YesNoJMBG = foreignCitizen.foreignRNYesNo ?? false;
 
   onValueChangeDateForeignBirth(event: any) {
     this.dateForeignBirthText = event;

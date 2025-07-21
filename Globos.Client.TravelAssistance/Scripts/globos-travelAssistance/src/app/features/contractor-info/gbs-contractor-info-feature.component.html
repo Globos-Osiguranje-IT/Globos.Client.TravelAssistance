@@ -11,17 +11,17 @@
             </div>
         </div>
         <div class="row">
-
+<!-- 
             <div *ngIf="this.foreignCitizen && contractorType?.id === 1"
                 class=" mb-4 mt-1 ms-auto d-flex align-items-center">
                 <gbs-checkbox [cid]="'Imabroj'" [value]="YesNoJMBG" class="orange-checkbox"
                     (valueChange)="YesNoJMBGChange($event)"></gbs-checkbox>
                 <label class="mb-0 ms-2 small-label">Ugovarač nema matični broj</label>
-            </div>
+            </div> -->
 
-            <div class="col-md-4" *ngIf="!this.YesNoJMBG && contractorType?.id === 1">
+            <div class="col-md-4" *ngIf=" contractorType?.id === 1">
                 <label>JMBG<span class="colorLabel">*</span></label>
-                <gbs-input type="number" [cid]="YesNoJMBG?  'contractorYesNoForeign' : (foreignCitizen? 'contractorforeignCitizen' :  'contractorJMBG')"
+                <gbs-input type="number" [cid]="(foreignCitizen? 'contractorforeignCitizen' :  'contractorJMBG')"
 
                     [value]="contractor?.registrationNumber || ''"
                     (valueChange)="onValueChangeRegistrationNumber($event)" maxlength="13" appLatinOnFocusOut
@@ -29,7 +29,7 @@
                 </gbs-input>
             </div>
 
-            <div *ngIf="this.YesNoJMBG && this.foreignCitizen && contractorType?.id === 1" class="col-md-4">
+            <div *ngIf=" this.foreignCitizen && contractorType?.id === 1" class="col-md-4">
                 <label style="margin-bottom: 11px;">Datum rođenja<span class="colorLabel">*</span></label>
                 <gbs-date-picker [cid]="'contractorDatumRodjenja'" (dateChange)="onValueChangeDateForeignBirth($event)" 
                 [maxDate]="maxSelectableDate" [placeholder]="'Izaberite datum rođenja'" [value]="dateForeignBirth" 
@@ -68,21 +68,7 @@
                 </gbs-input>
             </div>
         </div>
-        <!-- <div class="row"> -->
-
-            <!-- <div class="col-md-4" *ngIf="!this.YesNoJMBG && contractorType?.id === 1">
-                <label>Datum rođenja<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'inputDatumRodjenja'" [value]="contractor?.dateBirth || ''"
-                    [disabled]="true" appLatinOnFocusOut>
-                </gbs-input>
-            </div> -->
-            <!-- <div class="col-md-4" *ngIf=" contractorType?.id === 1">
-                <label>Broj pasoša<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'inputBrPasosa'" [value]="contractor?.passportNumber || ''"
-                    (valueChange)="onValueChangePassportNumber($event)" appLatinOnFocusOut>
-                </gbs-input>
-            </div> -->
-           
+        
         <!-- </div> -->
         <div class="row">
             <div class="col-md-8">

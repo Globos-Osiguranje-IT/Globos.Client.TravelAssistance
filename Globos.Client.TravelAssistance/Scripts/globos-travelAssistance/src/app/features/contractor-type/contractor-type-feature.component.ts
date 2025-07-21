@@ -91,10 +91,10 @@ export class ContractorTypeFeatureComponent implements OnInit {
   }
 
 
-  addList() {
-    this.agesList = this.infoOfferRequest.insurantsPerAgeGroups.reduce((sum: any, item: any) => sum + (item.number || 0), 0);
-    this.sum(this.isInsuredContractorShared);
-  }
+  // addList() {
+  //   this.agesList = this.infoOfferRequest.insurantsPerAgeGroups.reduce((sum: any, item: any) => sum + (item.number || 0), 0);
+  //   this.sum(this.isInsuredContractorShared);
+  // }
 
   fillField() {
     const infoOfferRequestJSON = sessionStorage.getItem('step1RequestObject');
@@ -119,14 +119,12 @@ export class ContractorTypeFeatureComponent implements OnInit {
 
     if (isInsuredContractorShared == false && this.contractorType?.id == 2) {
       this.agesList = this.agesList;
-      // console.log("USAO")
     }
 
   }
 
   onInsuredContractorChanged(value: boolean): void {
     this.isInsuredContractorShared = value;
-    this.addList()
     this.insuredContractorSharedChange.emit(this.isInsuredContractorShared);
     // console.log("Dobio je vrednost ", this.isInsuredContractorShared)
 
@@ -190,32 +188,7 @@ export class ContractorTypeFeatureComponent implements OnInit {
   setContractorType(contractor: CodebookResponse): void {
     this.contractorType = contractor;
     // console.log("CONTRACTOR", this.contractor)
-
-    if (this.contractorType?.id == ClientType.PRAVNO_LICE) {
-      this.isInsuredContractorShared = false;
-      this.insuredContractorSharedChange.emit(this.isInsuredContractorShared);
-    }
-    this.addList()
     // console.log("click", this.contractorType)
-
-    if (this.contractor != undefined) {
-      if (this.contractorType?.id == ClientType.PRAVNO_LICE) {
-        if (this.contractor.registrationNumber != '' && this.contractor.registrationNumber.length == 13) {
-          this.contractor.registrationNumber = '';
-          this.contractor.dateBirth = '';
-        }
-        this.contractor.firstName == '' ? this.contractor.firstName = this.contractor.firstName : this.contractor.firstName = '';
-        this.contractor.lastName == '' ? this.contractor.lastName = this.contractor.lastName : this.contractor.lastName = '';
-      }
-      else if (this.contractorType?.id == ClientType.FIZICKO_LICE) {
-        if (this.contractor.registrationNumber != '' && this.contractor.registrationNumber.length < 13) {
-          this.contractor.registrationNumber = '';
-        }
-        this.contractor.companyName == '' ? this.contractor.companyName = this.contractor.companyName : this.contractor.companyName = '';
-        this.contractor.taxIdentificationNumber == '' ? this.contractor.taxIdentificationNumber = this.contractor.taxIdentificationNumber : this.contractor.taxIdentificationNumber = '';
-        this.contractor.passportNumber == '' ? this.contractor.passportNumber = this.contractor.passportNumber : this.contractor.passportNumber = '';
-      }
-    }
 
     this.contractorSelected.emit(this.contractorType)
   }
