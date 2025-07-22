@@ -36,26 +36,6 @@ export class TravelInfoPageComponent {
 
   @Input() selectedTab?: InfoOfferResponse;
 
-  nextButtonStyles = {
-    'display': 'flex',
-    'align-items': 'center',
-    'justify-content': 'center',
-    'color': 'white',
-    'font-weight': 'bold',
-    'font-size': '18px',
-    'text-align': 'center',
-    'background-color': '#ff7f3f',
-    'border-radius': '8px',
-    'padding': '10px 32px',
-    'min-width': '140px',
-    'max-width': '160px',
-    'height': '50px',
-    'box-shadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    'border': 'none',
-    'cursor': 'pointer',
-    'transition': 'transform 0.1s ease-in-out',
-  };
-
   constructor(
     private loader: LoaderService,
     private policyService: PolicyClientService,
