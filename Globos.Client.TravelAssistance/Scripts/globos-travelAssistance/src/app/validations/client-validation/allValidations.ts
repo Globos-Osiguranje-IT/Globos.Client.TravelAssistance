@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, HostListener, Input, Renderer2 } 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { JmbgValidationService } from './jmbg-validation.service';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { REGISTARSKA_PODRUCJA, RegistarskoPodrucje } from '../../features/additionalCoverages/gbs-domestic-road-travel/model/roadTravel';
 
 
 @Directive({
@@ -12,7 +13,7 @@ export class AllValidationsDirective implements AfterViewInit {
   private errorElement: HTMLElement | null = null;
   private inputElement: any;
 
-
+  registarskaPodrucja = REGISTARSKA_PODRUCJA;
   @Input() selectedValue: any = null;
   @Input() cid: string = '';
   @Input() allJmbgs: string[] = [];
@@ -78,6 +79,19 @@ export class AllValidationsDirective implements AfterViewInit {
       }
     }
 
+
+    if (this.cid?.toLowerCase().includes('platesnumber')) {
+      const error = this.getOznakaValidationError(value);
+      if (error) {
+        this.showError(error);
+        return;
+      } else {
+        this.removeError();
+      }
+    }
+
+
+
     if (this.cid.toLowerCase().includes('insurant')) {
       const cnt = this.allJmbgs.filter(j => j === value).length;
 
@@ -126,8 +140,8 @@ export class AllValidationsDirective implements AfterViewInit {
 
 
         const cnt = this.allJmbgs.filter(j => j === fragment).length;
-      
-   
+
+
         if (cnt > 1) {
           this.showError('JMBG već postoji među osiguranicima.');
           return;
@@ -312,7 +326,19 @@ export class AllValidationsDirective implements AfterViewInit {
     return dd.padStart(2, '0') + mm.padStart(2, '0') + yearFrag;
   }
 
+  private getOznakaValidationError(oznakaInput: string): any {
+    if (!oznakaInput) {
+      return 'Polje je obavezno';
+    }
+    const input = oznakaInput.trim().toUpperCase();
 
+    const found = REGISTARSKA_PODRUCJA.some(p =>
+      input.includes(p.oznaka.toUpperCase())
+    );
 
+    if (!found) {
+      return 'Uneta tablica nije srpska registarska oznaka.';
+    }
 
+  }
 }

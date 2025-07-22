@@ -28,7 +28,7 @@ export class InsuranceCoverageLevelFeatureComponent {
     this.selectedTab && this.selectedTabChange.emit(this.selectedTab);
 
     this.codeBookService.getTerritorialCoverage().subscribe(res => {
-      localStorage.setItem('territorialCoverage', JSON.stringify(res));
+      sessionStorage.setItem('territorialCoverage', JSON.stringify(res));
     });
   }
 

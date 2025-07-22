@@ -66,7 +66,7 @@ export class PaymentsPageComponent implements OnInit {
     this.loader.show();
 
     const podaci = sessionStorage.getItem('policySaveResponse');
-    const policySaveRequest = localStorage.getItem('policySaveRequest');
+    const policySaveRequest = sessionStorage.getItem('policySaveRequest');
 
     if (podaci) {
       this.infoOfferRequest = JSON.parse(podaci);
@@ -80,7 +80,7 @@ export class PaymentsPageComponent implements OnInit {
 
       this.policyId = this.infoOfferRequest.id;
       sessionStorage.setItem('policyId', this.policyId.toString());
-      localStorage.setItem('policyId', this.policyId.toString());
+      sessionStorage.setItem('policyId', this.policyId.toString());
       sessionStorage.setItem('policySaveResponse', JSON.stringify(this.infoOfferRequest));
       sessionStorage.setItem('policySaveRequest', JSON.stringify(this.policySaveRequest));
 

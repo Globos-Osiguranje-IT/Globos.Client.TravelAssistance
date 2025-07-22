@@ -8,16 +8,23 @@ import { CashedCodebookClientService } from '../../../http/cashed-codebook-clien
 import { TravelAgencies, TravelAgenciesComplete } from '../model/domestic-road-travel.model';
 import { AllValidationsDirective } from '../../../validations/client-validation/allValidations';
 import { Client } from '../../contractor-info/model/gbs-contractor-info.model';
+import { REGISTARSKA_PODRUCJA, RegistarskoPodrucje } from './model/roadTravel';
+
+
 
 @Component({
   selector: 'gbs-domestic-road-travel',
   standalone: true,
-  imports: [CommonModule, FormsModule, GbsInputComponent, GbsAutocompleteComponent, AllValidationsDirective, GbsDatePickerComponent],
+  imports: [CommonModule, FormsModule, GbsInputComponent, GbsAutocompleteComponent, AllValidationsDirective, GbsDatePickerComponent
+  ],
   templateUrl: './gbs-domestic-road-travel.component.html',
   styleUrl: './gbs-domestic-road-travel.component.scss'
 })
-export class GbsDomesticRoadTravelComponent {
 
+
+export class GbsDomesticRoadTravelComponent {
+  
+  registarskaPodrucja = REGISTARSKA_PODRUCJA;
   airplaneTakeoff: Icons = Icons.AirplaneTakeOff;
   airplaneLanding: Icons = Icons.AirplaneLanding;
 
@@ -95,17 +102,12 @@ export class GbsDomesticRoadTravelComponent {
     sessionStorage.setItem('tripCancellation', JSON.stringify(this.tripCancellation));
   }
 
-  // mapAgenciesToAutocomplete(agencies: TravelAgencies[]): TravelAgenciesComplete[] {
-  //   return agencies.map((agency) => ({
-  //     label: agency.name,
-  //     value: agency.id.toString(),
-  //     cid: agency.name || ''
-  //   }));
-  // }
+
+
 
   fillPolicyOffer() {
 
-    const PolicyOfferJSON = localStorage.getItem('policyOffer');
+    const PolicyOfferJSON = sessionStorage.getItem('policyOffer');
 
     if (PolicyOfferJSON) {
       const policyOffer = JSON.parse(PolicyOfferJSON);

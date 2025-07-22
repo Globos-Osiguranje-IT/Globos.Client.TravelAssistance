@@ -30,8 +30,8 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label>Broj tablica<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'platesNumber'" [value]="road.platesNumber"
+                <label>Registarska oznaka vozila<span class="colorLabel">*</span></label>
+                <gbs-input [type]="'text'" [cid]="'platesNumber'" [value]="road.platesNumber"  [selectedValue]="road.platesNumber"
                     (valueChange)="onValueChangePlatesNumber($event)" appLatinOnFocusOut>
                 </gbs-input>
             </div>

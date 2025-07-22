@@ -50,7 +50,7 @@ export class PaymentResultPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     const policyId = sessionStorage.getItem('policyId');
-    const policyIdLocal = localStorage.getItem('policyId');
+    const policyIdLocal = sessionStorage.getItem('policyId');
     if(policyId){
       this.policyId = policyId ? Number(policyId) : 0;
     }
@@ -58,7 +58,7 @@ export class PaymentResultPageComponent implements OnInit, AfterViewInit {
       this.policyId = policyIdLocal ? Number(policyIdLocal) : 0
     }
 
-    const storedSaveRequest = localStorage.getItem('policySaveRequest');
+    const storedSaveRequest = sessionStorage.getItem('policySaveRequest');
     if (storedSaveRequest) {
       this.policySaveRequest = JSON.parse(storedSaveRequest);
       this.clientTypeId = this.policySaveRequest.Client.clientTypeId;

@@ -25,14 +25,14 @@ export class ClientSessionService {
   }
 
   private getSessionAsString(): string {
-    return localStorage.getItem(this.SESSION_KEY) || JSON.stringify(new ClientSessionModel());
+    return sessionStorage.getItem(this.SESSION_KEY) || JSON.stringify(new ClientSessionModel());
   }
 
   private setSession(): void {
     let expiresAt = this.calculateExpiration();
     let sessionAsString = JSON.stringify(new ClientSessionModel(expiresAt));
 
-    localStorage.setItem(this.SESSION_KEY, sessionAsString);
+    sessionStorage.setItem(this.SESSION_KEY, sessionAsString);
   }
 
   private calculateExpiration(): number {
