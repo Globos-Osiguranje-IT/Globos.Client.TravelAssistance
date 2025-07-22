@@ -53,20 +53,18 @@ export class PaymentsPageComponent implements OnInit {
   policySaveRequest: any;
 
   constructor(private payment: PaymentService,
-              private codeBook: CodebookClientService, 
               private sanitizer: DomSanitizer,
               private loader: LoaderService,
               private cdr: ChangeDetectorRef,
               private router: Router,
-              private cashedSessionService: CashedCodebookClientService,
             ) {}
 
   async ngOnInit(): Promise<void> {
     window.scrollTo(0, 0);
     this.loader.show();
 
-    const podaci = sessionStorage.getItem('policySaveResponse');
-    const policySaveRequest = sessionStorage.getItem('policySaveRequest');
+    const podaci = localStorage.getItem('policySaveResponse');
+    const policySaveRequest = localStorage.getItem('policySaveRequest');
 
     if (podaci) {
       this.infoOfferRequest = JSON.parse(podaci);
@@ -79,31 +77,25 @@ export class PaymentsPageComponent implements OnInit {
       }
 
       this.policyId = this.infoOfferRequest.id;
-      sessionStorage.setItem('policyId', this.policyId.toString());
       localStorage.setItem('policyId', this.policyId.toString());
-      sessionStorage.setItem('policySaveResponse', JSON.stringify(this.infoOfferRequest));
-      sessionStorage.setItem('policySaveRequest', JSON.stringify(this.policySaveRequest));
+      localStorage.setItem('policySaveResponse', JSON.stringify(this.infoOfferRequest));
+      localStorage.setItem('policySaveRequest', JSON.stringify(this.policySaveRequest));
 
       try {
-        // console.log('Loading all data...');
         await Promise.all([
           this.loadClientData(),
           this.loadInsurantsData(),
-          //this.loadInsuredSums(),
           this.loadPolicyData(),
           this.loadInvoiceData(),
           this.loadAnnexesData(),
           this.loadAdditionalCoveragesData()
         ]);
-        // console.log('All data loaded.');
         await this.checkPolicyCore();
-        // console.log('Policy core checked, status:', this.checkStatus);
+
         if (this.checkStatus === 1) {
           await this.loadPaymentForm();
-          // console.log('Payment form loaded.');
         }
       } catch (error) {
-        console.error('Error in payments-page:', error);
       } finally {
         this.loader.hide();
       }
@@ -504,10 +496,10 @@ export class PaymentsPageComponent implements OnInit {
   }
 
   navigateToHome(){
-    this.router.navigate(['/putno-osiguranje', 'info']);
+    this.router.navigate(['pomoc-na-putu', 'info']);
   }
 
   goToPreviousStep(){
-    this.router.navigate(['putno-osiguranje', 'passanger'])
+    this.router.navigate(['pomoc-na-putu', 'passanger'])
   }
 }
