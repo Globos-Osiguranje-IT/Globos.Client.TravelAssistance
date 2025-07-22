@@ -58,7 +58,7 @@ export class PaymentResultPageComponent implements OnInit, AfterViewInit {
       this.policyId = policyIdLocal ? Number(policyIdLocal) : 0
     }
 
-    const storedSaveRequest = sessionStorage.getItem('policySaveRequest');
+    const storedSaveRequest = localStorage.getItem('policySaveRequest');
     if (storedSaveRequest) {
       this.policySaveRequest = JSON.parse(storedSaveRequest);
       this.clientTypeId = this.policySaveRequest.Client.clientTypeId;

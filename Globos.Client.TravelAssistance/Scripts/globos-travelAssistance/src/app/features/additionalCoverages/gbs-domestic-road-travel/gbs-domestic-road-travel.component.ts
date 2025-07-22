@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GbsInputComponent, GbsAutocompleteComponent , GbsDatePickerComponent} from 'ng-globos-core';
+import { GbsInputComponent, GbsAutocompleteComponent, GbsDatePickerComponent } from 'ng-globos-core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RoadAssistanceInsurance, DomesticInsurance, TripCancellation } from '../../../http/dto/requests/policy.model';
@@ -20,13 +20,13 @@ export class GbsDomesticRoadTravelComponent {
 
   airplaneTakeoff: Icons = Icons.AirplaneTakeOff;
   airplaneLanding: Icons = Icons.AirplaneLanding;
-  
+
   today: Date = new Date();
   maxDate: Date = new Date(2100, 0, 1);
   minDate: Date | null = new Date(1940, 0, 1);
   @Input() selectedStartDate: string = '';
   @Input() selectedEndDate: string = '';
-  
+
 
   road: RoadAssistanceInsurance = {
     startDate: new Date(),
@@ -88,7 +88,7 @@ export class GbsDomesticRoadTravelComponent {
     // if(this.tripCancellation)
     //   this.trip = this.tripCancellation;
 
-    this.fillPolicyOffer()
+    // this.fillPolicyOffer()
   }
 
   private saveTripToSession(): void {
@@ -104,6 +104,27 @@ export class GbsDomesticRoadTravelComponent {
   // }
 
   fillPolicyOffer() {
+
+    const PolicyOfferJSON = localStorage.getItem('policyOffer');
+
+    if (PolicyOfferJSON) {
+      const policyOffer = JSON.parse(PolicyOfferJSON);
+
+      console.log("usaoo ", policyOffer)
+      // this.fillRoadAssistanceInsurance();
+      if (policyOffer.startDate) {
+        this.selectedStartDate = policyOffer.startDate;
+      }
+
+      if (policyOffer.endDate) {
+        this.selectedEndDate = policyOffer.endDate;
+      }
+      this.road.platesNumber = policyOffer.platesNumber
+      this.road.chassisNumber = policyOffer.chassisNumber
+      this.road.vehicleBrand = policyOffer.vehicleBrand
+      this.road.vehicleType = policyOffer.vehicleType
+
+    }
 
     const SelectedAdditionalInsurancesJSON = sessionStorage.getItem('SelectedAdditionalInsurances');
     if (SelectedAdditionalInsurancesJSON) {
@@ -193,7 +214,7 @@ export class GbsDomesticRoadTravelComponent {
 
     this.roadChange.emit(this.roadAssistanceInsurance);
   }
-  
+
 
   onValueChangeStartDate(value: string) {
     if (!this.roadAssistanceInsurance) {
@@ -201,15 +222,15 @@ export class GbsDomesticRoadTravelComponent {
     }
 
     const startDate = new Date(value);
-  
+
     this.selectedStartDate = startDate.toISOString();
     const endDate = new Date(startDate);
     endDate.setFullYear(endDate.getFullYear() + 1);
-    this.selectedEndDate = endDate.toISOString(); 
+    this.selectedEndDate = endDate.toISOString();
 
 
     this.roadAssistanceInsurance.startDate = value;
-    this.roadAssistanceInsurance.endDate =  this.selectedEndDate;
+    this.roadAssistanceInsurance.endDate = this.selectedEndDate;
 
     this.saveToSession();
 
@@ -281,22 +302,22 @@ export class GbsDomesticRoadTravelComponent {
 
 
   // onStartDateChange(event: any) {
-    
+
   //   this.selectedStartDate = event;
 
-    
-   
+
+
   // }
 
   // onStartDateChange(event: any) {
   //   const startDate = new Date(event);
-  
+
   //   this.selectedStartDate = startDate.toISOString();
   //   const endDate = new Date(startDate);
   //   endDate.setFullYear(endDate.getFullYear() + 1);
   //   this.selectedEndDate = endDate.toISOString(); 
   // }
-  
+
 
 
 
@@ -306,13 +327,13 @@ export class GbsDomesticRoadTravelComponent {
     if (dateStr instanceof Date) {
       return dateStr;
     }
-  
+
     if (typeof dateStr === 'string') {
       if (dateStr.includes('T')) {
         const isoDate = new Date(dateStr);
         return isNaN(isoDate.getTime()) ? null : isoDate;
       }
-  
+
       const parts = dateStr.split('.');
       if (parts.length === 3) {
         const [day, month, year] = parts;
@@ -323,11 +344,11 @@ export class GbsDomesticRoadTravelComponent {
         );
         return isNaN(localDate.getTime()) ? null : localDate;
       }
-  
+
       const fallback = new Date(dateStr);
       return isNaN(fallback.getTime()) ? null : fallback;
     }
-  
+
     return null;
   }
 }

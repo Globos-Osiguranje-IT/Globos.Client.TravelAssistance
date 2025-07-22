@@ -117,7 +117,8 @@ export class PassangersPageComponent implements OnInit {
 
     this.fillField();
     this.fillPolicyOffer();
-    // this.fillRestAdditionalInsurances();
+   
+ 
     this.fillContractorTypeAndClient();
     this.fillConsentsAndDestination();
     // this.fillAditionalCoverages();
@@ -226,10 +227,28 @@ export class PassangersPageComponent implements OnInit {
       this.policyClientService.policySaveRequest.PolicyOffer.discountId = this.selectedTabRequest.discountId;
       this.policyClientService.policySaveRequest.PolicyOffer.finalAmount = this.selectedTabRequest.finalAmount;
       this.policyClientService.policySaveRequest.PolicyOffer.tax = this.selectedTabRequest.tax;
+
+
     }
 
 
   }
+
+  // fillRoadAssistanceInsurance(policySaveRequest: any) {
+
+  //   this.policyClientService.policySaveRequest.PolicyOffer.startDate = policySaveRequest.PolicyOffer.startDate
+  //   this.policyClientService.policySaveRequest.PolicyOffer.endDate = policySaveRequest.PolicyOffer.endDate
+  //   this.policyClientService.policySaveRequest.PolicyOffer.platesNumber = policySaveRequest.PolicyOffer.platesNumber
+  //   this.policyClientService.policySaveRequest.PolicyOffer.chassisNumber = policySaveRequest.PolicyOffer.chassisNumber
+  //   this.policyClientService.policySaveRequest.PolicyOffer.vehicleBrand = policySaveRequest.PolicyOffer.vehicleBrand
+  //   this.policyClientService.policySaveRequest.PolicyOffer.vehicleType = policySaveRequest.PolicyOffer.vehicleType
+    
+  //   // localStorage.setItem('policySaveRequest', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
+  //   this.assemblePolicyRequest();
+  //   console.log(this.policyClientService.policySaveRequest)
+  // }
+
+ 
 
 
 
@@ -241,12 +260,15 @@ export class PassangersPageComponent implements OnInit {
     this.policyClientService.policySaveRequest.PolicyOffer.vehicleBrand = this.roadAssistanceInsurance.vehicleBrand
     this.policyClientService.policySaveRequest.PolicyOffer.vehicleType = this.roadAssistanceInsurance.vehicleType
 
+    // localStorage.setItem('policySaveRequest', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
+
+    localStorage.setItem('policyOffer', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
     console.log(this.policyClientService.policySaveRequest.PolicyOffer)
   }
 
  
   fillContractorTypeAndClient() {
-    const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
+    const policySaveRequestSession = localStorage.getItem('policySaveRequest');
     const contractorTypesSession = sessionStorage.getItem('contratorType');
     const contractorInfoChangeSession = sessionStorage.getItem('contractorInfoChange');
     const selectedCitySession = sessionStorage.getItem('selectedCity');
@@ -279,7 +301,7 @@ export class PassangersPageComponent implements OnInit {
 
 
   fillConsentsAndDestination() {
-    const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
+    const policySaveRequestSession = localStorage.getItem('policySaveRequest');
 
     if (policySaveRequestSession) {
       const consentSessionHelper: Consent[] = policySaveRequestSession ? JSON.parse(policySaveRequestSession).Consents : null;
@@ -323,14 +345,6 @@ export class PassangersPageComponent implements OnInit {
     this.assemblePolicyRequest();
   }
 
-  // handleDestination(info: Destination): void {
-  //   // console.log("Destination passanger", info)
-  //   this.destination = info;
-
-  //   // this.policyClientService.policySaveRequest.PolicyOffer.destinationId = Number(this.destination.value);
-  //   this.assemblePolicyRequest();
-  // }
-
   handleRoadChange(road: RoadAssistanceInsurance): void {
     this.roadAssistanceInsurance = road;
     console.log("Road", road)
@@ -364,9 +378,11 @@ export class PassangersPageComponent implements OnInit {
         Client: this.mapContractorInfoToClient(this.contractorInfoChange),
         Consents: this.consent?.map(consentItem => this.mapConsent(consentItem)) ?? []
       };
-      sessionStorage.setItem('policySaveRequest', JSON.stringify(this.PolicySaveRequest));
+     
     }
+    localStorage.setItem('policySaveRequest', JSON.stringify(this.PolicySaveRequest));
     console.log("PolicySaveRequest sastavljen:", this.PolicySaveRequest);
+   
   }
 
   private mapContractorInfoToClient(contractor: ContractorInfo): Client {
@@ -480,113 +496,8 @@ export class PassangersPageComponent implements OnInit {
   }
 
   goToPreviousStep() {
-    this.router.navigate(['putno-osiguranje', 'info'])
+    this.router.navigate(['pomoc-na-putu', 'info'])
   }
-
-  // handleContractorAsInsurant(): void {
-
-  //   // console.log("handleContractorAsInsurant 1")
-  //   if (!this.contractorInfoChange?.registrationNumber) return;
-
-  //   const foreignCitizenSession = sessionStorage.getItem('foreignCitizen');
-  //   const foreignCitizen: foreignCitizenData =
-  //     foreignCitizenSession ?
-  //       JSON.parse(foreignCitizenSession) :
-  //       {
-  //         foreignCitizen: false,
-  //         foreignRNYesNo: false,
-  //         foreignRegistrationNumber: ''
-  //       };
-
-
-  //   if (foreignCitizen.foreignCitizen && !foreignCitizen.foreignRNYesNo) {
-  //     const error = this.jmbgValidator.getJmbgValidationErrorForeign(this.contractorInfoChange.registrationNumber);
-  //     if (error) {
-  //       console.warn("JMBG nije validan:", error);
-  //       return;
-  //     }
-
-  //   } if(foreignCitizen.foreignCitizen==false && foreignCitizen.foreignRNYesNo==false) {
-  //     const error = this.jmbgValidator.getJmbgValidationError(this.contractorInfoChange.registrationNumber);
-  //     if (error) {
-  //       console.warn("JMBG nije validan:", error);
-  //       return;
-  //     }
-
-  //   }
-
-  // const contractorAsInsurant: InsurantInfo = {
-  //   registrationNumber: this.contractorInfoChange.registrationNumber,
-  //   firstName: this.contractorInfoChange.firstName || '',
-  //   lastName: this.contractorInfoChange.lastName || '',
-  //   passportNumber: this.contractorInfoChange.passportNumber || '',
-  //   birthDate: this.contractorInfoChange.dateBirth || '',
-  // };
-
-  //Nađi insuranta koji ima isti JMBG kao prethodni ugovarač
-
-  // const oldIndex = this.insurantInfoList.findIndex(
-  //   x => x?.registrationNumber === this.insurantInfoChange?.registrationNumber
-  // );
-
-  // if (!this.insurantInfoChange?.registrationNumber) return;
-
-  // const oldIndex = this.insurantInfoList?.findIndex(
-  //   x => x?.registrationNumber === this.insurantInfoChange.registrationNumber
-  // );
-
-
-
-  //   if (oldIndex !== -1) {
-  //     this.insurantInfoList[oldIndex] = contractorAsInsurant;
-  //     this.passportError = !this.clientValidationService.passportNumbersAreUnique(this.insurantInfoList);
-  //     // console.log("handleContractorAsInsurant 3", this.passportError)
-  //     // console.log("handleContractorAsInsurant 3 this.insurantInfoList", this.insurantInfoList)
-  //     // console.log("handleContractorAsInsurant 3")
-  //   } else {
-  //     const newIndex = this.insurantInfoList?.findIndex(
-  //       x => x.registrationNumber === contractorAsInsurant.registrationNumber
-  //     );
-
-  //     if (newIndex !== -1) {
-  //       this.insurantInfoList[newIndex] = contractorAsInsurant;
-  //       // console.log("handleContractorAsInsurant 4")
-  //     } else {
-  //       this.insurantInfoList.push(contractorAsInsurant);
-  //       // console.log("handleContractorAsInsurant 5")
-  //     }
-  //   }
-
-  //   this.insurantInfoChange = contractorAsInsurant;
-  //   this.assemblePolicyRequest();
-  // }
-
-
-
-  // validateAllLatinInputs(): boolean {
-  //   const invalidElements: HTMLElement[] = [];
-  //   const elements = document.querySelectorAll('[appLatinOnFocusOut]');
-
-  //   elements.forEach((element: any) => {
-  //     const event = new FocusEvent('focusout');
-  //     element.dispatchEvent(event);
-
-  //     const parent = element.parentElement;
-  //     const errorDiv = parent?.querySelector('.text-danger');
-
-  //     if (errorDiv && errorDiv.textContent?.trim()) {
-  //       invalidElements.push(element);
-  //     }
-  //   });
-
-  //   if (invalidElements.length > 0) {
-  //     const firstInvalid = invalidElements[0] as HTMLElement;
-  //     firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
 
 
 
