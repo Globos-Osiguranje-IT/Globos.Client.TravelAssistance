@@ -82,7 +82,7 @@ export class StepperFeatureComponent {
   private sessionValidForStep2(): boolean {
     const step1RequestObject = sessionStorage.getItem('step1RequestObject');
     const selectedOffer = sessionStorage.getItem('selectedOffer');
-    const policySaveRequest = sessionStorage.getItem('policySaveRequest');
+    const policySaveRequest = localStorage.getItem('policySaveRequest');
     return step1RequestObject !== null && selectedOffer !== null && policySaveRequest !== null;
   }
   

@@ -66,7 +66,7 @@ export class PaymentsPageComponent implements OnInit {
     this.loader.show();
 
     const podaci = sessionStorage.getItem('policySaveResponse');
-    const policySaveRequest = sessionStorage.getItem('policySaveRequest');
+    const policySaveRequest = localStorage.getItem('policySaveRequest');
 
     if (podaci) {
       this.infoOfferRequest = JSON.parse(podaci);
