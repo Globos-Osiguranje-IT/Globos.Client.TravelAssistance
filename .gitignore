@@ -1,94 +1,45 @@
-#############################
-#         .NET              #
-#############################
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-.vs/
-bin/
-obj/
-*.csproj.user
-*.nuget.cache
-*.nuget.g.props
-*.nuget.g.targets
-*.assets.cache
-*.AssemblyInfoInputs.cache
-*.GeneratedMSBuildEditorConfig.editorconfig
-project.assets.json
-project.nuget.cache
-*.AssemblyInfo.cs
-spa.proxy.json
+/.vs
+/Globos.Client.TravelAssistance/bin
+/Globos.Client.TravelAssistance/obj
 
-#############################
-#    Node / Angular / TS    #
-#############################
-node_modules/
-dist/
-tmp/
-out-tsc/
-.bazel-out/
-.angular/cache/
-.angular/cache/**
-coverage/
-connect.lock
-libpeerconnection.log
-testem.log
-typings/
-npm-debug.log*
-yarn-error.log*
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
+# Compiled output
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/dist
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/tmp
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/out-tsc
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/bazel-out
 
-# TypeScript build info
-*.tsbuildinfo
+# Node
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/node_modules
+npm-debug.log
+yarn-error.log
 
-# Angular specific - ignore all cache js/map files
-.angular/cache/**/*.js
-.angular/cache/**/*.js.map
+# IDEs and editors
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.idea/
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.project
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.classpath
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.c9/
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/*.launch
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.settings/
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/*.sublime-workspace
 
-# Optional: Ignore JS/MAP in src (if not using TS strict everywhere)
-src/**/*.js
-src/**/*.js.map
+# Visual Studio Code
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.vscode/*
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/!.vscode/settings.json
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/!.vscode/tasks.json
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/!.vscode/launch.json
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/!.vscode/extensions.json
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.history/*
 
-#############################
-#      Editors/IDEs         #
-#############################
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-.vscode/
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/
+# Miscellaneous
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/.angular/cache
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/*.sass-cache/
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/connect.lock
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/coverage
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/libpeerconnection.log
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/testem.log
+/Globos.Client.TravelAssistance/Scripts/globos-travelAssistance/typings
 
-#############################
-#      System Files         #
-#############################
+# System files
 .DS_Store
 Thumbs.db
-
-#############################
-#    Miscellaneous/Other    #
-#############################
-*.log
-*.tmp
-*.bak
-
-# Ignore environment files except example/template
-.env
-.env.*
-!.env.example
-!.env.template
-
-# Globalno ignoriši Angular cache u svim podfolderima
-**/.angular/cache/
-**/.angular/cache/**
+/Globos.Client.WebShop/Globos.Client.WebShop.csproj.user
