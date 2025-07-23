@@ -51,64 +51,68 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "dependencies": {
-            "Duende.AccessTokenManagement": {
-              "target": "Package",
-              "version": "[3.2.0, )"
+            "dependencies": {
+                "Duende.AccessTokenManagement": {
+                    "target": "Package",
+                    "version": "[3.2.0, )"
+                },
+                "Duende.AccessTokenManagement.OpenIdConnect": {
+                    "target": "Package",
+                    "version": "[3.2.0, )"
+                },
+                "Duende.IdentityModel": {
+                    "target": "Package",
+                    "version": "[7.0.0, )"
+                },
+                "Globos.Authorization.Services": {
+                    "target": "Package",
+                    "version": "[1.0.1-alpha5, )"
+                },
+                "Globos.Identity.Services": {
+                    "target": "Package",
+                    "version": "[1.0.0-alpha5, )"
+                },
+                "Globos.Logger": {
+                    "target": "Package",
+                    "version": "[1.0.14-alpha, )"
+                },
+                "Microsoft.AspNetCore.Authentication.JwtBearer": {
+                    "target": "Package",
+                    "version": "[9.0.2, )"
+                },
+                "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+                    "target": "Package",
+                    "version": "[9.0.2, )"
+                },
+                "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+                    "target": "Package",
+                    "version": "[9.0.1, )"
+                },
+                "Microsoft.AspNetCore.OpenApi": {
+                    "target": "Package",
+                    "version": "[9.0.0, )"
+                },
+                "Microsoft.AspNetCore.SpaProxy": {
+                    "target": "Package",
+                    "version": "[9.0.1, )"
+                },
+                "Microsoft.CodeAnalysis.Analyzers": {
+                    "target": "Package",
+                    "version": "[3.3.3, )"
+                },
+                "Microsoft.Extensions.Caching.SqlServer": {
+                    "target": "Package",
+                    "version": "[9.0.2, )"
+                },
+                "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+                    "target": "Package",
+                    "version": "[1.21.0, )"
+                },
+                "Newtonsoft.Json": {
+                    "target": "Package",
+                    "version": "[13.0.3, )"
+                }
             },
-            "Duende.AccessTokenManagement.OpenIdConnect": {
-              "target": "Package",
-              "version": "[3.2.0, )"
-            },
-            "Duende.IdentityModel": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Globos.Authorization.Services": {
-              "target": "Package",
-              "version": "[1.0.1-alpha5, )"
-            },
-            "Globos.Identity.Services": {
-              "target": "Package",
-              "version": "[1.0.0-alpha5, )"
-            },
-            "Globos.Logger": {
-              "target": "Package",
-              "version": "[1.0.14-alpha, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.AspNetCore.SpaProxy": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Microsoft.Extensions.Caching.SqlServer": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
-              "target": "Package",
-              "version": "[1.21.0, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

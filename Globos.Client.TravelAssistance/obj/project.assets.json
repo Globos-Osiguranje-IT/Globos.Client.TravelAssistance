@@ -636,7 +636,8 @@
       "Microsoft.CodeAnalysis.Analyzers/3.3.3": {
         "type": "package",
         "build": {
-          "build/_._": {}
+          "build/Microsoft.CodeAnalysis.Analyzers.props": {},
+          "build/Microsoft.CodeAnalysis.Analyzers.targets": {}
         }
       },
       "Microsoft.CodeAnalysis.Common/4.5.0": {
@@ -5720,29 +5721,30 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 9.0.1",
       "Microsoft.AspNetCore.OpenApi >= 9.0.0",
       "Microsoft.AspNetCore.SpaProxy >= 9.0.1",
+      "Microsoft.CodeAnalysis.Analyzers >= 3.3.3",
       "Microsoft.Extensions.Caching.SqlServer >= 9.0.2",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.21.0",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bojan.cipovic\\.nuget\\packages\\": {},
+    "C:\\Users\\milica.pajic\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
+      "projectUniqueName": "C:\\Users\\milica.pajic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
       "projectName": "Globos.Client.TravelAssistance",
-      "projectPath": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
-      "packagesPath": "C:\\Users\\bojan.cipovic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bojan.cipovic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\obj\\",
+      "projectPath": "C:\\Users\\milica.pajic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance.csproj",
+      "packagesPath": "C:\\Users\\milica.pajic\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\milica.pajic\\source\\repos\\Globos-Osiguranje-IT\\Globos.Client.TravelAssistance\\Globos.Client.TravelAssistance\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\bojan.cipovic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\milica.pajic\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5753,7 +5755,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://nugetserver.globos.rs/nuget": {}
+        "https://dev-nugetserver.globos.rs/nuget": {}
       },
       "frameworks": {
         "net9.0": {
@@ -5771,7 +5773,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -5821,6 +5823,10 @@
             "target": "Package",
             "version": "[9.0.1, )"
           },
+          "Microsoft.CodeAnalysis.Analyzers": {
+            "target": "Package",
+            "version": "[3.3.3, )"
+          },
           "Microsoft.Extensions.Caching.SqlServer": {
             "target": "Package",
             "version": "[9.0.2, )"
@@ -5853,7 +5859,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
