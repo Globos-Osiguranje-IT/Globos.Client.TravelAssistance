@@ -52,7 +52,7 @@ export class TravelInfoPageComponent {
         this.planName = offers.map((o) => o.coverrageLevelName);
         this.planAmount = offers.map((o) => o.finalAmount);
 
-        const raw = localStorage.getItem('selectedTab');
+        const raw = sessionStorage.getItem('selectedTab');
         let defaultTab: InfoOfferResponse;
         if (raw) {
           try {
@@ -69,7 +69,7 @@ export class TravelInfoPageComponent {
         }
 
         this.selectedTab = defaultTab;
-        localStorage.setItem('selectedTab', JSON.stringify(defaultTab));
+        sessionStorage.setItem('selectedTab', JSON.stringify(defaultTab));
       },
       error: () => this.loader.hide(),
     });
@@ -77,7 +77,7 @@ export class TravelInfoPageComponent {
 
   onselectedTabChange(event: InfoOfferResponse) {
     this.selectedTab = event;
-    localStorage.setItem('selectedTab', JSON.stringify(event));
+    sessionStorage.setItem('selectedTab', JSON.stringify(event));
   }
 
   onNextButtonClicked() {

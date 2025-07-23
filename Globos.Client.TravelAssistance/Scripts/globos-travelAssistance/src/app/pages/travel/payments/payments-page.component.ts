@@ -4,17 +4,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PaymentService } from '../../../services/payments.service';
 import { ClientResponse, InsurancePolicyResponse, CityResponse, InvoiceResponse, PolicyAnnexResponse, 
   PolicyAnnexAdditionalCoverageResponse, PolicyClientConsentResponse, ConsentResponse, ClientPhoneNumberResponse, 
-  ClientAddressResponse, ClientEmailResponse, TariffResponse, CurrencyResponse, ApplicationDiscountResponse, 
-  DestinationResponse, InsuranceCategoryResponse, InsuranceTypeResponse, InsuranceTypePeriodPackageResponse, 
-  PolicyStateResponse, TariffSubgroupResponse, TariffGroupResponse, DiscountTypeResponse } from '../../../http/dto/responses/payments-response.model';
+  ClientAddressResponse, ClientEmailResponse, CurrencyResponse, ApplicationDiscountResponse, 
+  PolicyStateResponse, DiscountTypeResponse } from '../../../http/dto/responses/payments-response.model';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import { LoaderService } from '../../../services/loader.service';
-import { CodebookClientService } from '../../../http/codebook-client.service';
 import { InsuredSumResponse } from '../../../http/dto/responses/codebook-response.model';
 import localeSr from '@angular/common/locales/sr';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { CashedCodebookClientService } from '../../../http/cashed-codebook-client.service';
 
 registerLocaleData(localeSr);
 @Component({
@@ -29,7 +26,6 @@ registerLocaleData(localeSr);
 })
 export class PaymentsPageComponent implements OnInit {
   paymentForm: any = '';
-  infoOfferRequest: any;
   checkStatus: number | null = null;
   checkPolicyDone: boolean = false;
   checkMessage: string = '';
@@ -51,59 +47,47 @@ export class PaymentsPageComponent implements OnInit {
 
   clientTypeId: number = 0;
   policySaveRequest: any;
+  selectedTab: any;
 
   constructor(private payment: PaymentService,
-              private codeBook: CodebookClientService, 
               private sanitizer: DomSanitizer,
               private loader: LoaderService,
               private cdr: ChangeDetectorRef,
               private router: Router,
-              private cashedSessionService: CashedCodebookClientService,
             ) {}
 
   async ngOnInit(): Promise<void> {
     window.scrollTo(0, 0);
-    this.loader.show();
+    //this.loader.show();
 
-    const podaci = sessionStorage.getItem('policySaveResponse');
-    const policySaveRequest = localStorage.getItem('policySaveRequest');
+    const policySaveRequest = sessionStorage.getItem('policySaveResponse');
+    const selectedTab = sessionStorage.getItem('selectedTab');
 
-    if (podaci) {
-      this.infoOfferRequest = JSON.parse(podaci);
+    if (policySaveRequest) {
       this.policySaveRequest = JSON.parse(policySaveRequest!);
-      this.clientTypeId = this.policySaveRequest.Client.clientTypeId;
+      this.selectedTab = JSON.parse(selectedTab!)
 
-      if (!this.infoOfferRequest.id) {
-        this.loader.hide();
-        return;
-      }
+      console.log(this.policySaveRequest, 'sta je policySave')
+      console.log(this.selectedTab, 'sta je selected tab')
+      //this.policyId = this.policySaveRequest.id
 
-      this.policyId = this.infoOfferRequest.id;
-      sessionStorage.setItem('policyId', this.policyId.toString());
-      localStorage.setItem('policyId', this.policyId.toString());
-      sessionStorage.setItem('policySaveResponse', JSON.stringify(this.infoOfferRequest));
-      sessionStorage.setItem('policySaveRequest', JSON.stringify(this.policySaveRequest));
+      //sessionStorage.setItem('policyId', this.policyId.toString());
 
       try {
-        // console.log('Loading all data...');
         await Promise.all([
           this.loadClientData(),
           this.loadInsurantsData(),
-          //this.loadInsuredSums(),
           this.loadPolicyData(),
           this.loadInvoiceData(),
           this.loadAnnexesData(),
           this.loadAdditionalCoveragesData()
         ]);
-        // console.log('All data loaded.');
         await this.checkPolicyCore();
-        // console.log('Policy core checked, status:', this.checkStatus);
+
         if (this.checkStatus === 1) {
           await this.loadPaymentForm();
-          // console.log('Payment form loaded.');
         }
       } catch (error) {
-        console.error('Error in payments-page:', error);
       } finally {
         this.loader.hide();
       }
@@ -113,37 +97,37 @@ export class PaymentsPageComponent implements OnInit {
   }
 
   async loadClientData(): Promise<void> {
-    this.client = this.mapClientData(this.infoOfferRequest.client);
+    this.client = this.mapClientData(this.policySaveRequest.client);
   }
 
   async loadInsurantsData(): Promise<void> {
-    if(this.infoOfferRequest.insurants){
-      this.insurants = this.infoOfferRequest.insurants ? this.infoOfferRequest.insurants.map(this.mapClientData) : [];
+    if(this.policySaveRequest.insurants){
+      this.insurants = this.policySaveRequest.insurants ? this.policySaveRequest.insurants.map(this.mapClientData) : [];
     }else{
     }
   }
 
   async loadPolicyData(): Promise<void> {
-    this.policy = this.mapPolicyData(this.infoOfferRequest);
+    this.policy = this.mapPolicyData(this.policySaveRequest);
   }
 
   async loadInvoiceData(): Promise<void> {
-    if (this.infoOfferRequest.invoice) {
-      this.invoice = this.mapInvoiceData(this.infoOfferRequest.invoice);
+    if (this.policySaveRequest.invoice) {
+      this.invoice = this.mapInvoiceData(this.policySaveRequest.invoice);
     } else {
     }
   }
   
   async loadAnnexesData(): Promise<void> {
-    if (this.infoOfferRequest.annexes) {
-      this.annexes = this.infoOfferRequest.annexes.map(this.mapPolicyAnnexData);
+    if (this.policySaveRequest.annexes) {
+      this.annexes = this.policySaveRequest.annexes.map(this.mapPolicyAnnexData);
     } else {
     }
   }
   
   async loadAdditionalCoveragesData(): Promise<void> {
-    if (this.infoOfferRequest.additionalCoverages) {
-      this.additionalCoverages = this.infoOfferRequest.additionalCoverages.map(this.mapAdditionalCoverages);
+    if (this.policySaveRequest.additionalCoverages) {
+      this.additionalCoverages = this.policySaveRequest.additionalCoverages.map(this.mapAdditionalCoverages);
     } else {
     }
   }
@@ -153,21 +137,6 @@ export class PaymentsPageComponent implements OnInit {
       this.paymentForm = this.sanitizer.bypassSecurityTrustHtml(response.paymentPage);
     });
   }
-
-  // async loadInsuredSums(): Promise<void> {
-  //   // this.codeBook.getInsuredSum().subscribe((response: any) => {
-  //   //   this.insuredSums = response;
-  //   // })
-  //   return new Promise<void>((resolve, reject) => {
-  //     this.cashedSessionService.getInsuredSum().subscribe({
-  //       next: (response: any) => {
-  //         this.insuredSums = response;
-  //         resolve();
-  //       },
-  //       error: reject
-  //     });
-  //   });
-  // }
 
   async checkPolicyCore(): Promise<void> {
     const response: any = await firstValueFrom(this.payment.checkPolicyCore(this.policyId));
@@ -215,39 +184,6 @@ export class PaymentsPageComponent implements OnInit {
   }
 
   private mapPolicyData(policyData: any): InsurancePolicyResponse {
-    let additionalcoverages = this.mapAdditionalCoverages(policyData.additionalCoverages) as any[]
-    if(additionalcoverages.length>0){
-      let homeinsurance= additionalcoverages.find(hi=>hi.InsuranceAdditionalCoverageId===8);
-      let roadinsurace = additionalcoverages.find(hi=>hi.InsuranceAdditionalCoverageId===9);
-      
-      this.showhomeinsurance = homeinsurance ? true:false 
-      this.showroadinsurance = roadinsurace ? true:false 
-
-       if (this.showhomeinsurance && this.showroadinsurance) {
-        this.homeinsuranceAmount = homeinsurance.Amount;
-        this.roadinsuranceAmount = roadinsurace.Amount;
-        this.additionalCoveragesTaxAmount = homeinsurance.Tax + roadinsurace.Tax;
-      } 
-      else if (this.showhomeinsurance && !this.showroadinsurance) {
-        this.homeinsuranceAmount = homeinsurance.Amount;
-        this.additionalCoveragesTaxAmount += homeinsurance.Tax;
-      } 
-      else if (!this.showhomeinsurance && this.showroadinsurance) {
-        this.roadinsuranceAmount = roadinsurace.Amount;
-        this.additionalCoveragesTaxAmount += roadinsurace.Tax;
-      }
-
-      // this.homeinsuranceAmount=homeinsurance.Amount;
-      // this.roadinsuranceAmount=roadinsurace.Amount;    
-      // this.additionalCoveragesTaxAmount = homeinsurance.Tax + roadinsurace.Tax;
-    } 
-    
-    this.additionalInsuranceAmount = policyData.additionalInsuranceAmount-this.homeinsuranceAmount -this.roadinsuranceAmount
-    
-    var tax = ((policyData.amount+this.additionalInsuranceAmount)-policyData.discount)*0.05
-
-    this.finalTax= tax+this.additionalCoveragesTaxAmount
-    
     return {
       Id: policyData.id,
       Number: policyData.number,
@@ -255,16 +191,9 @@ export class PaymentsPageComponent implements OnInit {
       PolicyDate: new Date(policyData.policyDate),
       StartDate: new Date(policyData.startDate),
       EndDate: new Date(policyData.endDate),
-      InsuranceCategoryId: policyData.insuranceCategoryId,
-      InsuranceTypeId: policyData.insuranceTypeId,
-      InsuranceTypePeriodPackageId: policyData.insuranceTypePeriodPackageId,
-      DestinationId: policyData.destinationId,
       Amount: policyData.amount,
       Tax: policyData.tax,
-      TaxTravelInsuranceAfterDiscount: policyData.taxTravelInsuranceAfterDiscount,
       Discount: policyData.discount,
-      TravelInsuranceDiscount: policyData.travelInsuranceDiscount,
-      TravelInsuranceFinalAmount: policyData.travelInsuranceFinalAmount,
       FinalAmount: policyData.finalAmount,
       IsPayed: policyData.isPayed,
       IsSentToClient: policyData.isSentToClient,
@@ -272,32 +201,26 @@ export class PaymentsPageComponent implements OnInit {
       CurrencyId: policyData.currencyId,
       PaymentAuthorizationNumber: policyData.paymentAuthorizationNumber,
       IsDefferedInvoicing: policyData.isDefferedInvoicing,
-      IsForStudents: policyData.isForStudents,
       AgentId: policyData.agentId,
       AgentCode: policyData.agentCode,
-      AdditionalInsuranceAmount: policyData.additionalInsuranceAmount,
-      AdditionalInsuranceTax: policyData.additionalInsuranceTax,
+      PlatesNumber: policyData.platesNumber,
+      ChassisNumber: policyData.chassisNumber,
+      VehicleBrand: policyData.vehicleBrand,
+      VehicleType: policyData.vehicleType,
+      StornoReason: policyData.stornoReason,
+      Note: policyData.note,
+      IssuancePlace: policyData.issuancePlace,
       Invoice: policyData.invoice ? this.mapInvoiceData(policyData.invoice) : {} as InvoiceResponse,
-      Annexes: Array.isArray(policyData.annexes) ? policyData.annexes.map(this.mapPolicyAnnexData) : [],
-      AdditionalCoverages: Array.isArray(policyData.additionalCoverages) ? this.mapAdditionalCoverages(policyData.additionalCoverages) : [],
       Client: this.mapClientData(policyData.client),
-      Insurants: policyData.insurants ? policyData.insurants.map(this.mapClientData) : [],
       Consents: policyData.consents ? policyData.consents.map(this.mapPolicyClientConsentData) : [],
       ClientPhoneNumber: policyData.clientPhoneNumber ? this.mapClientPhoneNumberData(policyData.clientPhoneNumber) : null,
       ClientAddress: policyData.clientAddress ? this.mapClientAddressData(policyData.clientAddress) : null,
       ClientEmail: policyData.clientEmail ? this.mapClientEmailData(policyData.clientEmail) : null,
-      Tariff: policyData.tariff ? this.mapTariffData(policyData.tariff) : null,
       Currency: this.mapCurrencyData(policyData.currency),
-      ApplicationDiscount: this.mapApplicationDiscountData(policyData.applicationDiscount),
-      Destination: this.mapDestinationData(policyData.destination),
-      InsuranceCategory: this.mapInsuranceCategoryData(policyData.insuranceCategory),
-      InsuranceType: this.mapInsuranceTypeData(policyData.insuranceType),
-      InsuranceTypePeriodPackage: policyData.insuranceTypePeriodPackage ? this.mapInsuranceTypePeriodPackageData(policyData.insuranceTypePeriodPackage) : null, 
       PolicyState: this.mapPolicyStateData(policyData.policyState),
-      TariffId: policyData.tariffId || 0
+      ApplicationDiscount: null,
     };
   }
-  
 
   private mapInvoiceData(invoiceData: any): InvoiceResponse {
     return {
@@ -414,34 +337,6 @@ export class PaymentsPageComponent implements OnInit {
     return { Id: emailData.id, Email: emailData.email };
   }
 
-  private mapTariffData(tariffData: any): TariffResponse {
-    return {
-      Id: tariffData.id,
-      TerritorialCoverageId: tariffData.territorialCoverageId,
-      InsuredSumId: tariffData.insuredSumId,
-      CoverrageLevelId: tariffData.coverrageLevelId,
-      TariffSubgroupId: tariffData.tariffSubgroupId,
-      IsValid: tariffData.isValid,
-      AgentTypeId: tariffData.agentTypeId,
-      TariffGroupCode: tariffData.tariffGroupCode,
-      TariffCodeCore: tariffData.tariffCodeCore,
-      TariffSubgroup: this.mapTariffSubgroupData(tariffData.tariffSubgroup)
-    };
-  }
-
-  private mapTariffSubgroupData(tariffSubgroupData: any): TariffSubgroupResponse {
-    return {
-      Id: tariffSubgroupData.id,
-      TariffGroupId: tariffSubgroupData.tariffGroupId,
-      Name: tariffSubgroupData.name,
-      TariffGroup: this.mapTariffGroupData(tariffSubgroupData.tariffGroup)
-    };
-  }
-
-  private mapTariffGroupData(tariffGroupData: any): TariffGroupResponse {
-    return { Id: tariffGroupData.id, Name: tariffGroupData.name };
-  }
-
   private mapCurrencyData(currencyData: any): CurrencyResponse {
     return {
       Id: currencyData.id,
@@ -451,63 +346,34 @@ export class PaymentsPageComponent implements OnInit {
     };
   }
 
-  private mapApplicationDiscountData(discountData: any): ApplicationDiscountResponse {
-    return {
-      Id: discountData.id,
-      Discount: discountData.discount,
-      StartDate: new Date(discountData.startDate),
-      EndDate: new Date(discountData.endDate),
-      ApplicationId: discountData.applicationId,
-      InsertDate: new Date(discountData.insertDate),
-      Promocode: discountData.promocode,
-      DiscountTypeId: discountData.discountTypeId,
-      AgentCode: discountData.agentCode,
-      DiscountType: this.mapDiscountTypeData(discountData.discountType)
-    };
-  }
+  // private mapApplicationDiscountData(discountData: any): ApplicationDiscountResponse {
+  //   return {
+  //     Id: discountData.id,
+  //     Discount: discountData.discount,
+  //     StartDate: new Date(discountData.startDate),
+  //     EndDate: new Date(discountData.endDate),
+  //     ApplicationId: discountData.applicationId,
+  //     InsertDate: new Date(discountData.insertDate),
+  //     Promocode: discountData.promocode,
+  //     DiscountTypeId: discountData.discountTypeId,
+  //     AgentCode: discountData.agentCode,
+  //     DiscountType: this.mapDiscountTypeData(discountData.discountType)
+  //   };
+  // }
 
-  private mapDiscountTypeData(discountTypeData: any): DiscountTypeResponse {
-    return { Id: discountTypeData.id, Name: discountTypeData.name };
-  }
-
-  private mapDestinationData(destinationData: any): DestinationResponse {
-    return {
-      id: destinationData.id,
-      name: destinationData.name,
-      nameEng: destinationData.nameEng,
-      nameEngShort: destinationData.nameEngShort,
-      iso: destinationData.iso
-    };
-  }
-
-  private mapInsuranceCategoryData(categoryData: any): InsuranceCategoryResponse {
-    return { id: categoryData.id, name: categoryData.name };
-  }
-
-  private mapInsuranceTypeData(typeData: any): InsuranceTypeResponse {
-    return { id: typeData.id, name: typeData.name };
-  }
-
-  private mapInsuranceTypePeriodPackageData(packageData: any): InsuranceTypePeriodPackageResponse | null {
-    if (!packageData) {
-      return null;
-    }
-    return { 
-      id: packageData.id, 
-      periodDays: packageData.periodDays, 
-      insuranceTypeId: packageData.insuranceTypeId 
-    };
-  }
+  // private mapDiscountTypeData(discountTypeData: any): DiscountTypeResponse {
+  //   return { Id: discountTypeData.id, Name: discountTypeData.name };
+  // }
 
   private mapPolicyStateData(stateData: any): PolicyStateResponse {
     return { id: stateData.id, name: stateData.name };
   }
 
   navigateToHome(){
-    this.router.navigate(['/putno-osiguranje', 'info']);
+    this.router.navigate(['pomoc-na-putu', 'info']);
   }
 
   goToPreviousStep(){
-    this.router.navigate(['putno-osiguranje', 'passanger'])
+    this.router.navigate(['pomoc-na-putu', 'passanger'])
   }
 }

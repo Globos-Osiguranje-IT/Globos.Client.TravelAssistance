@@ -209,13 +209,13 @@ export class PassangersPageComponent implements OnInit {
   }
 
   fillField() {
-    const infoOfferRequestJSON = localStorage.getItem('step1RequestObject');
+    const infoOfferRequestJSON = sessionStorage.getItem('step1RequestObject');
     if (infoOfferRequestJSON) {
       // console.log("infoOfferRequestJSON PODACI", infoOfferRequestJSON)
       const infoOfferRequest = JSON.parse(infoOfferRequestJSON);
     }
 
-    const selectedTabRequestJSON = localStorage.getItem('selectedTab');
+    const selectedTabRequestJSON = sessionStorage.getItem('selectedTab');
     if (selectedTabRequestJSON) {
      
       this.selectedTabRequest = JSON.parse(selectedTabRequestJSON);
@@ -262,13 +262,13 @@ export class PassangersPageComponent implements OnInit {
 
     // localStorage.setItem('policySaveRequest', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
 
-    localStorage.setItem('policyOffer', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
+    sessionStorage.setItem('policyOffer', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
     console.log(this.policyClientService.policySaveRequest.PolicyOffer)
   }
 
  
   fillContractorTypeAndClient() {
-    const policySaveRequestSession = localStorage.getItem('policySaveRequest');
+    const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
     const contractorTypesSession = sessionStorage.getItem('contratorType');
     const contractorInfoChangeSession = sessionStorage.getItem('contractorInfoChange');
     const selectedCitySession = sessionStorage.getItem('selectedCity');
@@ -301,7 +301,7 @@ export class PassangersPageComponent implements OnInit {
 
 
   fillConsentsAndDestination() {
-    const policySaveRequestSession = localStorage.getItem('policySaveRequest');
+    const policySaveRequestSession = sessionStorage.getItem('policySaveRequest');
 
     if (policySaveRequestSession) {
       const consentSessionHelper: Consent[] = policySaveRequestSession ? JSON.parse(policySaveRequestSession).Consents : null;
@@ -380,7 +380,7 @@ export class PassangersPageComponent implements OnInit {
       };
      
     }
-    localStorage.setItem('policySaveRequest', JSON.stringify(this.PolicySaveRequest));
+    sessionStorage.setItem('policySaveRequest', JSON.stringify(this.PolicySaveRequest));
     console.log("PolicySaveRequest sastavljen:", this.PolicySaveRequest);
    
   }
@@ -434,7 +434,7 @@ export class PassangersPageComponent implements OnInit {
   goToNextStep() {
     const isValid = this.validateAllLatinInputs();
     const isConsentValid = this.consentComponent?.isConsentValid?.() ?? true;
-    this.passportError = !this.clientValidationService.passportNumbersAreUnique(this.insurantInfoList);
+    //this.passportError = !this.clientValidationService.passportNumbersAreUnique(this.insurantInfoList);
 
     this.foreignCitizenSession()
 
@@ -444,7 +444,7 @@ export class PassangersPageComponent implements OnInit {
     }
 
 
-    if (!isValid || !isConsentValid || this.passportError) {
+    if (!isValid || !isConsentValid) {
       // console.warn('Forma nije validna – neka obavezna polja nisu popunjena ili checkboxovi nisu čekirani.');
       return;
     }
@@ -453,9 +453,10 @@ export class PassangersPageComponent implements OnInit {
     this.loader.show();
 
     this.policyClientService.savePolicy().subscribe(result => {
+      console.log('cao ovde sam u savePolicy', result)
       if (result.isSuccess) {
         sessionStorage.setItem('policySaveResponse', JSON.stringify(result.response));
-        this.router.navigate(['putno-osiguranje', 'payment'])
+        this.router.navigate(['pomoc-na-putu', 'payment'])
         this.loader.hide();
       }
       else {

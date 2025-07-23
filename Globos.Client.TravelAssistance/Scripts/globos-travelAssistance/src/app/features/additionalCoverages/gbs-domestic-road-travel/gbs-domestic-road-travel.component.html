@@ -51,7 +51,7 @@
             </div>
             <div class=" col-md-6">
                 <label >Tip vozila<span class="colorLabel">*</span></label>
-                <gbs-autocomplete style="margin-top: 15px;" appLatinOnFocusOut [cid]="'vehicleType'" [label]="'Tip vozila'"
+                <gbs-autocomplete style="margin-top: 15px;" appLatinOnFocusOut [cid]="'vehicleType'"
                     [placeholder]="'Tip vozila'" [items]="vehicleTypeItems" [value]="road.vehicleType" [selected]="road.vehicleType
                                ? { label: road.vehicleType, value: road.vehicleType }
                                : { label: '', value: '' }" (valueChange)="onValueChangeVehicleType($event)">
