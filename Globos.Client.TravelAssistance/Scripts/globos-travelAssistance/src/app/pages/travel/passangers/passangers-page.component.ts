@@ -435,7 +435,7 @@ export class PassangersPageComponent implements OnInit {
   goToNextStep() {
     const isValid = this.validateAllLatinInputs();
     const isConsentValid = this.consentComponent?.isConsentValid?.() ?? true;
-    this.passportError = !this.clientValidationService.passportNumbersAreUnique(this.insurantInfoList);
+    //this.passportError = !this.clientValidationService.passportNumbersAreUnique(this.insurantInfoList);
 
     this.foreignCitizenSession()
 
@@ -445,7 +445,7 @@ export class PassangersPageComponent implements OnInit {
     }
 
 
-    if (!isValid || !isConsentValid || this.passportError) {
+    if (!isValid || !isConsentValid) {
       // console.warn('Forma nije validna – neka obavezna polja nisu popunjena ili checkboxovi nisu čekirani.');
       return;
     }
@@ -454,9 +454,10 @@ export class PassangersPageComponent implements OnInit {
     this.loader.show();
 
     this.policyClientService.savePolicy().subscribe(result => {
+      console.log('cao ovde sam u savePolicy', result)
       if (result.isSuccess) {
         sessionStorage.setItem('policySaveResponse', JSON.stringify(result.response));
-        this.router.navigate(['putno-osiguranje', 'payment'])
+        this.router.navigate(['pomoc-na-putu', 'payment'])
         this.loader.hide();
       }
       else {

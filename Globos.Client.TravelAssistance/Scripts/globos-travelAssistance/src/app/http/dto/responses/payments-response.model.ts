@@ -5,47 +5,34 @@ export interface InsurancePolicyResponse {
   PolicyDate: Date;
   StartDate: Date;
   EndDate: Date;
-  InsuranceCategoryId?: number;
-  InsuranceTypeId?: number;
-  InsuranceTypePeriodPackageId?: number;
-  DestinationId: number;
   ApplicationDiscountId?: number;
   Discount?: number;
-  TravelInsuranceDiscount?: number;
-  TravelInsuranceFinalAmount: number;
+  PlatesNumber?: string;
+  ChassisNumber?: string;
+  VehicleBrand?: string;
+  VehicleType?: string;
   Amount: number;
   Tax: number;
-  TaxTravelInsuranceAfterDiscount: number;
   FinalAmount: number;
   IsPayed: boolean;
   IsSentToClient: boolean;
   PolicyStateId: number;
-  TariffId: number;
   CurrencyId: number;
   PaymentAuthorizationNumber?: string;
   IsDefferedInvoicing: boolean;
-  IsForStudents: boolean;
   AgentId: number;
   AgentCode?: string;
   StornoReason?: string;
-  AdditionalInsuranceAmount?: number;
-  AdditionalInsuranceTax?: number;
+  Note?: string;
+  IssuancePlace?: string;
   Invoice?: InvoiceResponse;
-  Annexes?: PolicyAnnexResponse[];
-  AdditionalCoverages?: PolicyAnnexAdditionalCoverageResponse[];
   Client?: ClientResponse;
-  Insurants?: ClientResponse[];
   Consents?: PolicyClientConsentResponse[];
   ClientPhoneNumber?: ClientPhoneNumberResponse | null;
   ClientAddress?: ClientAddressResponse | null;
   ClientEmail?: ClientEmailResponse | null;
-  Tariff: TariffResponse | null;
   Currency: CurrencyResponse;
-  ApplicationDiscount: ApplicationDiscountResponse;
-  Destination: DestinationResponse;
-  InsuranceCategory: InsuranceCategoryResponse;
-  InsuranceType: InsuranceTypeResponse;
-  InsuranceTypePeriodPackage: InsuranceTypePeriodPackageResponse | null;
+  ApplicationDiscount: ApplicationDiscountResponse | null;
   PolicyState: PolicyStateResponse;
 }
 
@@ -80,7 +67,7 @@ export interface PolicyAnnexAdditionalCoverageResponse {
   FinalAmount?: number;
   Discount: number;
   TaxAfterDiscount: number;
-  FinalAmountAfterDiscount: number;    
+  FinalAmountAfterDiscount: number;
   Data: string;
   DataVersion: string;
 }
@@ -142,31 +129,6 @@ export interface ClientEmailResponse {
   Email: string;
 }
 
-export interface TariffResponse {
-  Id: number;
-  TerritorialCoverageId: number;
-  InsuredSumId: number;
-  CoverrageLevelId: number;
-  TariffSubgroupId: number;
-  IsValid: boolean;
-  AgentTypeId: number;
-  TariffGroupCode: string;
-  TariffCodeCore: string;
-  TariffSubgroup: TariffSubgroupResponse;
-}
-
-export interface TariffSubgroupResponse {
-  Id: number;
-  TariffGroupId: number;
-  Name: string;
-  TariffGroup: TariffGroupResponse;
-}
-
-export interface TariffGroupResponse {
-  Id: number;
-  Name: string;
-}
-
 export interface CurrencyResponse {
   Id: number;
   Name: string;
@@ -191,31 +153,6 @@ export interface DiscountTypeResponse {
   Id: number;
   Name: string;
 }
-
-export interface DestinationResponse {
-  id: number;
-  name: string;
-  nameEng: string;
-  nameEngShort: string;
-  iso: string;
-}
-
-export interface InsuranceCategoryResponse {
-  id: number;
-  name: string;
-}
-
-export interface InsuranceTypeResponse {
-  id: number;
-  name: string;
-}
-
-export interface InsuranceTypePeriodPackageResponse {
-  id: number;
-  periodDays: number;
-  insuranceTypeId: number;
-}
-
 export interface PolicyStateResponse {
   id: number;
   name: string;
