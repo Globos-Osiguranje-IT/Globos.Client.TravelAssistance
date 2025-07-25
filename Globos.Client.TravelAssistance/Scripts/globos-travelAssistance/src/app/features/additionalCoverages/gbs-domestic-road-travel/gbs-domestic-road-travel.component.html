@@ -11,7 +11,7 @@
                     [placeholder]="'Izaberite datum'" (dateChange)="onValueChangeStartDate($event)" appLatinOnFocusOut>
                 </gbs-date-picker>
             </div>
-            <div #startDateWrapper class="col-md-6 mb-3 input-icon-container" id="startDatumField">
+            <div #endDateWrapper class="col-md-6 mb-3 input-icon-container" id="startDatumField">
                 <label>Osiguranje traje do<span class="colorLabel">*</span></label>
                 <gbs-date-picker #picker [value]="selectedEndDate" [minDate]="toDate(selectedStartDate) || today"
                     [maxDate]="maxDate" [disabled]="true" id="startDatePicker" [cid]="'datePicker1'"
@@ -44,7 +44,7 @@
                 </gbs-input>
             </div>
             <div class=" col-md-6">
-                <label >Tip vozila<span class="colorLabel">*</span></label>
+                <label>Tip vozila<span class="colorLabel">*</span></label>
                 <gbs-autocomplete style="margin-top: 15px;" appLatinOnFocusOut [cid]="'vehicleType'"
                     [placeholder]="'Tip vozila'" [items]="vehicleTypeItems" [value]="road.vehicleType" [selected]="road.vehicleType
                                ? { label: road.vehicleType, value: road.vehicleType }
@@ -55,9 +55,10 @@
         <div class="row">
             <div class="col-md-6">
                 <label>Godina proizvodnje:<span class="colorLabel">*</span></label>
-                <gbs-input type="number" [cid]="'production'"  [value]="road?.yearOfProduction || ''" [placeholder]="'YYYY'"
-                    (valueChange)="onValueChangeyearOfProduction($event)" appLatinOnFocusOut>
+                <gbs-input type="number" [cid]="'production'" [value]="road.yearOfProduction || ''"
+                    [placeholder]="'YYYY'" (valueChange)="onValueChangeyearOfProduction($event)" appLatinOnFocusOut>
                 </gbs-input>
+
             </div>
 
         </div>
