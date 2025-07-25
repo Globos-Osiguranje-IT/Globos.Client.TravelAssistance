@@ -72,7 +72,7 @@ export class PolicyClientService {
       chassisNumber: '',
       vehicleBrand: '',
       vehicleType: '',
-
+      yearOfProduction: 0,
       id: undefined,
       discountId: undefined,
       paymentAuthorizationNumber: '',
@@ -112,7 +112,8 @@ export class PolicyClientService {
       platesNumber: '',
       chassisNumber: '',
       vehicleBrand: '',
-      vehicleType: ''
+      vehicleType: '',
+      yearOfProduction: ''
     },
     domesticInsurance: {
       address: ''
@@ -121,7 +122,8 @@ export class PolicyClientService {
       travelAgencyId: 0,
       travelAgencyName: '',
       contractNumber: '',
-      price: 0
+      price: 0,
+      yearOfProduction: ''
     }
   };
 

@@ -46,6 +46,7 @@ export interface RoadAssistanceInsurance {
     chassisNumber: string;
     vehicleBrand: string;
     vehicleType: string;
+    yearOfProduction: string;
 }
 
 export interface DomesticInsurance {
@@ -59,6 +60,7 @@ export interface TripCancellation {
     travelAgencyName: string;
     contractNumber: string;
     price: number;
+    yearOfProduction: string;
 }
 
 export interface InsurantsPerAgeGroups {
@@ -95,6 +97,7 @@ export interface PolicyOfferRequest {
     chassisNumber: string;
     vehicleBrand: string;
     vehicleType: string;
+    yearOfProduction: number;
 }
 
 

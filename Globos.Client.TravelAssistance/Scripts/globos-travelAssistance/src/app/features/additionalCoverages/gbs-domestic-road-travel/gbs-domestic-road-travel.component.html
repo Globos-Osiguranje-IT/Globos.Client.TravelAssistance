@@ -10,29 +10,23 @@
                     [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
                     [placeholder]="'Izaberite datum'" (dateChange)="onValueChangeStartDate($event)" appLatinOnFocusOut>
                 </gbs-date-picker>
-                <!-- <div *ngIf="showStartDateError" class="text-danger mt-1">
-                Obavezno je uneti početak putovanja.
-            </div> -->
             </div>
-
             <div #startDateWrapper class="col-md-6 mb-3 input-icon-container" id="startDatumField">
                 <label>Osiguranje traje do<span class="colorLabel">*</span></label>
-                <gbs-date-picker #picker [value]="selectedEndDate"  [minDate]="toDate(selectedStartDate) || today" [maxDate]="maxDate" [disabled]="true"
-                    id="startDatePicker" [cid]="'datePicker1'" [icon]="airplaneTakeoff" [label]="''"
-                    [labelCssClass]="''" [labelStyle]="{ color: '' }" [inputCssClass]="'date-picker-input'"
-                    [inputStyle]="{ 'font-size': '16px', 'width': '100%' }" [format]="'dd.MM.yyyy'"
-                    [placeholder]="'Izaberite datum'" >
+                <gbs-date-picker #picker [value]="selectedEndDate" [minDate]="toDate(selectedStartDate) || today"
+                    [maxDate]="maxDate" [disabled]="true" id="startDatePicker" [cid]="'datePicker1'"
+                    [icon]="airplaneTakeoff" [label]="''" [labelCssClass]="''" [labelStyle]="{ color: '' }"
+                    [inputCssClass]="'date-picker-input'" [inputStyle]="{ 'font-size': '16px', 'width': '100%' }"
+                    [format]="'dd.MM.yyyy'" [placeholder]="'Izaberite datum'">
                 </gbs-date-picker>
-                <!-- <div *ngIf="showStartDateError" class="text-danger mt-1">
-                Obavezno je uneti početak putovanja.
-            </div> -->
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <label>Registarska oznaka vozila<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'platesNumber'" [value]="road.platesNumber"  [selectedValue]="road.platesNumber"
-                    (valueChange)="onValueChangePlatesNumber($event)" appLatinOnFocusOut>
+                <gbs-input [type]="'text'" [cid]="'platesNumber'" [value]="road.platesNumber"
+                    [selectedValue]="road.platesNumber" (valueChange)="onValueChangePlatesNumber($event)"
+                    appLatinOnFocusOut>
                 </gbs-input>
             </div>
             <div class="col-md-6">
@@ -45,55 +39,28 @@
         <div class="row">
             <div class="col-md-6">
                 <label>Marka vozila<span class="colorLabel">*</span></label>
-                <gbs-input  [type]="'text'" [cid]="'vehicleBrand'" [value]="road.vehicleBrand"
+                <gbs-input [type]="'text'" [cid]="'vehicleBrand'" [value]="road.vehicleBrand"
                     (valueChange)="onValueChangeVehicleBrand($event)" appLatinOnFocusOut>
                 </gbs-input>
             </div>
             <div class=" col-md-6">
-                <label >Tip vozila<span class="colorLabel">*</span></label>
-                <gbs-autocomplete style="margin-top: 15px;" appLatinOnFocusOut [cid]="'vehicleType'" [label]="'Tip vozila'"
-                    [placeholder]="'Tip vozila'" [items]="vehicleTypeItems" [value]="road.vehicleType" [selected]="road.vehicleType
+                <label>Tip vozila<span class="colorLabel">*</span></label>
+                <gbs-autocomplete style="margin-top: 15px;" appLatinOnFocusOut [cid]="'vehicleType'"
+                    [label]="'Tip vozila'" [placeholder]="'Tip vozila'" [items]="vehicleTypeItems"
+                    [value]="road.vehicleType" [selected]="road.vehicleType
                                ? { label: road.vehicleType, value: road.vehicleType }
                                : { label: '', value: '' }" (valueChange)="onValueChangeVehicleType($event)">
                 </gbs-autocomplete>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Godina proizvodnje:<span class="colorLabel">*</span></label>
+                <gbs-input type="number" [cid]="'production'"  [value]="road?.yearOfProduction || ''" [placeholder]="'YYYY'"
+                    (valueChange)="onValueChangeyearOfProduction($event)" appLatinOnFocusOut>
+                </gbs-input>
+            </div>
+
+        </div>
     </div>
 </div>
-<!-- <div class="box-wrapper" *ngIf="this.selectedAdditionalInsurances.includes(additionalCoverage.OSIGURANJE_DOMACINSTVA)">
-        <h4 class=" mb-3">{{additionalCoverageText.OSIGURANJE_DOMACINSTVA}}</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Adresa<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'address'" [value]="domestic.address" spellcheck="false" autocomplete="off" aria-autocomplete="none"
-                    (valueChange)="onValueChangeAddress($event)" appLatinOnFocusOut>
-                </gbs-input>
-            </div>
-        </div>
-    </div> -->
-
-<!-- <div class="box-wrapper" *ngIf="this.selectedAdditionalInsurances.includes(additionalCoverage.OTKAZ_PUTOVANJA)">
-        <h4 class="mb-3">{{additionalCoverageText.OTKAZ_PUTOVANJA}}</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Putnička agencija<span class="colorLabel">*</span></label>
-                <gbs-autocomplete [items]="items_travelAgenciesComplete" [selected]="selectedAgency"
-                    [cid]="'travelAgencyId'" (selectionChange)="onSelectedChangeAgencies($event)"  [selectedValue]="selectedAgency" appLatinOnFocusOut>
-                </gbs-autocomplete>
-            </div>
-            <div class="col-md-6">
-                <label>Broj ugovora<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'contractNumber'" [value]="trip.contractNumber"
-                    (valueChange)="onValueChangeContractNumber($event)" appLatinOnFocusOut>
-                </gbs-input>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Cena (RSD)<span class="colorLabel">*</span></label>
-                <gbs-input [type]="'text'" [cid]="'price'" [value]="trip.price.toString()" [disabled]="disablePrice"
-                    (valueChange)="onValueChangePrice($event)">
-                </gbs-input>
-            </div>
-        </div>
-    </div> -->

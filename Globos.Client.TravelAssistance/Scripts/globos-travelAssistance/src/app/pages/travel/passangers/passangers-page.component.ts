@@ -182,6 +182,7 @@ export class PassangersPageComponent implements OnInit {
   //   chassisNumber: string;
   //   vehicleBrand: string;
   //   vehicleType: string;
+  //   yearOfProduction: number
   // }
 
 
@@ -228,7 +229,6 @@ export class PassangersPageComponent implements OnInit {
       this.policyClientService.policySaveRequest.PolicyOffer.finalAmount = this.selectedTabRequest.finalAmount;
       this.policyClientService.policySaveRequest.PolicyOffer.tax = this.selectedTabRequest.tax;
 
-
     }
 
 
@@ -259,6 +259,7 @@ export class PassangersPageComponent implements OnInit {
     this.policyClientService.policySaveRequest.PolicyOffer.chassisNumber = this.roadAssistanceInsurance.chassisNumber
     this.policyClientService.policySaveRequest.PolicyOffer.vehicleBrand = this.roadAssistanceInsurance.vehicleBrand
     this.policyClientService.policySaveRequest.PolicyOffer.vehicleType = this.roadAssistanceInsurance.vehicleType
+    this.policyClientService.policySaveRequest.PolicyOffer.yearOfProduction = Number(this.roadAssistanceInsurance.yearOfProduction)
 
     // sessionStorage.setItem('policySaveRequest', JSON.stringify(this.policyClientService.policySaveRequest.PolicyOffer));
 

@@ -2,7 +2,6 @@ import { AfterViewInit, Directive, ElementRef, HostListener, Input, Renderer2 } 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { JmbgValidationService } from './jmbg-validation.service';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { REGISTARSKA_PODRUCJA, RegistarskoPodrucje } from '../../features/additionalCoverages/gbs-domestic-road-travel/model/roadTravel';
 
 
 @Directive({
@@ -13,7 +12,6 @@ export class AllValidationsDirective implements AfterViewInit {
   private errorElement: HTMLElement | null = null;
   private inputElement: any;
 
-  registarskaPodrucja = REGISTARSKA_PODRUCJA;
   @Input() selectedValue: any = null;
   @Input() cid: string = '';
   @Input() allJmbgs: string[] = [];
@@ -80,8 +78,18 @@ export class AllValidationsDirective implements AfterViewInit {
     }
 
 
-    if (this.cid?.toLowerCase().includes('platesnumber')) {
-      const error = this.getOznakaValidationError(value);
+    // if (this.cid?.toLowerCase().includes('platesnumber')) {
+    //   const error = this.getOznakaValidationError(value);
+    //   if (error) {
+    //     this.showError(error);
+    //     return;
+    //   } else {
+    //     this.removeError();
+    //   }
+    // }
+
+    if (this.cid?.toLowerCase().includes('production') ) {
+      const error = this.productionValidationError(value);
       if (error) {
         this.showError(error);
         return;
@@ -155,22 +163,6 @@ export class AllValidationsDirective implements AfterViewInit {
 
     }
 
-
-    // if (this.cid?.toLowerCase().includes('autocomplete')) {
-    //   console.log(this.selectedValue)
-
-    //   console.log(this.selectedValue)
-
-    //   // const isInList = this.isValueInItems(value);
-    //   const isSelectedEmpty = !this.selectedValue || !this.selectedValue.value;
-
-    //   if (isSelectedEmpty) {
-    //     this.showError('Morate izabrati vrednost iz ponuđenog menija.');
-    //     return;
-    //   } else {
-    //     this.removeError();
-    //   }
-    // }
 
 
     if (this.cid?.toLowerCase().includes('mobilnog')) {
@@ -255,15 +247,6 @@ export class AllValidationsDirective implements AfterViewInit {
   }
 
 
-  // private isValueInItems(value: string): boolean {
-  //   if (!this.items || this.items.length === 0) return false;
-
-  //   return this.items.some(item =>
-  //     item.label?.toLowerCase().trim() === value.toLowerCase().trim()
-  //   );
-  // }
-
-
   private getMobileValidationError(mobile: string): string | null {
     const mobileRegex = /^\+3816\d{6,8}$/;
 
@@ -326,19 +309,55 @@ export class AllValidationsDirective implements AfterViewInit {
     return dd.padStart(2, '0') + mm.padStart(2, '0') + yearFrag;
   }
 
-  private getOznakaValidationError(oznakaInput: string): any {
-    if (!oznakaInput) {
-      return 'Polje je obavezno';
+  // private getOznakaValidationError(oznakaInput: string): any {
+  //   if (!oznakaInput) {
+  //     return 'Polje je obavezno';
+  //   }
+  //   const input = oznakaInput.trim().toUpperCase();
+
+  //   const found = REGISTARSKA_PODRUCJA.some(p =>
+  //     input.includes(p.oznaka.toUpperCase())
+  //   );
+
+  //   if (!found) {
+  //     return 'Uneta tablica nije srpska registarska oznaka.';
+  //   }
+
+  // }
+
+
+  public productionValidationError(productionYear: number): string | null {
+     const currentYear = new Date().getFullYear();
+
+    const selectedStartDateJSON = sessionStorage.getItem('selectedStartDate');
+
+    if (selectedStartDateJSON) {
+      const selectedStartDate = JSON.parse(selectedStartDateJSON);
+      console.log("selectedStartDate", selectedStartDate)
+
+      const year: number = Number(selectedStartDate.substring(0, 4));
+      
+      console.log("currentYear", year)
+      const age = year - productionYear;
+      console.log("age", age)
+      if (age > 15) {
+        return 'Nije moguće osigurati vozilo starije od 15 godina';
+      }
+
+    }else{
+      return 'Morate uneti datum početka osiguranja';
     }
-    const input = oznakaInput.trim().toUpperCase();
 
-    const found = REGISTARSKA_PODRUCJA.some(p =>
-      input.includes(p.oznaka.toUpperCase())
-    );
-
-    if (!found) {
-      return 'Uneta tablica nije srpska registarska oznaka.';
+    if (!/^\d{4}$/.test(productionYear.toString())) {
+      return 'Godina proizvodnje mora imati tačno 4 cifre';
+    }
+    if (  productionYear > currentYear) {
+      return 'Uneli ste datum u budućnosti';
     }
 
+    return null;
   }
+
+
+
 }
